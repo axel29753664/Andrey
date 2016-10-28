@@ -61,7 +61,7 @@
     </dependencies>
 
     <build>
-        <finalName>java2</finalName>
+        <finalName>Totalizator</finalName>
         
         <plugins>
             <plugin>
@@ -88,7 +88,7 @@
                 <version>8.1.14.v20131031</version>
                 <configuration>
                     <webApp>
-                        <contextPath>/java2</contextPath>
+                        <contextPath>/Totalizator</contextPath>
                     </webApp>
                 </configuration>
             </plugin>
