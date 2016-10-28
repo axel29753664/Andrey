@@ -16,4 +16,6 @@ public interface UserDAO {
 
     List<User> getAll();
 
+    User getByLogin(String login);
+
 }
