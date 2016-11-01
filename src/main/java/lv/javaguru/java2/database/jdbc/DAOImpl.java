@@ -25,7 +25,7 @@ public class DAOImpl {
 
     private void registerJDBCDriver() {
         try {
-            Class.forName(driverClass);
+            Class.forName(driverClass); // driver registration from database.properties
         } catch (ClassNotFoundException e) {
             System.out.println("Exception while registering JDBC driver!");
             e.printStackTrace();
@@ -37,7 +37,7 @@ public class DAOImpl {
         try {
             properties.load(DAOImpl.class.getClassLoader().getResourceAsStream(DB_CONFIG_FILE));
 
-            jdbcUrl = properties.getProperty("jdbcUrl");
+            jdbcUrl = properties.getProperty("jdbcUrl"); // load data from database.properties
             driverClass = properties.getProperty("driverClass");
             userName = properties.getProperty("userName");
             password = properties.getProperty("password");
@@ -49,7 +49,7 @@ public class DAOImpl {
 
     protected Connection getConnection() throws DBException {
         try{
-            return DriverManager.getConnection(jdbcUrl, userName, password);
+            return DriverManager.getConnection(jdbcUrl, userName, password);// connection open
         } catch (SQLException e) {
             System.out.println("Exception while getting connection to database");
             e.printStackTrace();

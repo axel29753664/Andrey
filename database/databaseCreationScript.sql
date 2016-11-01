@@ -6,9 +6,10 @@ CREATE SCHEMA IF NOT EXISTS `java2` DEFAULT CHARACTER SET utf8 ;
 USE `java2` ;
 
 -- -----------------------------------------------------
--- Table `Java2_test`.`users`
+-- Table `Java2`: `users`, `bets`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `users` ;
+DROP TABLE IF EXISTS `bets` ;
 
 CREATE TABLE IF NOT EXISTS `users` (
   `UserID` INT(11) NOT NULL AUTO_INCREMENT,
@@ -18,6 +19,18 @@ CREATE TABLE IF NOT EXISTS `users` (
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
+
+CREATE TABLE IF NOT EXISTS bets (
+  BetID INT(11) AUTO_INCREMENT,
+  UserID INT(11) NOT NULL,
+  EventID INT(11) NOT NULL,
+  Bet_Sum BIGINT UNSIGNED NOT NULL,
+  Winning_Choice BOOLEAN NOT NULL,
+  PRIMARY KEY(BetID),
+  FOREIGN KEY(UserID) REFERENCES users(UserID),
+  FOREIGN KEY(EventID) REFERENCES events(EventID)
+)
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
