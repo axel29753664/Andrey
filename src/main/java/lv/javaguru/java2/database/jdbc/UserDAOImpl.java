@@ -20,7 +20,7 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
     private final String Password = "Password";
     private final String Admin = "Admin";
 
-    private User parseUser(ResultSet resultSet) throws SQLException {
+    private User parseResultSet(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setUserId(resultSet.getLong(UserID));
         user.setFirstName(resultSet.getString(FirstName));
@@ -41,7 +41,7 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("insert into " + DBName + " values (default, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                    connection.prepareStatement("INSERT INTO " + DBName + " VALUES (default, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getLogin());
@@ -63,72 +63,50 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
 
     }
 
-    public User getById(Long id) throws DBException {
+    private List<User> getByCondition(String condition) {
         Connection connection = null;
+        String query = "select * from " + DBName + condition;
 
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from " + DBName + " where " + UserID + " = ?");
-            preparedStatement.setLong(1, id);
+                    .prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
-            User user = null;
-            if (resultSet.next()) {
-                user = parseUser(resultSet);
+            List<User> users = new ArrayList<>();
+            while (resultSet.next()) {
+                User user = parseResultSet(resultSet);
+                users.add(user);
             }
-            return user;
+            return users;
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.getById()");
+            System.out.println("Exception while execute " + query);
             e.printStackTrace();
             throw new DBException(e);
         } finally {
             closeConnection(connection);
         }
+    }
+
+    private User getUserIfExist(String condition) {
+        List<User> users = getByCondition(condition);
+        if (users.size() > 0) {
+            return users.get(0);
+        }
+        return null;
     }
 
     public User getByLogin(String login) {
-        Connection connection = null;
-        User user = null;
-        try {
-            connection = getConnection();
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM " + DBName + " where " + Login + " = ?");
-            st.setString(1, login);
-            st.execute();
-            ResultSet resultSet = st.getResultSet();
-            if (resultSet.next()) {
-                user = parseUser(resultSet);
-            }
-        } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.getByLogin()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+        String condition = " where " + Login + " = '" + login + "'";
+        return getUserIfExist(condition);
+    }
 
-        return user;
+    public User getById(Long id) throws DBException {
+        String condition = " where " + UserID + " = " + id;
+        return getUserIfExist(condition);
     }
 
     public List<User> getAll() throws DBException {
-        List<User> users = new ArrayList<>();
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from " + DBName);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                User user = parseUser(resultSet);
-                users.add(user);
-            }
-        } catch (Throwable e) {
-            System.out.println("Exception while getting customer list UserDAOImpl.getList()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
-        return users;
+        return getByCondition("");
     }
 
     public void delete(Long id) throws DBException {
@@ -136,7 +114,7 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from " + DBName + " where " + UserID + " = ?");
+                    .prepareStatement("DELETE FROM " + DBName + " WHERE " + UserID + " = ?");
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
@@ -157,13 +135,13 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("update " + DBName + " set "
+                    .prepareStatement("UPDATE " + DBName + " SET "
                             + FirstName + " = ?,"
                             + LastName + " = ?,"
                             + Login + " = ?, "
                             + Password + " = ?, "
                             + Admin + " = ? "
-                            + "where " + UserID + " = ?");
+                            + "WHERE " + UserID + " = ?");
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getLogin());

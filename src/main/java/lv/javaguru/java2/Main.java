@@ -26,8 +26,11 @@ public class Main {
 ////            userDAO.update(user);
 //            registration.recordNewUser(user);
 //        } while (user.getUserId() == null);
-        userDAO.delete((long)1005);
-        userDAO.getAll().forEach(System.out::println);
+        user = userDAO.getByLogin("Login");
+        user.setLogin("asdf");
+        userDAO.update(user);
+//        System.out.println(userDAO.getByLogin("vasjaa"));
+//        userDAO.getAll().forEach(System.out::println);
 
     }
 }
