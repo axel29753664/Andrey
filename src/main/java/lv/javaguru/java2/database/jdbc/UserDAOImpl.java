@@ -109,16 +109,27 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         return getByCondition("");
     }
 
-    public void delete(Long id) throws DBException {
+    public void deleteById(Long id) throws DBException {
+        deleteByCondition(" WHERE " + UserID + " = " + id);
+    }
+
+    public void deleteByLogin(String login) throws DBException {
+        deleteByCondition(" WHERE " + Login + " = " + login);
+    }
+
+    public void deleteAll() throws DBException {
+        deleteByCondition("");
+    }
+
+    private void deleteByCondition(String condition) {
         Connection connection = null;
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM " + DBName + " WHERE " + UserID + " = ?");
-            preparedStatement.setLong(1, id);
+                    .prepareStatement("DELETE FROM " + DBName + condition);
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.delete()");
+            System.out.println("Exception while execute DELETE FROM " + condition);
             e.printStackTrace();
             throw new DBException(e);
         } finally {

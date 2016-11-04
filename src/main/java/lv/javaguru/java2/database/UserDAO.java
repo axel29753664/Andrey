@@ -12,7 +12,11 @@ public interface UserDAO {
 
     User getByLogin(String login);
 
-    void delete(Long id);
+    void deleteById(Long id);
+
+    void deleteByLogin(String login);
+
+    void deleteAll();
 
     void update(User user);
 

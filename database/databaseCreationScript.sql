@@ -5,24 +5,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE SCHEMA IF NOT EXISTS `TotalizatorDB` DEFAULT CHARACTER SET utf8 ;
 USE `TotalizatorDB` ;
 
--- -----------------------------------------------------
--- Table `Totalizator_test`.`users`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `users` ;
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `UserID` INT(11) NOT NULL AUTO_INCREMENT,
-  `FirstName` CHAR(32) NOT NULL,
-  `LastName` CHAR(32) NOT NULL,
-  `Login` VARCHAR(45) NOT NULL,UNIQUE INDEX `Login_UNIQUE` (`Login` ASC),
-  `Password` VARCHAR(45) NOT NULL,
-  `Admin` BOOLEAN DEFAULT FALSE  NULL,
-
-PRIMARY KEY (`UserID`)
-)
-ENGINE = InnoDB
-AUTO_INCREMENT = 1002;
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

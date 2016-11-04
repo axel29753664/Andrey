@@ -19,10 +19,10 @@ public class UserDAOImplTest extends DBUnitTestCase {
 
     @Test
     public void testCreate() throws Exception {
-        User user = createUser()
-                .withFirstName("F")
-                .withLastName("L").build();
-
+//        User user = createUser()
+//                .withFirstName("F")
+//                .withLastName("L").build();
+        User user = new User("a", "b", "c", "d", false);
         userDAO.create(user);
 
         User userFromDB = userDAO.getById(user.getUserId());
@@ -30,6 +30,9 @@ public class UserDAOImplTest extends DBUnitTestCase {
         assertEquals(user.getUserId(), userFromDB.getUserId());
         assertEquals(user.getFirstName(), userFromDB.getFirstName());
         assertEquals(user.getLastName(), userFromDB.getLastName());
+        assertEquals(user.getLogin(), userFromDB.getLogin());
+        assertEquals(user.getPassword(), userFromDB.getPassword());
+        assertEquals(user.isAdmin(), userFromDB.isAdmin());
     }
 
 }
