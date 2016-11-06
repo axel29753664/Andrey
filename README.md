@@ -48,6 +48,6 @@
 	- Money transfer Interface and access objects
 	- Adding information to database (MoneyTransferDAO)
 	- User account and Bet account entities
-	
+	- Database tables: Transfers, Acoount, User account, Bet Account
 
 ...

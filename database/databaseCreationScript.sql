@@ -19,6 +19,36 @@ CREATE TABLE IF NOT EXISTS `users` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 
+DROP TABLE IF EXISTS `transactions` ;
+
+-- creating Accounts table
+
+DROP TABLE IF EXISTS `accounts` ;
+
+CREATE TABLE IF NOT EXISTS `accounts` (
+  `AccountID` INT(11) NOT NULL AUTO_INCREMENT,
+  `AccountBalance` BIGINT NOT NULL,
+  PRIMARY KEY (`AccountID`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 1;
+
+-- creating Transactions table
+
+CREATE TABLE IF NOT EXISTS `transactions` (
+  `TransactionID` INT(11) NOT NULL AUTO_INCREMENT,
+  `TransactionTime` CHAR(32) NOT NULL,
+  `TransactionAmmount` BIGINT NOT NULL,
+  `AccountID`INT(11),
+  PRIMARY KEY (`TransactionID`)
+
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 1;
+
+
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
