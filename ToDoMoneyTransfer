@@ -1,0 +1,15 @@
+MoneyTransferDAO
+
+ - update account:
+  MySQL Transaction: account+
+                      transactions 
+ - getBalance
+ - withdrawMoney:
+  MySQL Transactions: account-
+                      transactions-
+ - transferMoney: sourceAccount-
+                  destAccount+
+                  transactions:
+                    source-
+                    dest+
+ -                
