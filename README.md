@@ -45,5 +45,9 @@
 	- решает кто выиграл
 
 9. Перевод денег на счёт пользователя ИЗВНЕ(биткоинты, банки, благотворительные фонды ...)
+	- Money transfer Interface and access objects
+	- Adding information to database (MoneyTransferDAO)
+	- User account and Bet account entities
+	
 
 ...
