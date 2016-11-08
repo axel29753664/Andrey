@@ -22,7 +22,7 @@ public class UserDAOImplTest extends DBUnitTestCase {
 //        User user = createUser()
 //                .withFirstName("F")
 //                .withLastName("L").build();
-        User user = new User("a", "b", "c", "d", false);
+        User user = new User("name", "lastName", "login", "password", false);
         userDAO.create(user);
 
         User userFromDB = userDAO.getById(user.getUserId());

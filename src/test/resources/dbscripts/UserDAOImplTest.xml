@@ -1,4 +1,4 @@
 <dataset>
-    <USERS FirstName="Bob" LastName="Doe" Login="login" Password="pass" Admin="false"/>
-    <USERS FirstName="Alice" LastName="Foo" Login="login2" Password="pass2" Admin="false"/>
+    <USERS FirstName="Bob" LastName="Doe" Login="BobDoe" Password="pass" Admin="false"/>
+    <USERS FirstName="Alice" LastName="Foo" Login="AliceFoo" Password="pass2" Admin="false"/>
 </dataset>

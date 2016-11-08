@@ -28,7 +28,7 @@ public class UserDAOImplTest2 {
 
     @Test
     public void createTest() {
-        User user = new User("a", "b", "c", "d", false);
+        User user = new User("name", "lastName", "login", "password", false);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
         compareUsers(user, userFromDB);
@@ -37,9 +37,9 @@ public class UserDAOImplTest2 {
 
     @Test
     public void updateTest() {
-        User user = new User("a", "b", "c", "d", false);
+        User user = new User("name", "lastName", "login", "password", false);
         userDAO.create(user);
-        user.setFirstName("B");
+        user.setFirstName("newName");
         userDAO.update(user);
         User userFromDB = userDAO.getById(user.getUserId());
         compareUsers(user, userFromDB);
