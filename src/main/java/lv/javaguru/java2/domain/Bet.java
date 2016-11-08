@@ -10,6 +10,19 @@ public class Bet {
     private BigDecimal betSum;
     private Boolean winningChoice;
 
+    public Bet() {
+    }
+
+    public Bet(Long userId,
+               Long eventId,
+               BigDecimal betSum,
+               Boolean winningChoice) {
+        this.userId = userId;
+        this.eventId = eventId;
+        this.betSum = betSum;
+        this.winningChoice = winningChoice;
+    }
+
     public Long getBetId() {
         return betId;
     }

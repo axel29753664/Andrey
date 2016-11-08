@@ -26,7 +26,6 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
             preparedStatement.setLong(2, bet.getEventId());
             preparedStatement.setBigDecimal(3, bet.getBetSum());
             preparedStatement.setBoolean(4, bet.getWiningChoice());
-
             preparedStatement.executeUpdate(); // отсылка подготовленного запроса
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()){ // поучаем обратно ID
@@ -146,7 +145,7 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
         Connection connection = null;
         try {
             connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from BETS where EventID = ? and Winning_Choise = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from BETS where EventID = ? AND Winning_Choise = ?");
             preparedStatement.setLong(1, eventId);
             preparedStatement.setBoolean(2, winningChoice);
             ResultSet resultSet = preparedStatement.executeQuery();
