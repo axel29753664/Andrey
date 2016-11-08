@@ -114,7 +114,7 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
     }
 
     public void deleteByLogin(String login) throws DBException {
-        deleteByCondition(" WHERE " + Login + " = " + login);
+        deleteByCondition(" WHERE " + Login + " = '" + login + "'");
     }
 
     public void deleteAll() throws DBException {
@@ -129,7 +129,7 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
                     .prepareStatement("DELETE FROM " + DBName + condition);
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
-            System.out.println("Exception while execute DELETE FROM " + condition);
+            System.out.println("Exception while execute DELETE FROM " + DBName + condition);
             e.printStackTrace();
             throw new DBException(e);
         } finally {
