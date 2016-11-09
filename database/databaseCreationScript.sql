@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 
 CREATE TABLE IF NOT EXISTS `transactions` (
   `TransactionID` INT(11) NOT NULL AUTO_INCREMENT,
-  `TransactionTime` CHAR(32) NOT NULL,
+  `TransactionTime` TIMESTAMP NOT NULL,
   `TransactionAmmount` BIGINT NOT NULL,
   `AccountID`INT(11),
   PRIMARY KEY (`TransactionID`)
@@ -46,7 +46,14 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   ENGINE = InnoDB
   AUTO_INCREMENT = 1;
 
-
+CREATE TABLE IF NOT EXISTS `userAccounts` (
+`UserAccountID` INT(11) NOT NULL AUTO_INCREMENT,
+`AccountID` INT(11) NOT NULL,
+`UserID` INT(11) NOT NULL,
+PRIMARY KEY (`UserAccountID`)
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

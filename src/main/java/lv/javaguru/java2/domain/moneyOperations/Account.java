@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class Account {
 
+    private Long accountId;
     private long accountBalance;
 
     public Account() {
@@ -22,6 +23,19 @@ public class Account {
         this.accountBalance = amount;
     }
 
+    public Long getAccountId() {
+        return accountId;
+    }
 
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountId=" + accountId +
+                ", accountBalance=" + accountBalance +
+                '}';
+    }
 }
