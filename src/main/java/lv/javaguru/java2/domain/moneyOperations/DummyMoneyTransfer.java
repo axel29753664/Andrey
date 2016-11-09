@@ -8,14 +8,14 @@ import java.util.Random;
 public class DummyMoneyTransfer implements ExternalMoneyTransfer {
 
     @Override
-    public void withdrawMoneyFromAccount(UserAccount account, long amount) {
+    public void withdrawMoneyFromAccount(Account account, long amount) {
 
 
 
     }
 
     @Override
-    public void addMoneyToAccount(UserAccount account) {
+    public void addMoneyToAccount(Account account) {
 
         Random randGen = new Random();
         long transferredSum = (long)randGen.nextInt(10000);

@@ -6,11 +6,11 @@ import java.util.List;
 /**
  * Created by Artjom on 06.11.2016.
  */
-public class UserAccount {
+public class Account {
 
     private long accountBalance;
 
-    public UserAccount() {
+    public Account() {
         this.accountBalance = 0;
     }
 
@@ -21,6 +21,7 @@ public class UserAccount {
     public void setAccountBalance (long amount) {
         this.accountBalance = amount;
     }
+
 
 
 }
