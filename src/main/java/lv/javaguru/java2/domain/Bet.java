@@ -63,4 +63,14 @@ public class Bet {
         this.winningChoice = winingChoice;
     }
 
+    @Override
+    public String toString() {
+        return "Bet{" +
+                "betId=" + betId +
+                ", userId=" + userId +
+                ", eventId=" + eventId +
+                ", betSum=" + betSum +
+                ", winningChoice=" + winningChoice +
+                '}';
+    }
 }

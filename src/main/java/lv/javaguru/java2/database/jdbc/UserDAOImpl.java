@@ -22,10 +22,8 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("insert into USERS values (default, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                    connection.prepareStatement("insert into USERS values (default, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()){
@@ -55,7 +53,6 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
                 user = new User();
                 user.setUserId(resultSet.getLong("UserID"));
                 user.setFirstName(resultSet.getString("FirstName"));
-                user.setLastName(resultSet.getString("LastName"));
             }
             return user;
         } catch (Throwable e) {
@@ -79,7 +76,6 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
                 User user = new User();
                 user.setUserId(resultSet.getLong("UserID"));
                 user.setFirstName(resultSet.getString("FirstName"));
-                user.setLastName(resultSet.getString("LastName"));
                 users.add(user);
             }
         } catch (Throwable e) {
@@ -118,11 +114,10 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("update USERS set FirstName = ?, LastName = ? " +
+                    .prepareStatement("update USERS set FirstName = ?, " +
                             "where UserID = ?");
             preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setLong(3, user.getUserId());
+            preparedStatement.setLong(2, user.getUserId());
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
             System.out.println("Exception while execute UserDAOImpl.update()");

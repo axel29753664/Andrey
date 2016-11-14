@@ -7,21 +7,26 @@ import lv.javaguru.java2.domain.Bet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BetDAOImpl extends DAOImpl implements BetDAO {
+    private final String TABLE_NAME = "bets";
+    private final String BET_ID = "BetID";
+    private final String USER_ID = "UserID";
+    private final String EVENT_ID = "EventID";
+    private final String BET_SUM = "Bet_Sum";
+    private final String WINNING_CHOICE = "Winning_Choice";
 
     public void create(Bet bet) throws DBException {
         if (bet == null) {
             return;
         }
-
         Connection connection = null;
         try {
             connection = getConnection();
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement("insert into BETS values (default, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS); // template SQL кот хотим выполнить первый автоинкремент, два других данные
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into BETS values (default, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS); // template SQL кот хотим выполнить первый автоинкремент, два других данные
             preparedStatement.setLong(1, bet.getUserId()); // заполняем поля
             preparedStatement.setLong(2, bet.getEventId());
             preparedStatement.setBigDecimal(3, bet.getBetSum());
@@ -36,102 +41,53 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
             e.printStackTrace();
             throw new DBException(e);
         } finally {
-            closeConnection(connection); // close everything
-        }
-
-    }
-
-    public void delete(Long betId) throws DBException {
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from BETS where UserID = ?");
-            preparedStatement.setLong(1, betId);
-            preparedStatement.executeUpdate();
-        } catch (Throwable e) {
-            System.out.println("Exception while execute BetDAOImpl.delete()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
             closeConnection(connection);
         }
+    }
 
+    public void deleteById(Long betId) throws DBException {
+        String deleteQuery = "delete from " +  TABLE_NAME + " where " + BET_ID + " = " + betId;
+        deleteByCondition(deleteQuery);
     }
 
     public Bet getById(Long betId) throws DBException {
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from BETS where BetID = ?");
-            preparedStatement.setLong(1, betId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            Bet bet = null;
-            if (resultSet.next()) {
-                bet = new Bet();
-                bet.setBetId(resultSet.getLong("BetID"));
-                bet.setUserId(resultSet.getLong("UserID"));
-                bet.setEventId(resultSet.getLong("EventID"));
-                bet.setBetSum(resultSet.getBigDecimal("Bet_Sum"));
-                bet.setWinningChoice(resultSet.getBoolean("Winning_Choice"));
-            }
-            return bet;
-        } catch (Throwable e) {
-            System.out.println("Exception while execute BetDAOImpl.getById()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+        String searchQuery = "select * from " +  TABLE_NAME + " where " + BET_ID + " = " + betId;
+        List<Bet> bets = getByCondition(searchQuery);
+        Bet bet = getOneUniqueBet(bets);
+        return bet;
     }
 
     public List<Bet> getByUserId(Long userId) throws DBException {
-        List<Bet> bets = new ArrayList();
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from BETS where UserID = ?");
-            preparedStatement.setLong(1, userId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Bet bet = new Bet();
-                bet.setBetId(resultSet.getLong("BetID"));
-                bet.setUserId(resultSet.getLong("UserID"));
-                bet.setEventId(resultSet.getLong("EventID"));
-                bet.setBetSum(resultSet.getBigDecimal("Bet_Sum"));
-                bet.setWinningChoice(resultSet.getBoolean("Winning_Choice"));
-                bets.add(bet);
-            }
-        } catch (Throwable e) {
-            System.out.println("Exception while getting customer list BetDAOImpl.getByUserId()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+        String searchQuery = "select * from " +  TABLE_NAME + " where " + USER_ID + " = " + userId;
+        List<Bet> bets = getByCondition(searchQuery);
         return bets;
     }
 
     public List<Bet> getByEventId(Long eventId) throws DBException {
+        String searchQuery = "select * from " +  TABLE_NAME + " where " + EVENT_ID + " = " + eventId;
+        List<Bet> bets = getByCondition(searchQuery);
+        return bets;
+    }
+
+    public List<Bet> getByEventIdAndWinningChoice(Long eventId, Boolean winningChoice) throws DBException {
+        String searchQuery = "select * from " +  TABLE_NAME + " where " + EVENT_ID + " = " + eventId + " AND " + WINNING_CHOICE + " = " + winningChoice;
+        List<Bet> bets = getByCondition(searchQuery);
+        return bets;
+    }
+
+    private List<Bet> getByCondition(String searchCondition) {
         List<Bet> bets = new ArrayList();
         Connection connection = null;
         try {
             connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from BETS where EventID = ?");
-            preparedStatement.setLong(1, eventId);
+            PreparedStatement preparedStatement = connection.prepareStatement(searchCondition);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Bet bet = new Bet();
-                bet.setBetId(resultSet.getLong("BetID"));
-                bet.setUserId(resultSet.getLong("UserID"));
-                bet.setEventId(resultSet.getLong("EventID"));
-                bet.setBetSum(resultSet.getBigDecimal("Bet_Sum"));
-                bet.setWinningChoice(resultSet.getBoolean("Winning_Choice"));
+                Bet bet = getDataFromSearchResult(resultSet);
                 bets.add(bet);
             }
         } catch (Throwable e) {
-            System.out.println("Exception while getting customer list BetDAOImpl.getList()");
+            System.out.println("Exception while execute BetDAOImpl.getByCondition()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -140,32 +96,37 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
         return bets;
     }
 
-    public List<Bet> getByEventIdAndWinningChoice(Long eventId, Boolean winningChoice) throws DBException {
-        List<Bet> bets = new ArrayList();
+    private void deleteByCondition(String deleteCondition) {
         Connection connection = null;
         try {
             connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from BETS where EventID = ? AND Winning_Choise = ?");
-            preparedStatement.setLong(1, eventId);
-            preparedStatement.setBoolean(2, winningChoice);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Bet bet = new Bet();
-                bet.setBetId(resultSet.getLong("BetID"));
-                bet.setUserId(resultSet.getLong("UserID"));
-                bet.setEventId(resultSet.getLong("EventID"));
-                bet.setBetSum(resultSet.getBigDecimal("Bet_Sum"));
-                bet.setWinningChoice(resultSet.getBoolean("Winning_Choice"));
-                bets.add(bet);
-            }
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteCondition);
+            preparedStatement.executeUpdate();
         } catch (Throwable e) {
-            System.out.println("Exception while getting customer list BetDAOImpl.getList()");
+            System.out.println("Exception while execute BetDAOImpl.deleteByCondition()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
             closeConnection(connection);
         }
-        return bets;
+    }
+
+    private Bet getDataFromSearchResult(ResultSet resultSet) throws SQLException {
+        Bet bet = new Bet();
+        bet.setBetId(resultSet.getLong("BetID"));
+        bet.setUserId(resultSet.getLong("UserID"));
+        bet.setEventId(resultSet.getLong("EventID"));
+        bet.setBetSum(resultSet.getBigDecimal("Bet_Sum"));
+        bet.setWinningChoice(resultSet.getBoolean("Winning_Choice"));
+        return bet;
+    }
+
+    private Bet getOneUniqueBet(List<Bet> bets) {
+        Bet bet = null;
+        if (bets.size() > 0) {
+            bet = bets.get(0);
+        }
+        return bet;
     }
 
 }

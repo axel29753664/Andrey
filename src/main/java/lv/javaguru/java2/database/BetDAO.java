@@ -8,7 +8,7 @@ public interface BetDAO {
 
     void create(Bet bet);
 
-    void delete(Long betId);
+    void deleteById(Long betId);
 
     Bet getById(Long betId);
 

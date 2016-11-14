@@ -1,7 +1,6 @@
 package lv.javaguru.java2.domain;
 
 import lv.javaguru.java2.database.jdbc.BetDAOImpl;
-import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 
 import java.math.BigDecimal;
 
@@ -18,46 +17,33 @@ public class BetCreatorImpl implements BetCreator {
                           BigDecimal betSum,
                           BetWinningChoiceState winningChoice) {
 
-        checkUserId(userId);
-        checkEventId(eventId);
-        checkBetSum(betSum);
-        checkWinningChoiceState(winningChoice);
+        validate(userId, eventId, betSum, winningChoice);
+        Bet bet = create(userId, eventId, betSum, winningChoice);
+        writeInDao(bet);
+
+        System.out.println(bet);
+    }
+
+    private void validate(Long userId,
+                          Long eventId,
+                          BigDecimal betSum,
+                          BetWinningChoiceState winningChoice) {
+
+        ValidationService validationService = new ValidationService();
+        validationService.checkUserId(userId);
+        validationService.checkEventId(eventId);
+        validationService.checkBetSum(betSum);
+        validationService.checkWinningChoiceState(winningChoice);
+    }
+
+    private Bet create(Long userId,
+                       Long eventId,
+                       BigDecimal betSum,
+                       BetWinningChoiceState winningChoice) {
+
         Boolean winningChoiceBoolean = convertWinningChoiceToBoolean(winningChoice);
         Bet bet = new Bet (userId, eventId, betSum, winningChoiceBoolean);
-        BetDAOImpl betDAO = new BetDAOImpl();
-        betDAO.create(bet);
-
-    }
-
-    private void checkUserId(Long userId) {
-        if (userId <= 0) {
-            throw new BetIllegalStateException("You must be login");
-        }
-        UserDAOImpl UserDAO = new UserDAOImpl();
-        User userExistence = UserDAO.getById(userId);
-        if (userExistence == null) {
-            throw new BetIllegalStateException("Invalid account");
-        }
-    }
-
-    private void checkEventId(Long eventId) {
-        if (eventId <= 0) {
-            throw new BetIllegalStateException("You must choose event before make bet");
-        }
-        /* Проверка существования Ивента в БД */
-    }
-
-    private void checkBetSum(BigDecimal betSum) {
-        if (betSum.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new BetIllegalStateException("Incorrect bet sum");
-        }
-        /* Проверка достаточно ли средств в кошельке у пользователя */
-    }
-
-    private void checkWinningChoiceState(BetWinningChoiceState winningChoice) {
-        if (winningChoice == NOT_APPLIED) {
-            throw new BetIllegalStateException("You must choose, You bet 'for' or 'against' event");
-        }
+        return bet;
     }
 
     private Boolean convertWinningChoiceToBoolean(BetWinningChoiceState winningChoice) {
@@ -68,6 +54,11 @@ public class BetCreatorImpl implements BetCreator {
             winningChoiceBoolean = false;
         }
         return winningChoiceBoolean;
+    }
+
+    private void writeInDao(Bet bet) {
+        BetDAOImpl betDAO = new BetDAOImpl();
+        betDAO.create(bet);
     }
 
 }
