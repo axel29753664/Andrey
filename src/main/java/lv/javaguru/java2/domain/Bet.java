@@ -55,7 +55,7 @@ public class Bet {
         this.betSum = bidSum;
     }
 
-    public Boolean getWiningChoice() {
+    public Boolean getWinningChoice() {
         return winningChoice;
     }
 

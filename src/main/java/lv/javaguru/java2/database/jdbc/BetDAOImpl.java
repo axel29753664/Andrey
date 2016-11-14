@@ -30,7 +30,7 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
             preparedStatement.setLong(1, bet.getUserId()); // заполняем поля
             preparedStatement.setLong(2, bet.getEventId());
             preparedStatement.setBigDecimal(3, bet.getBetSum());
-            preparedStatement.setBoolean(4, bet.getWiningChoice());
+            preparedStatement.setBoolean(4, bet.getWinningChoice());
             preparedStatement.executeUpdate(); // отсылка подготовленного запроса
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()){ // поучаем обратно ID

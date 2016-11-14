@@ -24,7 +24,12 @@ public class Main_Temp {
         //getByUserId();
         //getByEventId();
         //getByEventIdAndWinningChoice();
-        betCreatorTest();
+        //betCreatorTest();
+
+        long a = 1;
+        Long b = null;
+        b = b.valueOf(a);
+        System.out.println(b);
 
     }
 

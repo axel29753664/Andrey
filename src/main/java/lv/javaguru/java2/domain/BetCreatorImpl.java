@@ -21,7 +21,6 @@ public class BetCreatorImpl implements BetCreator {
         Bet bet = create(userId, eventId, betSum, winningChoice);
         writeInDao(bet);
 
-        System.out.println(bet);
     }
 
     private void validate(Long userId,
