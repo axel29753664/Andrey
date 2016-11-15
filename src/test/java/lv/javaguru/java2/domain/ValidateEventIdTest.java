@@ -1,6 +1,6 @@
 package lv.javaguru.java2.domain;
 
-import lv.javaguru.java2.database.jdbc.UserDAOImpl;
+import lv.javaguru.java2.database.jdbc.EventDAOImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,13 +14,13 @@ import static org.mockito.Mockito.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class ValidateUserIdTest {
+public class ValidateEventIdTest {
 
     @InjectMocks
-    private ValidateUserId validateUserId;
+    private ValidateEventId validateEventId;
 
     @Mock
-    private UserDAOImpl userDao;
+    private EventDAOImpl eventDao;
 
     @Before
     public void init() {
@@ -29,33 +29,33 @@ public class ValidateUserIdTest {
 
     @Test
     public void shouldReturnUser(){
-        long userId = 123;
-        User user = new User();
-        when(userDao.getById(userId)).thenReturn(user);
-        validateUserId.check(userId);
-        verify(userDao, times(1)).getById(userId);
+        long eventId = 123;
+        Event event = new Event();
+        when(eventDao.getById(eventId)).thenReturn(event);
+        validateEventId.check(eventId);
+        verify(eventDao, times(1)).getById(eventId);
     }
 
     @Test (expected = ValidationIllegalStateException.class)
     public void shouldThrowExceptionDueUserNotExist() {
-        long userId = 123;
-        User user = null;
-        when(userDao.getById(userId)).thenReturn(user);
-        validateUserId.check(userId);
-        fail();
+        long eventId = 123;
+        Event event = null;
+        when(eventDao.getById(eventId)).thenReturn(event);
+        validateEventId.check(eventId);
+        verify(eventDao, times(1)).getById(eventId);
     }
 
     @Test (expected = ValidationIllegalStateException.class)
     public void shouldThrowExceptionDueIncorrectUserId_Nr1() {
-        long userId = 0;
-        validateUserId.check(userId);
+        long eventId = 0;
+        validateEventId.check(eventId);
         fail();
     }
 
     @Test (expected = ValidationIllegalStateException.class)
     public void shouldThrowExceptionDueIncorrectUserId_Nr2() {
-        long userId = -10;
-        validateUserId.check(userId);
+        long eventId = -10;
+        validateEventId.check(eventId);
         fail();
     }
 

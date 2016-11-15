@@ -23,12 +23,8 @@ public class Main_Temp {
         //getByEventIdAndWinningChoice();
         //betCreatorTest();
 
-        User user = new User();
-        if (user == null) {
-            System.out.println("Null");
-        } else {
-            System.out.println("Not Null:" + user);
-        }
+        BigDecimal betSum = new BigDecimal(10);
+        System.out.println(betSum);
 
       }
 

@@ -29,9 +29,7 @@ public class ValidationServiceBetCreation {
         if (betSum.compareTo(BigDecimal.ZERO) <= 0) {
             throw new ValidationIllegalStateException("Incorrect bet sum.");
         }
-
         // Проверка достаточно ли средств в кошельке у пользователя
-
     }
 
     private void checkWinningChoiceState(BetWinningChoiceState winningChoice) {
