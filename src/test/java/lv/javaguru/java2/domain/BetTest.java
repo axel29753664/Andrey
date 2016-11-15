@@ -17,7 +17,7 @@ public class BetTest {
     }
 
     @After
-    public void clear() {
+    public void clean() {
         bet = null;
     }
 

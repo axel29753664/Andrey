@@ -5,7 +5,6 @@ import lv.javaguru.java2.database.jdbc.BetDAOImpl;
 import java.math.BigDecimal;
 
 import static lv.javaguru.java2.domain.BetWinningChoiceState.FOR;
-import static lv.javaguru.java2.domain.BetWinningChoiceState.NOT_APPLIED;
 
 public class BetCreatorImpl implements BetCreator {
 
@@ -28,11 +27,8 @@ public class BetCreatorImpl implements BetCreator {
                           BigDecimal betSum,
                           BetWinningChoiceState winningChoice) {
 
-        ValidationService validationService = new ValidationService();
-        validationService.checkUserId(userId);
-        validationService.checkEventId(eventId);
-        validationService.checkBetSum(betSum);
-        validationService.checkWinningChoiceState(winningChoice);
+        ValidationServiceBetCreation validationServiceBetCreation = new ValidationServiceBetCreation();
+        validationServiceBetCreation.check(userId, eventId, betSum, winningChoice);
     }
 
     private Bet create(Long userId,
