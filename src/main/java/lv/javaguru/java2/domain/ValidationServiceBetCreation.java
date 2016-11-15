@@ -5,22 +5,24 @@ import java.math.BigDecimal;
 import static lv.javaguru.java2.domain.BetWinningChoiceState.NOT_APPLIED;
 
 public class ValidationServiceBetCreation {
+    ValidateUserId validateUserId;
+    ValidateEventId validateEventId;
+
 
     public ValidationServiceBetCreation() {
+        validateUserId = new ValidateUserId();
+        validateEventId = new ValidateEventId();
     }
 
-    public void check(Long userId,
-                      Long eventId,
+    public void check(long userId,
+                      long eventId,
                       BigDecimal betSum,
                       BetWinningChoiceState winningChoice) {
 
-        ValidateUserId validateUserId = new ValidateUserId();
         validateUserId.check(userId);
-        ValidateEventId validateEventId = new ValidateEventId();
         validateEventId.check(eventId);
         checkBetSum(betSum);
         checkWinningChoiceState(winningChoice);
-
     }
 
     private void checkBetSum(BigDecimal betSum) {

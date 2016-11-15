@@ -5,6 +5,6 @@ import java.math.BigDecimal;
 
 public interface BetCreator {
 
-    void createBet(Long userId, Long eventId, BigDecimal betSum, BetWinningChoiceState winningChoice);
+    void createBet(long userId, long eventId, BigDecimal betSum, BetWinningChoiceState winningChoice);
 
 }

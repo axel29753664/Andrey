@@ -4,46 +4,46 @@ import java.math.BigDecimal;
 
 public class Bet {
 
-    private Long betId;
-    private Long userId;
-    private Long eventId;
+    private long betId;
+    private long userId;
+    private long eventId;
     private BigDecimal betSum;
-    private Boolean winningChoice;
+    private boolean winningChoice;
 
     public Bet() {
     }
 
-    public Bet(Long userId,
-               Long eventId,
+    public Bet(long userId,
+               long eventId,
                BigDecimal betSum,
-               Boolean winningChoice) {
+               boolean winningChoice) {
         this.userId = userId;
         this.eventId = eventId;
         this.betSum = betSum;
         this.winningChoice = winningChoice;
     }
 
-    public Long getBetId() {
+    public long getBetId() {
         return betId;
     }
 
-    public void setBetId(Long betId) {
+    public void setBetId(long betId) {
         this.betId = betId;
     }
 
-    public Long getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
-    public Long getEventId() {
+    public long getEventId() {
         return eventId;
     }
 
-    public void setEventId(Long eventId) {
+    public void setEventId(long eventId) {
         this.eventId = eventId;
     }
 
@@ -55,11 +55,11 @@ public class Bet {
         this.betSum = bidSum;
     }
 
-    public Boolean getWinningChoice() {
+    public boolean getWinningChoice() {
         return winningChoice;
     }
 
-    public void setWinningChoice(Boolean winingChoice) {
+    public void setWinningChoice(boolean winingChoice) {
         this.winningChoice = winingChoice;
     }
 

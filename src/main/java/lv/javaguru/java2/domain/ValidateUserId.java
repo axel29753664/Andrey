@@ -9,7 +9,7 @@ public class ValidateUserId {
         userDao = new UserDAOImpl();
     }
 
-    public void check(Long userId) {
+    public void check(long userId) {
         if (userId <= 0) {
             throw new ValidationIllegalStateException("You must be login.");
         }
@@ -20,6 +20,3 @@ public class ValidateUserId {
     }
 
 }
-
-
-

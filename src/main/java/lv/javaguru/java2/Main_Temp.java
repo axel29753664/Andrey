@@ -2,10 +2,7 @@ package lv.javaguru.java2;
 
 import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.jdbc.BetDAOImpl;
-import lv.javaguru.java2.domain.Bet;
-import lv.javaguru.java2.domain.BetCreator;
-import lv.javaguru.java2.domain.BetCreatorImpl;
-import lv.javaguru.java2.domain.BetWinningChoiceState;
+import lv.javaguru.java2.domain.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -24,7 +21,14 @@ public class Main_Temp {
         //getByUserId();
         //getByEventId();
         //getByEventIdAndWinningChoice();
-        betCreatorTest();
+        //betCreatorTest();
+
+        User user = new User();
+        if (user == null) {
+            System.out.println("Null");
+        } else {
+            System.out.println("Not Null:" + user);
+        }
 
       }
 

@@ -1,13 +1,13 @@
 package lv.javaguru.java2.domain;
 
 public class Event {
-    private Long eventId;
+    private long eventId;
     private String eventName;
 
     public Event() {
     }
 
-    public void setEventId(Long eventId) {
+    public void setEventId(long eventId) {
         this.eventId = eventId;
     }
 

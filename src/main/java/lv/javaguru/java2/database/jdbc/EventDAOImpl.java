@@ -15,7 +15,7 @@ public class EventDAOImpl extends DAOImpl implements EventDAO {
     private final String TABLE_NAME = "events";
     private final String EVENT_ID = "EventID";
 
-    public Event getById(Long eventId) throws DBException {
+    public Event getById(long eventId) throws DBException {
         String searchQuery = "select * from " +  TABLE_NAME + " where " + EVENT_ID + " = " + eventId;
         List<Event> events = getByCondition(searchQuery);
         Event event = getOneUniqueEvent(events);

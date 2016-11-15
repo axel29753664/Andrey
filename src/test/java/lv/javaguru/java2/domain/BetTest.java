@@ -23,27 +23,21 @@ public class BetTest {
 
     @Test
     public void testSetCorrectBetId() {
-        Long betId = null;
-        long number = 1;
-        betId = betId.valueOf(number);
+        long betId = 1;
         bet.setBetId(betId);
         assertEquals(bet.getBetId(), betId);
     }
 
     @Test
     public void testSetCorrectUserId() {
-        Long userId = null;
-        long number = 10;
-        userId = userId.valueOf(number);
+        long userId = 10;
         bet.setUserId(userId);
         assertEquals(bet.getUserId(), userId);
     }
 
     @Test
     public void testSetCorrectEventId() {
-        Long eventId = null;
-        long number = 20;
-        eventId = eventId.valueOf(number);
+        long eventId = 20;
         bet.setEventId(eventId);
         assertEquals(bet.getEventId(), eventId);
     }
@@ -59,14 +53,14 @@ public class BetTest {
 
     @Test
     public void testSetTrueWinningChoice() {
-        Boolean winningChoice = true;
+        boolean winningChoice = true;
         bet.setWinningChoice(winningChoice);
         assertEquals(bet.getWinningChoice(), winningChoice);
     }
 
     @Test
     public void testSetFalseWinningChoice() {
-        Boolean winningChoice = false;
+        boolean winningChoice = false;
         bet.setWinningChoice(winningChoice);
         assertEquals(bet.getWinningChoice(), winningChoice);
     }

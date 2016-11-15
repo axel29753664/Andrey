@@ -3,16 +3,17 @@ package lv.javaguru.java2.domain;
 import lv.javaguru.java2.database.jdbc.EventDAOImpl;
 
 public class ValidateEventId {
+    EventDAOImpl EventDao;
 
     public ValidateEventId() {
+        EventDao = new EventDAOImpl();
     }
 
-    public void check(Long eventId) {
+    public void check(long eventId) {
         if (eventId <= 0) {
             throw new ValidationIllegalStateException("You must choose event before make bet");
         }
-        EventDAOImpl EventDAO = new EventDAOImpl();
-        Event eventExistence = EventDAO.getById(eventId);
+        Event eventExistence = EventDao.getById(eventId);
         if (eventExistence == null) {
             throw new ValidationIllegalStateException("Event doesn't exist.");
         }

@@ -45,31 +45,31 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
         }
     }
 
-    public void deleteById(Long betId) throws DBException {
+    public void deleteById(long betId) throws DBException {
         String deleteQuery = "delete from " +  TABLE_NAME + " where " + BET_ID + " = " + betId;
         deleteByCondition(deleteQuery);
     }
 
-    public Bet getById(Long betId) throws DBException {
+    public Bet getById(long betId) throws DBException {
         String searchQuery = "select * from " +  TABLE_NAME + " where " + BET_ID + " = " + betId;
         List<Bet> bets = getByCondition(searchQuery);
         Bet bet = getOneUniqueBet(bets);
         return bet;
     }
 
-    public List<Bet> getByUserId(Long userId) throws DBException {
+    public List<Bet> getByUserId(long userId) throws DBException {
         String searchQuery = "select * from " +  TABLE_NAME + " where " + USER_ID + " = " + userId;
         List<Bet> bets = getByCondition(searchQuery);
         return bets;
     }
 
-    public List<Bet> getByEventId(Long eventId) throws DBException {
+    public List<Bet> getByEventId(long eventId) throws DBException {
         String searchQuery = "select * from " +  TABLE_NAME + " where " + EVENT_ID + " = " + eventId;
         List<Bet> bets = getByCondition(searchQuery);
         return bets;
     }
 
-    public List<Bet> getByEventIdAndWinningChoice(Long eventId, Boolean winningChoice) throws DBException {
+    public List<Bet> getByEventIdAndWinningChoice(long eventId, boolean winningChoice) throws DBException {
         String searchQuery = "select * from " +  TABLE_NAME + " where " + EVENT_ID + " = " + eventId + " AND " + WINNING_CHOICE + " = " + winningChoice;
         List<Bet> bets = getByCondition(searchQuery);
         return bets;
