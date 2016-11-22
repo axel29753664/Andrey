@@ -21,20 +21,19 @@ public class UserDAOImplTest2 {
         assertEquals(user.getLastName(), userFromDB.getLastName());
         assertEquals(user.getLogin(), userFromDB.getLogin());
         assertEquals(user.getPassword(), userFromDB.getPassword());
-        assertEquals(user.isAdmin(), userFromDB.isAdmin());
     }
 
     private User recordUserToDB() {
-        User user = new User("name", "lastName", "login", "password", false);
+        User user = new User("name", "lastName", "login", "password");
         userDAO.create(user);
         return user;
     }
 
     private List<User> initUserList() {
         List<User> userList = new ArrayList<>();
-        userList.add(new User("a", "b", "c", "d", false));
-        userList.add(new User("e", "f", "g", "j", false));
-        userList.add(new User("1", "2", "3", "4", false));
+        userList.add(new User("a", "b", "c", "d"));
+        userList.add(new User("e", "f", "g", "j"));
+        userList.add(new User("1", "2", "3", "4"));
         return userList;
     }
 

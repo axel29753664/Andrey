@@ -1,4 +1,4 @@
-INSERT INTO totalizatordb.users (FirstName, LastName, Login, Password, Admin) VALUES ('axel', 'foley', 'axel', 'axel', 0);
-INSERT INTO totalizatordb.users (FirstName, LastName, Login, Password, Admin) VALUES ('Vasja', 'Pupkin', 'Vasja', 'Pupkin', 0);
-INSERT INTO totalizatordb.users (FirstName, LastName, Login, Password, Admin) VALUES ('Anna', 'Vanna', 'Anna', 'Vanna', 0);
-INSERT INTO totalizatordb.users (FirstName, LastName, Login, Password, Admin) VALUES ('login', 'password', 'login', 'password', 0);
+INSERT INTO totalizatordb.users (FirstName, LastName, Login, Password) VALUES ('axel', 'foley', 'axel', 'axel');
+INSERT INTO totalizatordb.users (FirstName, LastName, Login, Password) VALUES ('Vasja', 'Pupkin', 'Vasja', 'Pupkin');
+INSERT INTO totalizatordb.users (FirstName, LastName, Login, Password) VALUES ('Anna', 'Vanna', 'Anna', 'Vanna');
+INSERT INTO totalizatordb.users (FirstName, LastName, Login, Password) VALUES ('login', 'password', 'login', 'password');

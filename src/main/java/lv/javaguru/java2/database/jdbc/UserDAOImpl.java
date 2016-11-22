@@ -18,7 +18,6 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
     private final String LastName = "LastName";
     private final String Login = "Login";
     private final String Password = "Password";
-    private final String Admin = "Admin";
 
     private User parseResultSet(ResultSet resultSet) throws SQLException {
         User user = new User();
@@ -27,7 +26,6 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         user.setLastName(resultSet.getString(LastName));
         user.setLogin(resultSet.getString(Login));
         user.setPassword(resultSet.getString(Password));
-        user.setAdmin(resultSet.getBoolean(Admin));
         return user;
     }
 
@@ -41,13 +39,11 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO " + DBName + " VALUES (default, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                    connection.prepareStatement("INSERT INTO " + DBName + " VALUES (default, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getLogin());
             preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setBoolean(5, user.isAdmin());
-
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {
@@ -150,15 +146,13 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
                             + FirstName + " = ?,"
                             + LastName + " = ?,"
                             + Login + " = ?, "
-                            + Password + " = ?, "
-                            + Admin + " = ? "
+                            + Password + " = ? "
                             + "WHERE " + UserID + " = ?");
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getLogin());
             preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setBoolean(5, user.isAdmin());
-            preparedStatement.setLong(6, user.getUserId());
+            preparedStatement.setLong(5, user.getUserId());
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
             System.out.println("Exception while execute UserDAOImpl.update()");

@@ -7,17 +7,16 @@ public class User {
     private String lastName;
     private String login;
     private String password;
-    private boolean isAdmin;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String login, String password, boolean isAdmin) {
+    public User(String firstName, String lastName, String login, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
-        this.isAdmin = isAdmin;
+
     }
 
     public String getLogin() {
@@ -34,14 +33,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
     }
 
     public Long getUserId() {
@@ -76,7 +67,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                ", isAdmin=" + isAdmin +
                 '}';
     }
 }

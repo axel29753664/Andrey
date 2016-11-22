@@ -22,7 +22,7 @@ public class UserDAOImplTest extends DBUnitTestCase {
 //        User user = createUser()
 //                .withFirstName("F")
 //                .withLastName("L").build();
-        User user = new User("name", "lastName", "login", "password", false);
+        User user = new User("name", "lastName", "login", "password");
         userDAO.create(user);
 
         User userFromDB = userDAO.getById(user.getUserId());
@@ -32,7 +32,6 @@ public class UserDAOImplTest extends DBUnitTestCase {
         assertEquals(user.getLastName(), userFromDB.getLastName());
         assertEquals(user.getLogin(), userFromDB.getLogin());
         assertEquals(user.getPassword(), userFromDB.getPassword());
-        assertEquals(user.isAdmin(), userFromDB.isAdmin());
     }
 
 }
