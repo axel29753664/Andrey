@@ -24,9 +24,8 @@ public class RegistrationServlet extends HttpServlet {
         user.setLogin(req.getParameter("login"));
         user.setPassword(req.getParameter("password"));
         HttpSession session = req.getSession();
-        String message = null;
+        String message;
         String url = "registration.jsp";
-        boolean result = false;
         try {
             registration.createNewUser(user);
             url = "login.jsp";

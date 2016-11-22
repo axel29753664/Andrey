@@ -4,6 +4,11 @@
     <title>user page</title>
 </head>
 <body>
+<form method="post" action="userPage">
+    <input type="submit" value="logout"/>
+
+</form>
+
         <h1>Hello ${login}</h1>
 
 </body>
