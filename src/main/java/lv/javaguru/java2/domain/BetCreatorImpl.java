@@ -11,8 +11,8 @@ public class BetCreatorImpl implements BetCreator {
     public BetCreatorImpl() {
     }
 
-    public void createBet(long userId,
-                          long eventId,
+    public void createBet(Long userId,
+                          Long eventId,
                           BigDecimal betSum,
                           BetWinningChoiceState winningChoice) {
 
@@ -22,8 +22,8 @@ public class BetCreatorImpl implements BetCreator {
 
     }
 
-    private void validate(long userId,
-                          long eventId,
+    private void validate(Long userId,
+                          Long eventId,
                           BigDecimal betSum,
                           BetWinningChoiceState winningChoice) {
 
@@ -31,8 +31,8 @@ public class BetCreatorImpl implements BetCreator {
         validationServiceBetCreation.check(userId, eventId, betSum, winningChoice);
     }
 
-    private Bet create(long userId,
-                       long eventId,
+    private Bet create(Long userId,
+                       Long eventId,
                        BigDecimal betSum,
                        BetWinningChoiceState winningChoice) {
 

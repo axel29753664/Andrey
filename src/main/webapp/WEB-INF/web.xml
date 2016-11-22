@@ -6,6 +6,40 @@
          version="3.0">
 
     <servlet>
+        <servlet-name>StartingServlet</servlet-name>
+        <servlet-class>lv.javaguru.java2.servlet.StartingServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>StartingServlet</servlet-name>
+        <url-pattern>/start</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MakeBetFormServlet</servlet-name>
+        <servlet-class>lv.javaguru.java2.servlet.MakeBetFormServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MakeBetFormServlet</servlet-name>
+        <url-pattern>/makeBetForm</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MakeBetServlet</servlet-name>
+        <servlet-class>lv.javaguru.java2.servlet.MakeBetServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MakeBetServlet</servlet-name>
+        <url-pattern>/makeBet</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
+    <servlet>
         <servlet-name>HelloWorldServlet</servlet-name>
         <servlet-class>lv.javaguru.java2.servlet.HelloWorldServlet</servlet-class>
     </servlet>
@@ -44,6 +78,5 @@
         <servlet-name>RedirectToJSPServlet</servlet-name>
         <url-pattern>/jsp</url-pattern>
     </servlet-mapping>
-
 
 </web-app>

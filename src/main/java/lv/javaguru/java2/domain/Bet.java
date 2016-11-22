@@ -4,17 +4,17 @@ import java.math.BigDecimal;
 
 public class Bet {
 
-    private long betId;
-    private long userId;
-    private long eventId;
+    private Long betId;
+    private Long userId;
+    private Long eventId;
     private BigDecimal betSum;
     private boolean winningChoice;
 
     public Bet() {
     }
 
-    public Bet(long userId,
-               long eventId,
+    public Bet(Long userId,
+               Long eventId,
                BigDecimal betSum,
                boolean winningChoice) {
         this.userId = userId;
@@ -27,7 +27,7 @@ public class Bet {
         return betId;
     }
 
-    public void setBetId(long betId) {
+    public void setBetId(Long betId) {
         this.betId = betId;
     }
 
@@ -35,7 +35,7 @@ public class Bet {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -43,7 +43,7 @@ public class Bet {
         return eventId;
     }
 
-    public void setEventId(long eventId) {
+    public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
 
@@ -51,8 +51,8 @@ public class Bet {
         return betSum;
     }
 
-    public void setBetSum(BigDecimal bidSum) {
-        this.betSum = bidSum;
+    public void setBetSum(BigDecimal betSum) {
+        this.betSum = betSum;
     }
 
     public boolean getWinningChoice() {
