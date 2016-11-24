@@ -2,10 +2,12 @@
 <html>
 <head>
     <title>JSP page</title>
-</head>
 <body>
-
-    <h1>Hello from JSP file!</h1>
+</head>
+Hello World!
+    <p>
+        <h1>${data}</h1><br>
+    </p>
 
 </body>
 </html>
