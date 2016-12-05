@@ -4,8 +4,8 @@
     <title>Login page</title>
 </head>
 <body>
-<jsp:include page="index.html"></jsp:include>
-<form method="post" action="login">
+<jsp:include page="default.jsp"></jsp:include>
+<form method="post">
     Login <input type="text" name="login"/>
     Password <input type="text" name="password"/>
     <input type="submit" value="Send"/>

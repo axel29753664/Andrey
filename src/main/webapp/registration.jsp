@@ -4,8 +4,8 @@
     <title>Registration page</title>
 </head>
 <body>
-<jsp:include page="index.html"></jsp:include>
-<form method="post" action="registration">
+<jsp:include page="default.jsp"></jsp:include>
+<form method="post">
     <font color="red">${regMessage}</font><br>
     <table>
         <tr>

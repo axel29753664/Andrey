@@ -5,12 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface MVCController {
 
-
     MVCModel processGet(HttpServletRequest req);
 
-
     MVCModel processPost(HttpServletRequest req);
-
-
-
 }

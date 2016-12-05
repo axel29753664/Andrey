@@ -4,7 +4,7 @@
     <title>user page</title>
 </head>
 <body>
-<form method="post" action="userPage">
+<form method="post">
     <input type="submit" value="logout"/>
 
 </form>

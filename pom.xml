@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>lv.javaguru</groupId>
-    <artifactId>Totalizator</artifactId>
+    <artifactId>java2</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <packaging>war</packaging>
@@ -67,7 +67,7 @@
     </dependencies>
 
     <build>
-        <finalName>Totalizator</finalName>
+        <finalName>java2</finalName>
 
         <plugins>
             <plugin>
@@ -94,7 +94,7 @@
                 <version>8.1.14.v20131031</version>
                 <configuration>
                     <webApp>
-                        <contextPath>/Totalizator</contextPath>
+                        <contextPath>/java2</contextPath>
                     </webApp>
                 </configuration>
             </plugin>

@@ -1,28 +1,16 @@
 package lv.javaguru.java2.servlet.mvc;
 
-
 import javax.servlet.http.HttpServletRequest;
 
-public class HelloWorldController implements MVCController {
-
-
+public class DefaultPageController implements MVCController {
     @Override
-
     public MVCModel processGet(HttpServletRequest req) {
-
-
-        return new MVCModel("/helloWorld.jsp", "Hello WWW world from Java!");
-
+        String jspName = "/default.jsp";
+        return new MVCModel(jspName, req);
     }
-
 
     @Override
-
     public MVCModel processPost(HttpServletRequest req) {
-
         return null;
-
     }
-
-
 }
