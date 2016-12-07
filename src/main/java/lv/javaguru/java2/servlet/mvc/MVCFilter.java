@@ -19,7 +19,7 @@ public class MVCFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         controllers = new HashMap<>();
-        controllers.put("/", new DefaultPageController());
+        controllers.put("/", new MenuPageController());
         controllers.put("/login", new LoginPageController());
         controllers.put("/userPage", new UserPageController());
         controllers.put("/registration", new RegistrationPageController());

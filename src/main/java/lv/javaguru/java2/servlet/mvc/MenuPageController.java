@@ -2,11 +2,10 @@ package lv.javaguru.java2.servlet.mvc;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class DefaultPageController implements MVCController {
+public class MenuPageController implements MVCController {
     @Override
     public MVCModel processGet(HttpServletRequest req) {
-        String jspName = "/default.jsp";
-        return new MVCModel(jspName, req);
+        return new MVCModel("/menu.jsp", null);
     }
 
     @Override

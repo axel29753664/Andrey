@@ -4,7 +4,7 @@
     <title>Registration page</title>
 </head>
 <body>
-<jsp:include page="default.jsp"></jsp:include>
+<jsp:include page="menu.jsp"></jsp:include>
 <form method="post">
     <font color="red">${regMessage}</font><br>
     <table>
