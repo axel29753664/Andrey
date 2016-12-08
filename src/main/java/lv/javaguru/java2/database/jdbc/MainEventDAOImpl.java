@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.MainEventDAO;
 import lv.javaguru.java2.domain.MainEvent;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Created by Mike on 11/1/2016.
  */
+@Component
 public class MainEventDAOImpl extends  DAOImpl implements MainEventDAO{
 
     public void create (MainEvent mainEvent) throws DBException {

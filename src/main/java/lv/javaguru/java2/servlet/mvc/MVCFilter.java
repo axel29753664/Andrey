@@ -1,5 +1,11 @@
 package lv.javaguru.java2.servlet.mvc;
 
+import javafx.application.Application;
+import lv.javaguru.java2.config.SpringConfig;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,11 +20,21 @@ public class MVCFilter implements Filter {
 
     private Map<String, MVCController> controllers;
 
+    private ApplicationContext springContext;
+
+    private MVCController getBean(Class<?> clazz){
+        return (MVCController) springContext.getBean(clazz);
+    }
+
     @Override
     public void init (FilterConfig filterConfig) throws ServletException{
+        try {
+            springContext = new AnnotationConfigApplicationContext(SpringConfig.class);
+        } catch (BeansException e) {
+        }
         controllers = new HashMap<>();
-        controllers.put("/hello", new HelloWorldController());
-        controllers.put("/events", new EventPageController());
+        controllers.put("/hello", getBean(HelloWorldController.class));
+        controllers.put("/events", getBean(EventPageController.class));
     }
 
     @Override

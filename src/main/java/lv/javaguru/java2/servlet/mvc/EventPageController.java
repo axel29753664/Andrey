@@ -1,10 +1,14 @@
 package lv.javaguru.java2.servlet.mvc;
 
+import org.springframework.stereotype.Component;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Craze on 12/8/2016.
  */
+
+@Component
 public class EventPageController implements MVCController {
 
     @Override
