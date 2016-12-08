@@ -18,6 +18,7 @@ public class MVCFilter implements Filter {
     public void init (FilterConfig filterConfig) throws ServletException{
         controllers = new HashMap<>();
         controllers.put("/hello", new HelloWorldController());
+        controllers.put("/events", new EventPageController());
     }
 
     @Override
@@ -35,19 +36,19 @@ public class MVCFilter implements Filter {
         } else {
             MVCController controller = controllers.get(contextURI);
             MVCModel model;
-            if (method.equalsIgnoreCase("GET")){
-                model = controller.processGet(req);
-            } else {
-                model = controller.processPost(req);
-            }
 
-            req.setAttribute("data", model.getData());
-            ServletContext context = req.getServletContext();
-            RequestDispatcher requestDispatcher = context.getRequestDispatcher(model.getJspName());
-            requestDispatcher.forward(req, resp);
-        }
+            if (method.equalsIgnoreCase("GET")){
+        model = controller.processGet(req);
+    } else {
+        model = controller.processPost(req);
     }
 
+            req.setAttribute("data", model.getData());
+    ServletContext context = req.getServletContext();
+    RequestDispatcher requestDispatcher = context.getRequestDispatcher(model.getJspName());
+            requestDispatcher.forward(req, resp);
+}
+    }
 
     @Override
     public void destroy (){
