@@ -1,5 +1,11 @@
 package lv.javaguru.java2.servlet.mvc;
 
+import lv.javaguru.java2.config.SpringAppConfig;
+
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import javax.servlet.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,14 +21,25 @@ import java.util.Map;
 
 public class MVCFilter implements Filter {
     private Map<String, MVCController> controllers;
+    private ApplicationContext springContext;
+
+
+    private MVCController getBean(Class<?> clazz) {
+        return (MVCController) springContext.getBean(clazz);
+    }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+        try {
+            springContext = new AnnotationConfigApplicationContext(SpringAppConfig.class);
+        } catch (BeansException e) {
+
+        }
         controllers = new HashMap<>();
-        controllers.put("/", new MenuPageController());
-        controllers.put("/login", new LoginPageController());
-        controllers.put("/userPage", new UserPageController());
-        controllers.put("/registration", new RegistrationPageController());
+        controllers.put("/", getBean(MenuPageController.class));
+        controllers.put("/login", getBean(LoginPageController.class));
+        controllers.put("/userPage", getBean(UserPageController.class));
+        controllers.put("/registration", getBean(RegistrationPageController.class));
 
     }
 
@@ -45,12 +62,12 @@ public class MVCFilter implements Filter {
             }
             req.setAttribute("data", model.getData());
             ServletContext context = req.getServletContext();
-            if (model.getJspName().contains(".jsp")) {
+//            if (model.getJspName().contains(".jsp")) {
                 RequestDispatcher requestDispatcher = context.getRequestDispatcher(model.getJspName());
                 requestDispatcher.forward(req, resp);
-            } else {
-                resp.sendRedirect(model.getJspName());
-            }
+//            } else {
+//                resp.sendRedirect(model.getJspName());
+//            }
         }
     }
 

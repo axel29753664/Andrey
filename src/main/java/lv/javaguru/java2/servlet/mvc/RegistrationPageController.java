@@ -4,10 +4,14 @@ import lv.javaguru.java2.domain.LoginValidationException;
 import lv.javaguru.java2.domain.RegistrationException;
 import lv.javaguru.java2.domain.RegistrationService;
 import lv.javaguru.java2.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-
+@Component
 public class RegistrationPageController implements MVCController {
+    @Autowired
+    private RegistrationService registration;
     @Override
     public MVCModel processGet(HttpServletRequest req) {
         return new MVCModel("/registration.jsp", null);
@@ -15,7 +19,7 @@ public class RegistrationPageController implements MVCController {
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
-        RegistrationService registration = new RegistrationService();
+
         User user = new User();
         user.setFirstName(req.getParameter("firstName"));
         user.setLastName(req.getParameter("lastName"));

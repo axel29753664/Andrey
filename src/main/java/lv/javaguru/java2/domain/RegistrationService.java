@@ -3,9 +3,13 @@ package lv.javaguru.java2.domain;
 
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.database.jdbc.UserDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RegistrationService {
-    private UserDAO userDAO = new UserDAOImpl();
+    @Autowired
+    private UserDAO userDAO;
     private UserLoginValidation loginValidation = new UserLoginValidation();
 
     public void createNewUser(User user) throws RegistrationException {

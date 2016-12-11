@@ -8,7 +8,9 @@
 <form method="post">
     Login <input type="text" name="login"/>
     Password <input type="text" name="password"/>
-    <input type="submit" value="Send"/>
+    <a href="${pageContext.request.contextPath}/userPage">
+        <button>login</button>
+    </a>
     <font color="red">${loginMessage}</font>
 </form>
 </body>
