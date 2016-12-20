@@ -8,14 +8,14 @@ public interface BetDAO {
 
     void create(Bet bet);
 
-    void deleteById(long betId);
+    void deleteById(Long betId);
 
-    Bet getById(long betId);
+    Bet getById(Long betId);
 
-    List<Bet> getByUserId(long userId);
+    List<Bet> getByUserId(Long userId);
 
-    List<Bet> getByEventId(long eventId);
+    List<Bet> getByEventId(Long eventId);
 
-    List<Bet> getByEventIdAndWinningChoice (long eventId, boolean winningChoice);
+    List<Bet> getByEventIdAndWinningCondition (Long eventId, Boolean winningCondition);
 
 }

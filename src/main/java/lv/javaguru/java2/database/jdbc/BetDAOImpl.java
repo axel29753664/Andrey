@@ -17,7 +17,7 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
     private final String USER_ID = "UserID";
     private final String EVENT_ID = "EventID";
     private final String BET_SUM = "Bet_Sum";
-    private final String WINNING_CHOICE = "Winning_Choice";
+    private final String WINNING_CONDITION = "Winning_Condition";
 
     public void create(Bet bet) throws DBException {
         if (bet == null) {
@@ -30,7 +30,7 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
             preparedStatement.setLong(1, bet.getUserId()); // заполняем поля
             preparedStatement.setLong(2, bet.getEventId());
             preparedStatement.setBigDecimal(3, bet.getBetSum());
-            preparedStatement.setBoolean(4, bet.getWinningChoice());
+            preparedStatement.setBoolean(4, bet.getWinningCondition());
             preparedStatement.executeUpdate(); // отсылка подготовленного запроса
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()){ // поучаем обратно ID
@@ -39,38 +39,38 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
         } catch (Throwable e) {
             System.out.println("Exception while execute BetDAOImpl.create()");
             e.printStackTrace();
-            throw new DBException(e);
+            throw new DBException("Exception while execute BetDAOImpl.create()", e);
         } finally {
             closeConnection(connection);
         }
     }
 
-    public void deleteById(long betId) throws DBException {
+    public void deleteById(Long betId) throws DBException {
         String deleteQuery = "delete from " +  TABLE_NAME + " where " + BET_ID + " = " + betId;
         deleteByCondition(deleteQuery);
     }
 
-    public Bet getById(long betId) throws DBException {
+    public Bet getById(Long betId) throws DBException {
         String searchQuery = "select * from " +  TABLE_NAME + " where " + BET_ID + " = " + betId;
         List<Bet> bets = getByCondition(searchQuery);
         Bet bet = getOneUniqueBet(bets);
         return bet;
     }
 
-    public List<Bet> getByUserId(long userId) throws DBException {
+    public List<Bet> getByUserId(Long userId) throws DBException {
         String searchQuery = "select * from " +  TABLE_NAME + " where " + USER_ID + " = " + userId;
         List<Bet> bets = getByCondition(searchQuery);
         return bets;
     }
 
-    public List<Bet> getByEventId(long eventId) throws DBException {
+    public List<Bet> getByEventId(Long eventId) throws DBException {
         String searchQuery = "select * from " +  TABLE_NAME + " where " + EVENT_ID + " = " + eventId;
         List<Bet> bets = getByCondition(searchQuery);
         return bets;
     }
 
-    public List<Bet> getByEventIdAndWinningChoice(long eventId, boolean winningChoice) throws DBException {
-        String searchQuery = "select * from " +  TABLE_NAME + " where " + EVENT_ID + " = " + eventId + " AND " + WINNING_CHOICE + " = " + winningChoice;
+    public List<Bet> getByEventIdAndWinningCondition(Long eventId, Boolean winningCondition) throws DBException {
+        String searchQuery = "select * from " +  TABLE_NAME + " where " + EVENT_ID + " = " + eventId + " AND " + WINNING_CONDITION + " = " + winningCondition;
         List<Bet> bets = getByCondition(searchQuery);
         return bets;
     }
@@ -89,7 +89,7 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
         } catch (Throwable e) {
             System.out.println("Exception while execute BetDAOImpl.getByCondition()");
             e.printStackTrace();
-            throw new DBException(e);
+            throw new DBException("Exception while execute BetDAOImpl.getByCondition()", e);
         } finally {
             closeConnection(connection);
         }
@@ -105,7 +105,7 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
         } catch (Throwable e) {
             System.out.println("Exception while execute BetDAOImpl.deleteByCondition()");
             e.printStackTrace();
-            throw new DBException(e);
+            throw new DBException("Exception while execute BetDAOImpl.deleteByCondition()", e);
         } finally {
             closeConnection(connection);
         }
@@ -117,7 +117,7 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
         bet.setUserId(resultSet.getLong("UserID"));
         bet.setEventId(resultSet.getLong("EventID"));
         bet.setBetSum(resultSet.getBigDecimal("Bet_Sum"));
-        bet.setWinningChoice(resultSet.getBoolean("Winning_Choice"));
+        bet.setWinningCondition(resultSet.getBoolean("Winning_Condition"));
         return bet;
     }
 

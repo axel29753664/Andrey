@@ -1,4 +1,4 @@
-package lv.javaguru.java2.domain;
+/*package lv.javaguru.java2.domain;
 
 import org.junit.After;
 import org.junit.Before;
@@ -66,3 +66,4 @@ public class BetTest {
     }
 
 }
+*/

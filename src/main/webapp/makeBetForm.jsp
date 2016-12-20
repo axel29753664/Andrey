@@ -10,8 +10,8 @@
     <p>Event ID: 2</p>
     <input type="hidden" name="eventID" value="2">
     <p>Bet sum: <input type="number" min="1" name="betSum"></p>
-    <p><input type="radio" name="winningChoice" value="FOR"> For
-       <input type="radio" name="winningChoice" value="AGAINST"> Against</p>
+    <p><input type="radio" name="winningCondition" value="FOR"> For
+       <input type="radio" name="winningCondition" value="AGAINST"> Against</p>
     <input type="submit" value="Create Bet"/>
 </form>
 </body>

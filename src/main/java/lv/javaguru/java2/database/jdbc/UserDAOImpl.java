@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class UserDAOImpl extends DAOImpl implements UserDAO {
 
     public void create(User user) throws DBException {

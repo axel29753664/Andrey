@@ -3,15 +3,16 @@ package lv.javaguru.java2;
 import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.jdbc.BetDAOImpl;
 import lv.javaguru.java2.domain.*;
+import lv.javaguru.java2.domain.betValidation.BetValidationError;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static lv.javaguru.java2.domain.BetWinningChoiceState.AGAINST;
-import static lv.javaguru.java2.domain.BetWinningChoiceState.FOR;
-import static lv.javaguru.java2.domain.BetWinningChoiceState.NOT_APPLIED;
+import static lv.javaguru.java2.domain.BetWinningConditionState.AGAINST;
+import static lv.javaguru.java2.domain.BetWinningConditionState.FOR;
+import static lv.javaguru.java2.domain.BetWinningConditionState.NOT_APPLIED;
 
 public class Main_Temp {
     public static void main (String[] args) {
@@ -23,8 +24,16 @@ public class Main_Temp {
         //getByEventIdAndWinningChoice();
         //betCreatorTest();
 
-        BigDecimal betSum = new BigDecimal(10);
-        System.out.println(betSum);
+        //BigDecimal betSum = new BigDecimal(10);
+        //System.out.println(betSum);
+
+        BetWinningConditionState a = FOR;
+        String b = "FOR";
+        if (a.equals(b)) {
+            System.out.println("Yapii");
+        } else {
+            System.out.println(":-(");
+        }
 
       }
 
@@ -81,7 +90,7 @@ public class Main_Temp {
         int mainEnd = 1;
         do {
             System.out.println("Enter betID to delete");
-            long betId = sc.nextLong();
+            Long betId = sc.nextLong();
             betDao.deleteById(betId);
             System.out.println("Continue? (0 - no, 1 - yes");
             mainEnd = sc.nextInt();
@@ -120,22 +129,22 @@ public class Main_Temp {
         } while (mainEnd != 0);
     }
 
-    public static void getByEventIdAndWinningChoice() {
+    public static void getByEventIdAndWinningCondition() {
         Scanner sc = new Scanner(System.in);
         BetDAO betDao = new BetDAOImpl();
         int mainEnd = 1;
         do {
             System.out.println("Enter eventID");
             Long eventId = sc.nextLong();
-            System.out.println("Enter Winning Choice (1 - true, 0 - false");
+            System.out.println("Enter Winning Condition (1 - true, 0 - false");
             int winingChoiceInt = sc.nextInt();
-            Boolean winningChoice;
+            Boolean winningCondition;
             if (winingChoiceInt == 1) {
-                winningChoice = true;
+                winningCondition = true;
             } else {
-                winningChoice = false;
+                winningCondition = false;
             }
-            List<Bet> betList = betDao.getByEventIdAndWinningChoice(eventId, winningChoice);
+            List<Bet> betList = betDao.getByEventIdAndWinningCondition(eventId, winningCondition);
             for (Bet bet: betList) {
                 System.out.println(bet);
             }
@@ -156,7 +165,7 @@ public class Main_Temp {
             System.out.println("Enter BetSum");
             BigDecimal betSum = sc.nextBigDecimal();
             System.out.println("Enter WinningChoice");
-            BetWinningChoiceState winningChoice;
+            BetWinningConditionState winningChoice;
             int winingChoiceInt = sc.nextInt();
             if (winingChoiceInt == 2) {
                 winningChoice = AGAINST;
@@ -169,7 +178,17 @@ public class Main_Temp {
             }
 
             BetCreatorImpl betCreator = new BetCreatorImpl();
-            betCreator.createBet(userId, eventId, betSum, winningChoice);
+            Response response = betCreator.createBet(userId, eventId, betSum, winningChoice);
+            //Bet bet = response.getBet();
+            //System.out.println(bet.getBetId() + ", " + bet.getUserId() + ", " + bet.getEventId() + ", " + bet.getBetSum() + ", " + bet.getWinningCondition());
+
+            //List<BetValidationError> errors = response.getErrorsList();
+            //for (BetValidationError error : errors) {
+            //    System.out.println(error);
+            //}
+
+            String dbError = response.getDbError();
+            System.out.println(dbError);
 
             System.out.println("Continue? (0 - no, 1 - yes)");
             mainEnd = sc.nextInt();

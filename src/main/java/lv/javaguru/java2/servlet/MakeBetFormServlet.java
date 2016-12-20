@@ -15,4 +15,5 @@ public class MakeBetFormServlet extends HttpServlet {
         req.getRequestDispatcher("makeBetForm.jsp").forward(req, resp);
     }
 
+
 }

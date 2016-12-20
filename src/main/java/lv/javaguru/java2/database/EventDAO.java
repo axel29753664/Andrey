@@ -4,7 +4,7 @@ import lv.javaguru.java2.domain.Event;
 
 public interface EventDAO {
 
-    Event getById(long eventId);
+    Event getById(Long eventId);
 
 }
 

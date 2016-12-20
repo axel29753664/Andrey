@@ -1,5 +1,5 @@
 package lv.javaguru.java2.domain;
 
-public enum BetWinningChoiceState {
+public enum BetWinningConditionState {
     FOR, AGAINST, NOT_APPLIED
 }

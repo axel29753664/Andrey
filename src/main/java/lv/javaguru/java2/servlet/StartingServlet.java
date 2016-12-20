@@ -15,4 +15,5 @@ public class StartingServlet extends HttpServlet {
         req.getRequestDispatcher("starting.jsp").forward(req, resp);
     }
 
+
 }

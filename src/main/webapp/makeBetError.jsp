@@ -8,6 +8,7 @@
 <center>
     <form>
         <b>Error :-(</b>
+        <h1>Errors: ${Errors}</h1>
     </form>
 </center>
 
