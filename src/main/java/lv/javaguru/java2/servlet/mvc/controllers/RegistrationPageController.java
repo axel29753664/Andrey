@@ -1,9 +1,9 @@
-package lv.javaguru.java2.servlet.mvc;
+package lv.javaguru.java2.servlet.mvc.controllers;
 
-import lv.javaguru.java2.domain.LoginValidationException;
-import lv.javaguru.java2.domain.RegistrationException;
-import lv.javaguru.java2.domain.RegistrationService;
-import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.domain.*;
+import lv.javaguru.java2.domain.exception.RegistrationException;
+import lv.javaguru.java2.domain.services.RegistrationService;
+import lv.javaguru.java2.servlet.mvc.MVCModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,10 +29,10 @@ public class RegistrationPageController implements MVCController {
         String url = "/registration.jsp";
         try {
             registration.createNewUser(user);
-            url = "/java2/login";
+            url = "/login.jsp";
             message = null;
 
-        } catch (LoginValidationException | RegistrationException e) {
+        } catch (RegistrationException e) {
             message = e.getMessage();
         }
 

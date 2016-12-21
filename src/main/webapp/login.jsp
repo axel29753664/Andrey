@@ -5,13 +5,12 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
-<form method="post">
+<form method="post" action="login">
     Login <input type="text" name="login"/>
     Password <input type="text" name="password"/>
-    <a href="${pageContext.request.contextPath}/userPage">
-        <button>login</button>
-    </a>
+    <input type="submit" value="login">
     <font color="red">${loginMessage}</font>
+
 </form>
 </body>
 </html>

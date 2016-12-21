@@ -51,7 +51,7 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
                 user.setUserId(rs.getLong(1));
             }
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.create()");
+            System.out.println("exception while execute UserDAOImpl.create()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -76,7 +76,7 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
             }
             return users;
         } catch (Throwable e) {
-            System.out.println("Exception while execute " + query);
+            System.out.println("exception while execute " + query);
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -126,7 +126,7 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
                     .prepareStatement("DELETE FROM " + DBName + condition);
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
-            System.out.println("Exception while execute DELETE FROM " + DBName + condition);
+            System.out.println("exception while execute DELETE FROM " + DBName + condition);
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -156,7 +156,7 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
             preparedStatement.setLong(5, user.getUserId());
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.update()");
+            System.out.println("exception while execute UserDAOImpl.update()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {

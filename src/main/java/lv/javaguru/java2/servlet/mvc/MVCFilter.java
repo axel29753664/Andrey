@@ -2,20 +2,16 @@ package lv.javaguru.java2.servlet.mvc;
 
 import lv.javaguru.java2.config.SpringAppConfig;
 
+import lv.javaguru.java2.servlet.mvc.controllers.*;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.*;
-
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
-
 import java.util.HashMap;
-
 import java.util.Map;
 
 
@@ -50,6 +46,7 @@ public class MVCFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         String contextURI = req.getServletPath();
         String method = req.getMethod();
+
         if (contextURI.contains("/css")) {
             filterChain.doFilter(request, response);
         } else {
@@ -62,12 +59,9 @@ public class MVCFilter implements Filter {
             }
             req.setAttribute("data", model.getData());
             ServletContext context = req.getServletContext();
-//            if (model.getJspName().contains(".jsp")) {
                 RequestDispatcher requestDispatcher = context.getRequestDispatcher(model.getJspName());
                 requestDispatcher.forward(req, resp);
-//            } else {
-//                resp.sendRedirect(model.getJspName());
-//            }
+
         }
     }
 

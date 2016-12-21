@@ -7,14 +7,14 @@
 </head>
 <body>
 <form>
-    <a href="${pageContext.request.contextPath}/login">Login</a>
-    <a href="${pageContext.request.contextPath}/registration">Registration</a>
+    <a href="login">Login</a>
+    <a href="registration">Registration</a>
 
     <%! private String type = "hidden";%>
     <% if (user == null) {
         type = null;
     } %>
-    <a type=<%= type %>; href="${pageContext.request.contextPath}/userPage"> ${user.login} </a>
+    <a type=<%= type %>; href="userPage"> ${user.login} </a>
 
 </form>
 </body>

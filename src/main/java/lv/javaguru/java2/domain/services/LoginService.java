@@ -1,7 +1,9 @@
-package lv.javaguru.java2.domain;
+package lv.javaguru.java2.domain.services;
 
 import lv.javaguru.java2.database.UserDAO;
-import lv.javaguru.java2.database.jdbc.UserDAOImpl;
+import lv.javaguru.java2.domain.exception.LoginServiceException;
+import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.domain.validators.UserLoginValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

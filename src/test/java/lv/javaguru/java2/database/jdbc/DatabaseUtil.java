@@ -58,7 +58,7 @@ public class DatabaseUtil extends DAOImpl {
                         .prepareStatement("delete from " + tableName);
                 preparedStatement.executeUpdate();
             } catch (Throwable e) {
-                System.out.println("Exception while execute cleanDatabase() for table " + tableName);
+                System.out.println("exception while execute cleanDatabase() for table " + tableName);
                 e.printStackTrace();
                 throw new DBException(e);
             } finally {

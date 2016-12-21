@@ -5,7 +5,7 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
-<form method="post">
+<form method="post" action="registration">
     <font color="red">${regMessage}</font><br>
     <table>
         <tr>
