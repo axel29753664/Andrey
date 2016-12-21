@@ -16,30 +16,6 @@ import java.util.Map;
 
 public class MVCFilter111 implements Filter {
 
-    private Map<String, MVCController> urlToControllerMap;
-
-    private Logger logger = LoggerFactory.getLogger(MVCFilter111.class);
-
-    private ApplicationContext springContext; //new
-
-    private MVCController getBean(Class<?> clazz) {             //new
-        return (MVCController) springContext.getBean(clazz);
-    }
-
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-       try {
-           springContext = new AnnotationConfigApplicationContext(SpringAppConfig.class);
-       }
-       catch (BeansException e) {
-           logger.error("Error");
-       }
-
-       urlToControllerMap = new HashMap<>();
-       urlToControllerMap.put ("/", getBean(lv.javaguru.java2.servlet.mvc.controllers.HelloWorldController.class));
-        //controllers = new HashMap<>();
-        //controllers.put("/hello", new lv.javaguru.java2.servlet.mvc.controllers.HelloWorldController());
-    }
 
     @Override
     public void doFilter(ServletRequest request,

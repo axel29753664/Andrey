@@ -7,6 +7,8 @@
 
 <center>
     <form>
+        <b>${data}</b>
+
         <b>You make a bid!</b>
         <h1>betId: ${betId}</h1>
         <h1>userId: ${userId}</h1>

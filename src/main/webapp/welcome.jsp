@@ -4,6 +4,6 @@
     <title>Welcome to Totalizator</title>
 </head>
 <body>
-    Welcome to Totalizator!
+    <h1>${data}</h1>
 </body>
 </html>

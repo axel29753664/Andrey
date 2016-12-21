@@ -1,7 +1,10 @@
 package lv.javaguru.java2.servlet.mvc;
 
 import lv.javaguru.java2.servlet.SpringAppConfig;
-import lv.javaguru.java2.servlet.mvc.controllers.HelloWorldController;
+import lv.javaguru.java2.servlet.mvc.controllers.MakeBetController;
+import lv.javaguru.java2.servlet.mvc.controllers.MakeBetFormController;
+import lv.javaguru.java2.servlet.mvc.controllers.StartingController;
+import lv.javaguru.java2.servlet.mvc.controllers.WelcomeController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -17,27 +20,31 @@ import java.util.Map;
 
 public class MVCFilter implements Filter {
 
-    Logger logger = LoggerFactory.getLogger(MVCFilter.class);
-
     private Map<String, MVCController> controllers;
-
-    private ApplicationContext springContext;
+    private ApplicationContext springContext; //new
+    private Logger logger = LoggerFactory.getLogger(MVCFilter.class); // new
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
-        try {
+        try {   //new
             springContext = new AnnotationConfigApplicationContext(SpringAppConfig.class);
         } catch (BeansException e) {
             logger.error("Error " + e);
         }
 
-        controllers = new HashMap<>();
-        controllers.put("/hello", getBean(HelloWorldController.class));
-        controllers.put("/bet", getBean(MakeBetController.class));
+        controllers = new HashMap();
+        //controllers.put("/", new WelcomeController());
+        //controllers.put("/start", new StartingController());
+        //controllers.put("/makeBetForm", new MakeBetFormController());
+        //controllers.put("/makeBet", new MakeBetController());
+        controllers.put("/", getBean(WelcomeController.class));
+        controllers.put("/start", getBean(StartingController.class));
+        controllers.put("/makeBetForm", getBean(MakeBetFormController.class));
+        controllers.put("/makeBet", getBean(MakeBetController.class));
     }
 
-    private MVCController getBean ( Class<?> clazz ) {
+    private MVCController getBean(Class<?> clazz) {             //new
         return (MVCController) springContext.getBean(clazz);
     }
 
@@ -47,10 +54,13 @@ public class MVCFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        String contextURI = req.getServletPath();
+        String contextURL = req.getServletPath();
 
-        if (controllers.containsKey(contextURI)) {
-            MVCController controller = controllers.get(contextURI);
+        //if (contextURL.contains("/css")) {
+        //    filterChain.doFilter(request, response);
+        //}
+        if (controllers.containsKey(contextURL)) {
+            MVCController controller = controllers.get(contextURL);
             MVCModel model = processRequestByMethodAndReturnModel(req, controller);
 
             req.setAttribute("data", model.getData());

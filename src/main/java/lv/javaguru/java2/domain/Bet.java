@@ -84,9 +84,7 @@ public class Bet {
         if (!eventId.equals(bet.eventId)) return false;
         if (!betSum.equals(bet.betSum)) return false;
         return winningCondition.equals(bet.winningCondition);
-
     }
-
     @Override
     public int hashCode() {
         int result = betId.hashCode();

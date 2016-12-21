@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Bet;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class BetDAOImpl extends DAOImpl implements BetDAO {
     private final String TABLE_NAME = "bets";
     private final String BET_ID = "BetID";
@@ -39,7 +41,7 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
         } catch (Throwable e) {
             System.out.println("Exception while execute BetDAOImpl.create()");
             e.printStackTrace();
-            throw new DBException("Exception while execute BetDAOImpl.create()", e);
+            throw new DBException(e);
         } finally {
             closeConnection(connection);
         }
@@ -89,7 +91,7 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
         } catch (Throwable e) {
             System.out.println("Exception while execute BetDAOImpl.getByCondition()");
             e.printStackTrace();
-            throw new DBException("Exception while execute BetDAOImpl.getByCondition()", e);
+            throw new DBException(e);
         } finally {
             closeConnection(connection);
         }
@@ -105,7 +107,7 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
         } catch (Throwable e) {
             System.out.println("Exception while execute BetDAOImpl.deleteByCondition()");
             e.printStackTrace();
-            throw new DBException("Exception while execute BetDAOImpl.deleteByCondition()", e);
+            throw new DBException(e);
         } finally {
             closeConnection(connection);
         }

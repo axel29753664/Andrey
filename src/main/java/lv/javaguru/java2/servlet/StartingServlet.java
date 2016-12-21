@@ -1,4 +1,4 @@
-package lv.javaguru.java2.servlet;
+/*package lv.javaguru.java2.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,3 +17,4 @@ public class StartingServlet extends HttpServlet {
 
 
 }
+*/
