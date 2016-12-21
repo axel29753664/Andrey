@@ -29,6 +29,7 @@ public class LoginPageController implements MVCController {
 
         String url = "/login.jsp";
         String message = null;
+
         if ((login != null)&&!(login.equals(""))) {
             try {
                 User user = loginService.login(login, password);
