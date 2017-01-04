@@ -1,6 +1,5 @@
 package lv.javaguru.java2.domain;
 
-
 import java.math.BigDecimal;
 
 public interface BetCreator {

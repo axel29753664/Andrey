@@ -3,7 +3,6 @@ package lv.javaguru.java2;
 import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.jdbc.BetDAOImpl;
 import lv.javaguru.java2.domain.*;
-import lv.javaguru.java2.domain.betValidation.BetValidationError;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -27,15 +26,52 @@ public class Main_Temp {
         //BigDecimal betSum = new BigDecimal(10);
         //System.out.println(betSum);
 
-        BetWinningConditionState a = FOR;
-        String b = "FOR";
-        if (a.equals(b)) {
-            System.out.println("Yapii");
+        String userIdFromRequest = "1";
+        String eventIdFromRequest = "2";
+        String betSumFromRequest = "10";
+
+        Long userId = Long.parseLong(userIdFromRequest);
+        Long eventId = Long.parseLong(eventIdFromRequest);
+        BigDecimal betSum = BigDecimal.valueOf(Long.parseLong(betSumFromRequest));
+        BetWinningConditionState winningCondition = FOR;
+
+        System.out.println(userId + ", " + eventId + ", " + betSum);
+
+        BetCreatorImpl BetCreator = new BetCreatorImpl();
+        Response response = BetCreator.createBet(userId, eventId, betSum, winningCondition);
+
+        if (response.getDbError() != null) {
+            System.out.println("DB Error");
         } else {
-            System.out.println(":-(");
+            if (response.getErrorsList() != null) {
+                System.out.println("Error List");
+            } else {
+                String data = "Bet is registered with id " + response.getBet().getBetId();
+                System.out.println(data);
+            }
         }
 
+
+
+        /*Bet bet = new Bet (userId, eventId, betSum, null);
+
+        BetPolicy betPolicy = new BetPolicy();
+        List<BetValidationError> errors = new ArrayList();
+        errors = betPolicy.validate(bet);
+
+        if (errors.size() > 0) {
+            for (BetValidationError error: errors) {
+                System.out.println(error);
+            }
+        } else {
+            System.out.println("All OK");
+        }*/
+
+
       }
+
+
+
 
     public static void createBet() {
         Scanner sc = new Scanner(System.in);

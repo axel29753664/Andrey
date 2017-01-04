@@ -14,6 +14,7 @@ import java.util.List;
 
 @Component
 public class BetDAOImpl extends DAOImpl implements BetDAO {
+
     private final String TABLE_NAME = "bets";
     private final String BET_ID = "BetID";
     private final String USER_ID = "UserID";

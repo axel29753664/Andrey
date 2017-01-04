@@ -1,16 +1,14 @@
-package lv.javaguru.java2.servlet.mvc.controllers;
+package lv.javaguru.java2.servlet.controllers;
 
+import lv.javaguru.java2.domain.BetCreator;
 import lv.javaguru.java2.domain.BetCreatorImpl;
 import lv.javaguru.java2.domain.BetWinningConditionState;
 import lv.javaguru.java2.domain.Response;
-import lv.javaguru.java2.servlet.mvc.MVCController;
-import lv.javaguru.java2.servlet.mvc.MVCModel;
+import lv.javaguru.java2.servlet.MVCController;
+import lv.javaguru.java2.servlet.MVCModel;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.math.BigDecimal;
 
 import static lv.javaguru.java2.domain.BetWinningConditionState.AGAINST;
@@ -29,21 +27,34 @@ public class MakeBetController implements MVCController {
     public MVCModel processPost(HttpServletRequest req) {
 
         String userIdFromRequest = req.getParameter("userID");
-        Long userId = new Long(userIdFromRequest);
         String eventIdFromRequest = req.getParameter("eventID");
-        Long eventId = new Long(eventIdFromRequest);
         String betSumFromRequest = req.getParameter("betSum");
-        BigDecimal betSum = new BigDecimal(betSumFromRequest);
         String winningConditionFromRequest = req.getParameter("winningCondition");
+
+        Long userId = null;
+        Long eventId = null;
+        BigDecimal betSum = null;
         BetWinningConditionState winningCondition = NOT_APPLIED;
-        if (winningConditionFromRequest.equalsIgnoreCase("FOR")) {
-            winningCondition = FOR;
+
+        if (userIdFromRequest != "") {
+            userId = Long.parseLong(userIdFromRequest);
         }
-        if (winningConditionFromRequest.equalsIgnoreCase("AGAINST")) {
-            winningCondition = AGAINST;
+        if (eventIdFromRequest != "") {
+            eventId = Long.parseLong(eventIdFromRequest);
+        }
+        if (betSumFromRequest != "") {
+            betSum = BigDecimal.valueOf(Long.parseLong(betSumFromRequest));
+        }
+        if (winningConditionFromRequest != null) {
+            if (winningConditionFromRequest.equalsIgnoreCase("FOR")) {
+                winningCondition = FOR;
+            }
+            if (winningConditionFromRequest.equalsIgnoreCase("AGAINST")) {
+                winningCondition = AGAINST;
+            }
         }
 
-        BetCreatorImpl BetCreator = new BetCreatorImpl();
+        BetCreator BetCreator = new BetCreatorImpl();
         Response response = BetCreator.createBet(userId, eventId, betSum, winningCondition);
 
         if (response.getDbError() != null) {

@@ -1,10 +1,10 @@
-package lv.javaguru.java2.servlet.mvc;
+package lv.javaguru.java2.servlet;
 
-import lv.javaguru.java2.servlet.SpringAppConfig;
-import lv.javaguru.java2.servlet.mvc.controllers.MakeBetController;
-import lv.javaguru.java2.servlet.mvc.controllers.MakeBetFormController;
-import lv.javaguru.java2.servlet.mvc.controllers.StartingController;
-import lv.javaguru.java2.servlet.mvc.controllers.WelcomeController;
+import lv.javaguru.java2.config.SpringAppConfig;
+import lv.javaguru.java2.servlet.controllers.MakeBetController;
+import lv.javaguru.java2.servlet.controllers.MakeBetFormController;
+import lv.javaguru.java2.servlet.controllers.WelcomeController;
+import lv.javaguru.java2.servlet.controllers.StartingController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;

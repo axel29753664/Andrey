@@ -16,7 +16,7 @@ public class Bet {
     public Bet(Long userId,
                Long eventId,
                BigDecimal betSum,
-               boolean winningCondition) {
+               Boolean winningCondition) {
         this.userId = userId;
         this.eventId = eventId;
         this.betSum = betSum;
@@ -59,7 +59,7 @@ public class Bet {
         return winningCondition;
     }
 
-    public void setWinningCondition(boolean winingCondition) {
+    public void setWinningCondition(Boolean winingCondition) {
         this.winningCondition = winingCondition;
     }
 
@@ -74,24 +74,4 @@ public class Bet {
                 '}';
     }
 
-   /* @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Bet bet = (Bet) o;
-        if (!betId.equals(bet.betId)) return false;
-        if (!userId.equals(bet.userId)) return false;
-        if (!eventId.equals(bet.eventId)) return false;
-        if (!betSum.equals(bet.betSum)) return false;
-        return winningCondition.equals(bet.winningCondition);
-    }
-    @Override
-    public int hashCode() {
-        int result = betId.hashCode();
-        result = 31 * result + userId.hashCode();
-        result = 31 * result + eventId.hashCode();
-        result = 31 * result + betSum.hashCode();
-        result = 31 * result + winningCondition.hashCode();
-        return result;
-    }*/
 }

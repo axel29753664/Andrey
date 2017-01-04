@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.EventDAO;
 import lv.javaguru.java2.domain.Event;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class EventDAOImpl extends DAOImpl implements EventDAO {
+
     private final String TABLE_NAME = "events";
     private final String EVENT_ID = "EventID";
 

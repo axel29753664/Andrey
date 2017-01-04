@@ -5,7 +5,6 @@ public class UserBuilder {
     private String firstName;
     private String lastName;
 
-
     private UserBuilder() {}
 
     public static UserBuilder createUser() {

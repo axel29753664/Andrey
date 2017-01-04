@@ -1,9 +1,12 @@
 package lv.javaguru.java2.domain;
 
+import lv.javaguru.java2.config.SpringAppConfig;
+import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.BetDAOImpl;
 import lv.javaguru.java2.domain.betValidation.BetPolicy;
 import lv.javaguru.java2.domain.betValidation.BetValidationError;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,8 +18,9 @@ import static lv.javaguru.java2.domain.BetWinningConditionState.FOR;
 public class BetCreatorImpl implements BetCreator {
 
     private List<BetValidationError> errors = new ArrayList();
-    private BetPolicy betPolicy = new BetPolicy();
     private Response response = new Response();
+    private BetPolicy betPolicy;
+    private BetDAO betDAO;
 
     public BetCreatorImpl() {
     }
@@ -25,6 +29,10 @@ public class BetCreatorImpl implements BetCreator {
                               Long eventId,
                               BigDecimal betSum,
                               BetWinningConditionState winningCondition) {
+
+        ApplicationContext springContext = new AnnotationConfigApplicationContext(SpringAppConfig.class);
+        betDAO = springContext.getBean(BetDAO.class);
+        betPolicy = springContext.getBean(BetPolicy.class);
 
         Bet bet = create(userId, eventId, betSum, winningCondition);
         errors = betPolicy.validate(bet);
@@ -62,8 +70,7 @@ public class BetCreatorImpl implements BetCreator {
         return winningConditionBoolean;
     }
 
-    private void writeInDao(Bet bet) {
-        BetDAOImpl betDAO = new BetDAOImpl();
+    public void writeInDao(Bet bet) {
         betDAO.create(bet);
     }
 
