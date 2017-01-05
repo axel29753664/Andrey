@@ -1,5 +1,6 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
+import lv.javaguru.java2.domain.exception.LoginValidationException;
 import lv.javaguru.java2.domain.services.LoginService;
 import lv.javaguru.java2.domain.exception.LoginServiceException;
 import lv.javaguru.java2.domain.User;
@@ -30,16 +31,14 @@ public class LoginPageController implements MVCController {
         String url = "/login.jsp";
         String message = null;
 
-        if ((login != null)&&!(login.equals(""))) {
-            try {
-                User user = loginService.login(login, password);
-                HttpSession session = req.getSession();
-                session.setAttribute("user", user);
-                url = "/userPage.jsp";
-                message = null;
-            } catch (LoginServiceException e) {
-                message = e.getMessage();
-            }
+        try {
+            User user = loginService.login(login, password);
+            HttpSession session = req.getSession();
+            session.setAttribute("user", user);
+            url = loginService.getRightPageByUserLogin(user.getLogin());
+            message = null;
+        } catch (LoginValidationException | LoginServiceException e) {
+            message = e.getMessage();
         }
         req.setAttribute("loginMessage", message);
         return new MVCModel(url, null);

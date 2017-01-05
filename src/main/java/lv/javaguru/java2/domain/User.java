@@ -1,11 +1,25 @@
 package lv.javaguru.java2.domain;
 
-public class User {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @Column(name = "userID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
+
+    @Column(name = "FirstName")
     private String firstName;
+
+    @Column(name = "LastName")
     private String lastName;
+
+    @Column(name = "Login", nullable = false)
     private String login;
+
+    @Column(name = "Password", nullable = false)
     private String password;
 
     public User() {

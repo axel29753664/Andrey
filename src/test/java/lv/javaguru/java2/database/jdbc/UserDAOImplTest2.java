@@ -4,15 +4,17 @@ import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-
 public class UserDAOImplTest2 {
-    private UserDAO userDAO = new UserDAOImpl();
+    @Autowired
+    private UserDAO userDAO;
 
     private void compareUsers(User user, User userFromDB) {
         assertNotNull(userFromDB);
@@ -37,10 +39,10 @@ public class UserDAOImplTest2 {
         return userList;
     }
 
-    @Before
-    public void clearUserTable() {
-        userDAO.deleteAll();
-    }
+//    @Before
+//    public void clearUserTable() {
+//        userDAO.deleteAll();
+//    }
 
     @Test
     public void createTest() {
@@ -91,7 +93,7 @@ public class UserDAOImplTest2 {
         for (User user : userList) {
             userDAO.create(user);
         }
-        userDAO.deleteById(userList.get(1).getUserId());
+        userDAO.delete(userList.get(1).getUserId());
         userList.remove(1);
         List<User> userListFromDB = userDAO.getAll();
         for (int i = 0; i < userListFromDB.size(); i++) {

@@ -1,26 +1,17 @@
 package lv.javaguru.java2.database;
 
 import lv.javaguru.java2.domain.User;
+import org.hibernate.JDBCException;
 
 import java.util.List;
 
-public interface UserDAO {
+public interface UserDAO extends GenericDAO<User> {
 
-    void create(User user);
+    User getByLogin(String login) throws JDBCException;
 
-    User getById(Long id);
+    void deleteByLogin(String login) throws JDBCException;
 
-    User getByLogin(String login);
-
-    void deleteById(Long id);
-
-    void deleteByLogin(String login);
-
-    void deleteAll();
-
-    void update(User user);
-
-    List<User> getAll();
+    void deleteAll() throws JDBCException;
 
 
 }

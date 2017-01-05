@@ -6,8 +6,9 @@ import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.validators.UserLoginValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class LoginService {
     @Autowired
     private UserDAO userDAO;
@@ -16,6 +17,8 @@ public class LoginService {
 
     public User login(String login, String password) throws LoginServiceException {
         User user = userDAO.getByLogin(login);
+        loginValidation.validateToNull(login);
+        loginValidation.validateToEmptyString(login);
         if (user == null) {
             throw new LoginServiceException("Login incorrect.");
         }
@@ -23,5 +26,16 @@ public class LoginService {
             throw new LoginServiceException("Password incorrect.");
         }
         return user;
+    }
+    public String getRightPageByUserLogin(String login){
+        String url = "/login.jsp";
+        if ((login != null) && !(login.equals(""))){
+            if (login.equalsIgnoreCase("admin")) {
+                url="/adminPage.jsp";
+            } else {
+                url = "/userPage.jsp";
+            }
+        }
+        return url;
     }
 }

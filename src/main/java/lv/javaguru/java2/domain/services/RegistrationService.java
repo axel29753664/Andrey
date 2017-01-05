@@ -10,8 +10,9 @@ import lv.javaguru.java2.domain.validators.UserLoginValidation;
 import lv.javaguru.java2.domain.validators.UserPasswordValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class RegistrationService {
     @Autowired
     private UserDAO userDAO;
