@@ -28,7 +28,6 @@
             </tr>
         </c:forEach>
     </table>
-
     <button type="submit" name="delete">delete</button>
 
 
