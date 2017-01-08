@@ -41,20 +41,4 @@ public class BetPolicy {
         return errors;
     }
 
-    public void setUserIdBetRule (UserIdBetRule userIdBetRule) {
-        this.userIdBetRule = userIdBetRule;
-    }
-
-    public void setEventIdBetRule (EventIdBetRule eventIdBetRule) {
-        this.eventIdBetRule = eventIdBetRule;
-    }
-
-    public void setBetSumBetRule (BetSumBetRule betSumBetRule) {
-        this.betSumBetRule = betSumBetRule;
-    }
-
-    public void setWinningStateBetRule (WinningStateBetRule winningStateBetRule) {
-        this.winningStateBetRule = winningStateBetRule;
-    }
-
 }

@@ -5,6 +5,7 @@ import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.betValidation.BetPolicy;
 import lv.javaguru.java2.domain.betValidation.BetValidationError;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

@@ -31,27 +31,17 @@ public class MakeBetController implements MVCController {
         String betSumFromRequest = req.getParameter("betSum");
         String winningConditionFromRequest = req.getParameter("winningCondition");
 
-        Long userId = null;
-        Long eventId = null;
-        BigDecimal betSum = null;
         BetWinningConditionState winningCondition = NOT_APPLIED;
 
-        if (userIdFromRequest != "") {
-            userId = Long.parseLong(userIdFromRequest);
+        Long userId = Long.parseLong(userIdFromRequest);
+        Long eventId = Long.parseLong(eventIdFromRequest);
+        BigDecimal betSum = BigDecimal.valueOf(Long.parseLong(betSumFromRequest));
+
+        if (winningConditionFromRequest.equalsIgnoreCase("FOR")) {
+            winningCondition = FOR;
         }
-        if (eventIdFromRequest != "") {
-            eventId = Long.parseLong(eventIdFromRequest);
-        }
-        if (betSumFromRequest != "") {
-            betSum = BigDecimal.valueOf(Long.parseLong(betSumFromRequest));
-        }
-        if (winningConditionFromRequest != null) {
-            if (winningConditionFromRequest.equalsIgnoreCase("FOR")) {
-                winningCondition = FOR;
-            }
-            if (winningConditionFromRequest.equalsIgnoreCase("AGAINST")) {
-                winningCondition = AGAINST;
-            }
+        if (winningConditionFromRequest.equalsIgnoreCase("AGAINST")) {
+            winningCondition = AGAINST;
         }
 
         BetCreator BetCreator = new BetCreatorImpl();

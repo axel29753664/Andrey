@@ -31,8 +31,4 @@ public class EventIdBetRule implements BetRule {
         }
     }
 
-    public void setEventDao (EventDAO eventDao) {
-        this.eventDao = eventDao;
-    }
-
 }

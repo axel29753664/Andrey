@@ -31,8 +31,4 @@ public class UserIdBetRule implements BetRule {
         }
     }
 
-    public void setUserDao (UserDAO userDao) {
-        this.userDao = userDao;
-    }
-
 }

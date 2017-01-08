@@ -1,8 +1,10 @@
 package lv.javaguru.java2;
 
+import lv.javaguru.java2.config.SpringAppConfig;
 import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.jdbc.BetDAOImpl;
 import lv.javaguru.java2.domain.*;
+import org.hibernate.SessionFactory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ public class Main_Temp {
         //BigDecimal betSum = new BigDecimal(10);
         //System.out.println(betSum);
 
-        String userIdFromRequest = "1";
+        /*String userIdFromRequest = "1";
         String eventIdFromRequest = "2";
         String betSumFromRequest = "10";
 
@@ -49,7 +51,9 @@ public class Main_Temp {
                 String data = "Bet is registered with id " + response.getBet().getBetId();
                 System.out.println(data);
             }
-        }
+        }*/
+
+        //SessionFactory sessionFactory = SpringAppConfig.getSessionFactory();
 
 
 
