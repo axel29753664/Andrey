@@ -1,4 +1,4 @@
-package lv.javaguru.java2.database.jdbc;
+/*package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
@@ -34,4 +34,4 @@ public class UserDAOImplTest extends DBUnitTestCase {
         assertEquals(user.getPassword(), userFromDB.getPassword());
     }
 
-}
+}*/
