@@ -1,6 +1,7 @@
 package lv.javaguru.java2.servlet.mvc;
 
 public class MVCModel {
+
     private String jspName;
     private Object data;
 

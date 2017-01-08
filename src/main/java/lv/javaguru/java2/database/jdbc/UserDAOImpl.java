@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class UserDAOImpl extends DAOImpl implements UserDAO {
     private final String DBName = "users";

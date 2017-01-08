@@ -1,11 +1,10 @@
-package lv.javaguru.java2.servlet.controllers;
+package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.domain.BetCreator;
 import lv.javaguru.java2.domain.BetCreatorImpl;
 import lv.javaguru.java2.domain.BetWinningConditionState;
 import lv.javaguru.java2.domain.Response;
-import lv.javaguru.java2.servlet.MVCController;
-import lv.javaguru.java2.servlet.MVCModel;
+import lv.javaguru.java2.servlet.mvc.MVCModel;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;

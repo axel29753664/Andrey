@@ -25,7 +25,7 @@ import java.util.Properties;
 
 public class SpringAppConfig {
 
-    private static final String DATABASE_PROPERTIES_FILE = "database.properties";
+    /*private static final String DATABASE_PROPERTIES_FILE = "database.properties";
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer prodPropertiesPlaceholderConfigurer() {
@@ -86,6 +86,6 @@ public class SpringAppConfig {
     @Bean
     public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
         return new HibernateTransactionManager(sessionFactory);
-    }
+    }*/
 
 }

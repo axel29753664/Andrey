@@ -14,15 +14,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class MVCFilter implements Filter {
+
     private Map<String, MVCController> controllers;
     private ApplicationContext springContext;
-
-
-    private MVCController getBean(Class<?> clazz) {
-        return (MVCController) springContext.getBean(clazz);
-    }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -36,7 +31,14 @@ public class MVCFilter implements Filter {
         controllers.put("/login", getBean(LoginPageController.class));
         controllers.put("/userPage", getBean(UserPageController.class));
         controllers.put("/registration", getBean(RegistrationPageController.class));
+        controllers.put("/start", getBean(StartingController.class));
+        controllers.put("/makeBetForm", getBean(MakeBetFormController.class));
+        controllers.put("/makeBet", getBean(MakeBetController.class));
 
+    }
+
+    private MVCController getBean(Class<?> clazz) {
+        return (MVCController) springContext.getBean(clazz);
     }
 
     @Override
