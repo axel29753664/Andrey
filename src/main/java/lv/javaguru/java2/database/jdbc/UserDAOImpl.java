@@ -22,6 +22,7 @@ import java.util.List;
 
 @Component
 public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDAO {
+    private final String TABLE_NAME = "users";
 
     @Override
     @Transactional
@@ -38,26 +39,22 @@ public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDA
     @Transactional
     public void deleteByLogin(String login) throws JDBCException {
 
-        String hql = "DELETE FROM users WHERE Login = :login";
+        String hql = "DELETE FROM " + TABLE_NAME + " WHERE " + login;
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(hql);
-        query.setParameter("login", login);
-
         query.executeUpdate();
     }
 
     @Override
     @Transactional
     public void deleteAll() throws JDBCException {
-        String hql = "DELETE FROM users";
+        String hql = "DELETE FROM " + TABLE_NAME;
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(hql);
         query.executeUpdate();
-
-//        sessionFactory.getCurrentSession().createQuery("delete from users").executeUpdate();
     }
 
 
     //       public void create(User user) throws DBException {
-//        if (user == null) {
+//       if (user == null) {
 //            return;
 //        }
 //

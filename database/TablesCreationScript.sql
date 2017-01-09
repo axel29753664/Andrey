@@ -1,10 +1,10 @@
 
 CREATE TABLE IF NOT EXISTS `users` (
   `UserID` BIGINT(20) NOT NULL AUTO_INCREMENT,
-  `FirstName` VARCHAR(32) NOT NULL,
-  `LastName` VARCHAR(32) NOT NULL,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
   `Login` VARCHAR(45) NOT NULL,UNIQUE INDEX `Login_UNIQUE` (`Login` ASC),
-  `Password` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`UserID`)
 )
   ENGINE = InnoDB
@@ -12,12 +12,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 
 CREATE TABLE IF NOT EXISTS `main_events` (
-  `MainEventID` INT(11) NOT NULL AUTO_INCREMENT,
-  `MainEventName` CHAR(32) NOT NULL,
+  `MainEventID` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `MainEventName` VARCHAR(45) NOT NULL,
   `MainEventAddTime` INT(11) NOT NULL,
   `MainEventStartTime` INT(11) NOT NULL,
   `MainEventEndTime` INT(11) NOT NULL,
-  `MainEventInfo` CHAR(255) NOT NULL,
+  `MainEventInfo` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`MainEventID`)
 )
   ENGINE = InnoDB
@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `main_events` (
 
 
 CREATE TABLE IF NOT EXISTS `events` (
-  `EventID` INT(11) NOT NULL AUTO_INCREMENT,
-  `EventName` CHAR(32) NOT NULL,
+  `EventID` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `EventName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`EventID`)
 )
   ENGINE = InnoDB
@@ -34,9 +34,9 @@ CREATE TABLE IF NOT EXISTS `events` (
 
 
 CREATE TABLE IF NOT EXISTS `bets` (
-  BetID INT(11) AUTO_INCREMENT,
-  UserID INT(11) NOT NULL,
-  EventID INT(11) NOT NULL,
+  BetID BIGINT(20) AUTO_INCREMENT,
+  UserID BIGINT(20) NOT NULL,
+  EventID BIGINT(20) NOT NULL,
   Bet_Sum BIGINT UNSIGNED NOT NULL,
   Winning_Condition BOOLEAN NOT NULL,
   PRIMARY KEY(BetID),
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `bets` (
 
 
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `AccountID` INT(11) NOT NULL AUTO_INCREMENT,
+  `AccountID` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `AccountBalance` BIGINT NOT NULL,
   PRIMARY KEY (`AccountID`)
 )
@@ -57,9 +57,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 
 
 CREATE TABLE IF NOT EXISTS `userAccounts` (
-  `UserAccountID` INT(11) NOT NULL AUTO_INCREMENT,
-  `AccountID` INT(11) NOT NULL,
-  `UserID` INT(11) NOT NULL,
+  `UserAccountID` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `AccountID` BIGINT(20) NOT NULL,
+  `UserID` BIGINT(20) NOT NULL,
   PRIMARY KEY (`UserAccountID`)
 )
   ENGINE = InnoDB
@@ -67,10 +67,10 @@ CREATE TABLE IF NOT EXISTS `userAccounts` (
 
 
 CREATE TABLE IF NOT EXISTS `transactions` (
-  `TransactionID` INT(11) NOT NULL AUTO_INCREMENT,
+  `TransactionID` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `TransactionTime` TIMESTAMP NOT NULL,
   `TransactionAmmount` BIGINT NOT NULL,
-  `AccountID`INT(11),
+  `AccountID` BIGINT(20),
   PRIMARY KEY (`TransactionID`)
 )
   ENGINE = InnoDB
