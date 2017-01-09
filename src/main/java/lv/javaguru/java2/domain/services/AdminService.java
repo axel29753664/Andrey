@@ -12,7 +12,11 @@ public class AdminService {
     @Autowired
     private UserDAO userDAO;
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userDAO.getAll();
+    }
+
+    public void deleteUserById(Long id) {
+        userDAO.delete(id);
     }
 }

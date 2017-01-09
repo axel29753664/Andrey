@@ -8,9 +8,10 @@
 </head>
 <body>
 <jsp:include page="userPage.jsp"></jsp:include>
-<form name="myform" method="post" action="adminPage">
+<form method="post" action="adminPage">
     <button type="submit" name="ShowUsers">Show all users from DB</button>
-
+</form>
+<form name="userTable" action="adminPage" method="post">
     <table border="1">
         <c:forEach items="${data}" var="user">
             <tr>
@@ -21,14 +22,16 @@
                 <td>Lastname: <c:out value="${user.lastName}"/></td>
                 <td>
                     <label>
-                        <input type="checkbox" name="${user.userId}">
+                        <input type="button" value="delete"
+                               onclick="document.getElementById('userId').value = ${user.userId};
+                                       document.userTable.submit(); "/>
                     </label>
 
                 </td>
             </tr>
         </c:forEach>
     </table>
-    <button type="submit" name="delete">delete</button>
+    <input type="hidden" id="userId" value="" name="deletedUserId"/>
 
 
 </form>

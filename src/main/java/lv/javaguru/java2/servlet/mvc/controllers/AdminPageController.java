@@ -33,18 +33,10 @@ public class AdminPageController implements MVCController {
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
-
-        Enumeration en = req.getParameterNames();
-        while (en.hasMoreElements()) {
-            String name = (String) en.nextElement();
-            System.out.println(" name : " + name);
-            String value = req.getParameter(name);
-            System.out.println(" value : " + value);
-            String[] values = req.getParameterValues(name);
-
-            for (int i = 0; i < values.length; i++) {
-                System.out.println("Values " + values[i]);
-            }
+        String deletedUserId = req.getParameter("deletedUserId");
+        if (deletedUserId != null) {
+            Long id = Long.parseLong(deletedUserId);
+            adminService.deleteUserById(id);
         }
         List<User> users = adminService.getAllUsers();
         return new MVCModel("/adminPage.jsp", users);

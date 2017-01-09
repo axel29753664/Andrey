@@ -4,7 +4,7 @@
     <title>Make bet form</title>
 </head>
 <body>
-<form action="http://localhost:8080/java2/makeBet" method="POST">
+<form action="makeBet" method="POST">
     <p>User ID: 1003</p>
     <input type="hidden" name="userID" value="1003">
     <p>Event ID: 2</p>

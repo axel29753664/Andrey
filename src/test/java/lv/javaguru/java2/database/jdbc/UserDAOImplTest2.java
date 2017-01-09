@@ -39,10 +39,10 @@ public class UserDAOImplTest2 {
         return userList;
     }
 
-//    @Before
-//    public void clearUserTable() {
-//        userDAO.deleteAll();
-//    }
+    @Before
+    public void clearUserTable() {
+        userDAO.deleteAll();
+    }
 
     @Test
     public void createTest() {
