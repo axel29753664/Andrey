@@ -9,17 +9,17 @@ import java.io.PrintWriter;
 
 public class HelloWorldServlet extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest req,
-	                     HttpServletResponse resp) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest req,
+                         HttpServletResponse resp) throws ServletException, IOException {
 
-		// Set response content type
-		resp.setContentType("text/html");
+        // Set response content type
+        resp.setContentType("text/html");
 
-		// Prepare output html
-		PrintWriter out = resp.getWriter();
-		out.println("<h1>" + "Hello WWW world from Java!" + "</h1>");		
-		out.println("<h1>" + "Hello WWW world from Java!" + "</h1>");
-	}
+        // Prepare output html
+        PrintWriter out = resp.getWriter();
+        out.println("<h1>" + "Hello WWW world from Java!" + "</h1>");
+        out.println("<h1>" + "Hello WWW world from Java!" + "</h1>");
+    }
 
 }
