@@ -4,13 +4,9 @@ import lv.javaguru.java2.domain.Bet;
 
 import java.util.List;
 
-public interface BetDAO {
-
-    void create(Bet bet);
+public interface BetDAO extends GenericDAO<Bet>{
 
     void deleteById(Long betId);
-
-    Bet getById(Long betId);
 
     List<Bet> getByUserId(Long userId);
 

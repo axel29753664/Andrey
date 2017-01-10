@@ -21,13 +21,13 @@ import java.util.Map;
 public class MVCFilter implements Filter {
 
     private Map<String, MVCController> controllers;
-    private ApplicationContext springContext; //new
-    private Logger logger = LoggerFactory.getLogger(MVCFilter.class); // new
+    private ApplicationContext springContext;
+    private Logger logger = LoggerFactory.getLogger(MVCFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
-        try {   //new
+        try {
             springContext = new AnnotationConfigApplicationContext(SpringAppConfig.class);
         } catch (BeansException e) {
             logger.error("Error " + e);

@@ -2,9 +2,15 @@ package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.GenericHibernateDAOImpl;
 import lv.javaguru.java2.domain.Bet;
+import org.hibernate.Criteria;
+import org.hibernate.JDBCException;
+import org.hibernate.SQLQuery;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +19,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class BetDAOImpl extends DAOImpl implements BetDAO {
+public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
 
+    private final String TABLE_NAME = "bets";
+
+    @Override
+    @Transactional
+    public List<Bet> getByUserId(Long userId) throws JDBCException {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Bet.class);
+        criteria.add(Restrictions.like("UserID", userId));
+        return criteria.list();
+    }
+
+    @Override
+    @Transactional
+    public List<Bet> getByEventId(Long eventId) throws JDBCException {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Bet.class);
+        criteria.add(Restrictions.like("EventID", eventId));
+        return criteria.list();
+    }
+
+    @Override
+    @Transactional
+    public List<Bet> getByEventIdAndWinningCondition (Long eventId, Boolean winningCondition) throws JDBCException {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Bet.class);
+        criteria.add(Restrictions.like("EventID", eventId));
+        criteria.add(Restrictions.like("Winning_Condition", winningCondition));
+        return criteria.list();
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long betId) throws JDBCException {
+        String deleteQuery = "delete from " +  TABLE_NAME + " where " + betId;
+        SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(deleteQuery);
+        query.executeUpdate();
+    }
+
+    /*
     private final String TABLE_NAME = "bets";
     private final String BET_ID = "BetID";
     private final String USER_ID = "UserID";
@@ -130,6 +172,6 @@ public class BetDAOImpl extends DAOImpl implements BetDAO {
             bet = bets.get(0);
         }
         return bet;
-    }
+    }*/
 
 }

@@ -24,7 +24,6 @@ import java.util.Properties;
 @EnableTransactionManagement
 
 public class SpringAppConfig {
-
     private static final String DATABASE_PROPERTIES_FILE = "database.properties";
 
     @Bean
