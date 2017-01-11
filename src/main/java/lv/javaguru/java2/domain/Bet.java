@@ -9,13 +9,13 @@ public class Bet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="BetID", length = 11)
+    @Column(name="BetID", length = 20)
     private Long betId;
 
-    @Column(name="UserID", length = 11, nullable = false)
+    @Column(name="UserID", length = 20, nullable = false)
     private Long userId;
 
-    @Column(name="EventID", length = 11, nullable = false)
+    @Column(name="EventID", length = 20, nullable = false)
     private Long eventId;
 
     @Column(name="Bet_Sum", nullable = false)
