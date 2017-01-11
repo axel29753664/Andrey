@@ -27,22 +27,24 @@ public class GenericHibernateDAOImpl<T> {
 
     @Transactional
     public T getById(Long id) throws JDBCException {
-        return (T)sessionFactory.getCurrentSession().get(persistentClass, id);
+        return (T) sessionFactory.getCurrentSession().get(persistentClass, id);
     }
 
     @Transactional
-    public void delete(Long id)   throws JDBCException{
+    public void delete(Long id) throws JDBCException {
         Session session = sessionFactory.getCurrentSession();
         T obj = (T) session.get(persistentClass, id);
         session.delete(obj);
     }
 
     @Transactional
-    public void update(T obj)  throws JDBCException {
+    public void update(T obj) throws JDBCException {
         sessionFactory.getCurrentSession().update(obj);
     }
 
     @Transactional
-    public List<T> getAll()  throws JDBCException {
+    public List<T> getAll() throws JDBCException {
         return sessionFactory.getCurrentSession().createCriteria(persistentClass).list();
     }
+
+}
