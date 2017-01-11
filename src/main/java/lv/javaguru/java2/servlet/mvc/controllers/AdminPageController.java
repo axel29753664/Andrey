@@ -34,7 +34,7 @@ public class AdminPageController implements MVCController {
     @Override
     public MVCModel processPost(HttpServletRequest req) {
         String deletedUserId = req.getParameter("deletedUserId");
-        if (deletedUserId != null) {
+        if ((deletedUserId != null)&&(!deletedUserId.equals(""))) {
             Long id = Long.parseLong(deletedUserId);
             adminService.deleteUserById(id);
         }

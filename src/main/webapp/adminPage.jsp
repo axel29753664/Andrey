@@ -9,17 +9,31 @@
 <body>
 <jsp:include page="userPage.jsp"></jsp:include>
 <form method="post" action="adminPage">
-    <button type="submit" name="ShowUsers">Show all users from DB</button>
+
+    <button name="ShowUsers" onclick="showForm()">
+        Show all users from DB
+    </button>
+
 </form>
-<form name="userTable" action="adminPage" method="post">
+
+<form name="userTable" id="userTable" action="adminPage" method="post">
+
     <table border="1">
+        <tr>
+            <td>User ID</td>
+            <td>Login</td>
+            <td>Password</td>
+            <td>Firstname</td>
+            <td>Lastname</td>
+            <td></td>
+        </tr>
         <c:forEach items="${data}" var="user">
             <tr>
-                <td>User ID: <c:out value="${user.userId}"/></td>
-                <td>Login: <c:out value="${user.login}"/></td>
-                <td>Password: <c:out value="${user.password}"/></td>
-                <td>Firstname: <c:out value="${user.firstName}"/></td>
-                <td>Lastname: <c:out value="${user.lastName}"/></td>
+                <td><c:out value="${user.userId}"/></td>
+                <td><c:out value="${user.login}"/></td>
+                <td><c:out value="${user.password}"/></td>
+                <td><c:out value="${user.firstName}"/></td>
+                <td><c:out value="${user.lastName}"/></td>
                 <td>
                     <label>
                         <input type="button" value="delete"
