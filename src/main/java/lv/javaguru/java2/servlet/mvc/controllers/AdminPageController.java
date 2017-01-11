@@ -30,7 +30,7 @@ public class AdminPageController {
     @RequestMapping(value = "adminPage", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        String url = loginService.getRightPageByUserLogin(user.getLogin());
+        String url = loginService.getUserPage(user);
         return new ModelAndView(url);
     }
 

@@ -10,11 +10,18 @@
     <a href="login">Login</a>
     <a href="registration">Registration</a>
 
-    <%! private String type = "hidden";%>
-    <% if (user == null) {
+    <%! private String type = "hidden";
+        private String url;
+    %>
+    <% if (user != null) {
         type = null;
+        if (user.isAdmin()) {
+            url = "adminPage";
+        } else {
+            url = "userPage";
+        }
     } %>
-    <a type=<%= type %>; href="userPage"> ${user.login} </a>
+    <a type=<%= type %>; href=<%= url %>> ${user.login} </a>
 
 </form>
 </body>

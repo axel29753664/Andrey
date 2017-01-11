@@ -40,7 +40,7 @@ public class LoginPageController {
             User user = loginService.login(login, password);
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            url = loginService.getRightPageByUserLogin(user.getLogin());
+            url = loginService.getUserPage(user);
             message = null;
             return new ModelAndView("redirect", "url", url);
         } catch (LoginValidationException | LoginServiceException e) {

@@ -22,6 +22,9 @@ public class User {
     @Column(name = "Password", nullable = false)
     private String password;
 
+    @Column(name = "Admin")
+    private boolean admin;
+
     public User() {
     }
 
@@ -31,6 +34,14 @@ public class User {
         this.login = login;
         this.password = password;
 
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public String getLogin() {

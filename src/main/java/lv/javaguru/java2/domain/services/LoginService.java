@@ -27,10 +27,10 @@ public class LoginService {
         }
         return user;
     }
-    public String getRightPageByUserLogin(String login){
+    public String getUserPage(User user){
         String url = "login";
-        if ((login != null) && !(login.equals(""))){
-            if (login.equalsIgnoreCase("admin")) {
+        if ((user.getLogin()!= null) && !(user.getLogin().equals(""))){
+            if (user.isAdmin()) {
                 url="adminPage";
             } else {
                 url = "userPage";

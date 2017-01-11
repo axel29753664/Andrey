@@ -25,6 +25,7 @@
             <td>Password</td>
             <td>Firstname</td>
             <td>Lastname</td>
+            <td>Admin</td>
             <td></td>
         </tr>
         <c:forEach items="${data}" var="user">
@@ -34,6 +35,7 @@
                 <td><c:out value="${user.password}"/></td>
                 <td><c:out value="${user.firstName}"/></td>
                 <td><c:out value="${user.lastName}"/></td>
+                <td><c:out value="${user.admin}"/></td>
                 <td>
                     <label>
                         <input type="button" value="delete"
