@@ -2,21 +2,24 @@ package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.servlet.mvc.MVCModel;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Component
-public class MakeBetFormController implements MVCController {
+@Controller
+public class MakeBetFormController {
 
-    @Override
-    public MVCModel processGet(HttpServletRequest req) {
-
-        return new MVCModel("/makeBetForm.jsp", null);
+    @RequestMapping(value = "makeBetForm", method = {RequestMethod.GET})
+    public ModelAndView processRequestGet(HttpServletRequest request) {
+        return new ModelAndView("makeBetForm");
     }
 
-    @Override
-    public MVCModel processPost(HttpServletRequest req) {
-        return new MVCModel("/error.jsp", "Incorrect request");
+    @RequestMapping(value = "makeBetForm", method = {RequestMethod.POST})
+    public ModelAndView processRequestPost(HttpServletRequest request) {
+        return new ModelAndView("error", "data", "Incorrect request");
     }
 
 }

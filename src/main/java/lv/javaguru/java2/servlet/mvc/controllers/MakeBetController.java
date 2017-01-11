@@ -6,6 +6,10 @@ import lv.javaguru.java2.domain.BetWinningConditionState;
 import lv.javaguru.java2.domain.Response;
 import lv.javaguru.java2.servlet.mvc.MVCModel;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
@@ -14,21 +18,21 @@ import static lv.javaguru.java2.domain.BetWinningConditionState.AGAINST;
 import static lv.javaguru.java2.domain.BetWinningConditionState.FOR;
 import static lv.javaguru.java2.domain.BetWinningConditionState.NOT_APPLIED;
 
-@Component
-public class MakeBetController implements MVCController {
+@Controller
+public class MakeBetController {
 
-    @Override
-    public MVCModel processGet(HttpServletRequest req) {
-        return new MVCModel("/error.jsp", "Incorrect request");
+    @RequestMapping(value = "makeBet", method = {RequestMethod.GET})
+    public ModelAndView processRequestGet(HttpServletRequest request) {
+        return new ModelAndView("error", "data", "Incorrect request");
     }
 
-    @Override
-    public MVCModel processPost(HttpServletRequest req) {
+    @RequestMapping(value = "makeBet", method = {RequestMethod.POST})
+    public ModelAndView processRequestPost(HttpServletRequest request) {
 
-        String userIdFromRequest = req.getParameter("userID");
-        String eventIdFromRequest = req.getParameter("eventID");
-        String betSumFromRequest = req.getParameter("betSum");
-        String winningConditionFromRequest = req.getParameter("winningCondition");
+        String userIdFromRequest = request.getParameter("userID");
+        String eventIdFromRequest = request.getParameter("eventID");
+        String betSumFromRequest = request.getParameter("betSum");
+        String winningConditionFromRequest = request.getParameter("winningCondition");
 
         BetWinningConditionState winningCondition = NOT_APPLIED;
 
@@ -47,13 +51,13 @@ public class MakeBetController implements MVCController {
         Response response = BetCreator.createBet(userId, eventId, betSum, winningCondition);
 
         if (response.getDbError() != null) {
-            return new MVCModel("/dbErrorMessage.jsp", response.getDbError());
+            return new ModelAndView("dbErrorMessage", "data", response.getDbError());
         }
         if (response.getErrorsList() != null) {
-            return new MVCModel("/makeBetError.jsp", response.getErrorsList());
+            return new ModelAndView("makeBetError", "data", response.getErrorsList());
         }
         String data = "Bet is registered with id " + response.getBet().getBetId();
-        return new MVCModel("/makeBetConfirmation.jsp", data);
+        return new ModelAndView("makeBetConfirmation", "data", data);
 
     }
 

@@ -7,41 +7,46 @@ import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.servlet.mvc.MVCModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@Component
-public class LoginPageController implements MVCController {
+@Controller
+public class LoginPageController {
 
     @Autowired
     private LoginService loginService;
 
-    @Override
-    public MVCModel processGet(HttpServletRequest req) {
-        return new MVCModel("/login.jsp", null);
+    @RequestMapping(value = "login", method = {RequestMethod.GET})
+    public ModelAndView processRequestGet(HttpServletRequest request) {
+        return new ModelAndView("login");
     }
 
 
-    @Override
-    public MVCModel processPost(HttpServletRequest req) {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+    @RequestMapping(value = "login", method = {RequestMethod.POST})
+    public ModelAndView processPost(HttpServletRequest request) {
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
 
-        String url = "/login.jsp";
-        String message = null;
+        String url = "login";
+        String message;
 
         try {
             User user = loginService.login(login, password);
-            HttpSession session = req.getSession();
+            HttpSession session = request.getSession();
             session.setAttribute("user", user);
             url = loginService.getRightPageByUserLogin(user.getLogin());
             message = null;
+            return new ModelAndView("redirect", "url", url);
         } catch (LoginValidationException | LoginServiceException e) {
             message = e.getMessage();
         }
-        req.setAttribute("loginMessage", message);
-        return new MVCModel(url, null);
+        return new ModelAndView(url, "message", message);
 
     }
 }

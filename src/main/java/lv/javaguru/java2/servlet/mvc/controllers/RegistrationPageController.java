@@ -6,37 +6,40 @@ import lv.javaguru.java2.domain.services.RegistrationService;
 import lv.javaguru.java2.servlet.mvc.MVCModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-@Component
-public class RegistrationPageController implements MVCController {
+
+@Controller
+public class RegistrationPageController {
     @Autowired
     private RegistrationService registration;
-    @Override
-    public MVCModel processGet(HttpServletRequest req) {
-        return new MVCModel("/registration.jsp", null);
+
+    @RequestMapping(value = "registration", method = {RequestMethod.GET})
+    public ModelAndView processGet(HttpServletRequest request) {
+        return new ModelAndView("registration");
     }
 
-    @Override
-    public MVCModel processPost(HttpServletRequest req) {
+    @RequestMapping(value = "registration", method = {RequestMethod.POST})
+    public ModelAndView processPost(HttpServletRequest request) {
 
         User user = new User();
-        user.setFirstName(req.getParameter("firstName"));
-        user.setLastName(req.getParameter("lastName"));
-        user.setLogin(req.getParameter("login"));
-        user.setPassword(req.getParameter("password"));
+        user.setFirstName(request.getParameter("firstName"));
+        user.setLastName(request.getParameter("lastName"));
+        user.setLogin(request.getParameter("login"));
+        user.setPassword(request.getParameter("password"));
         String message;
-        String url = "/registration.jsp";
+        String url = "registration";
         try {
             registration.createNewUser(user);
-            url = "/login.jsp";
-            message = null;
-
+            url = "login";
+            message = "Registration successful ! Please login.";
         } catch (RegistrationException e) {
             message = e.getMessage();
         }
-
-        req.setAttribute("regMessage", message);
-        return new MVCModel(url, null);
+        return new ModelAndView(url, "message", message);
     }
 }

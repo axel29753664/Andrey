@@ -9,7 +9,7 @@
     Login <input type="text" name="login"/>
     Password <input type="text" name="password"/>
     <input type="submit" value="login">
-    <font color="red">${loginMessage}</font>
+    <font color="red">${message}</font>
 
 </form>
 </body>

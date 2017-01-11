@@ -9,6 +9,9 @@ import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,28 +20,28 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
 
-@Component
-public class AdminPageController implements MVCController {
+@Controller
+public class AdminPageController {
     @Autowired
     private AdminService adminService;
     @Autowired
     private LoginService loginService;
 
-    @Override
-    public MVCModel processGet(HttpServletRequest req) {
-        User user = (User) req.getSession().getAttribute("user");
+    @RequestMapping(value = "adminPage", method = {RequestMethod.GET})
+    public ModelAndView processRequestGet(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
         String url = loginService.getRightPageByUserLogin(user.getLogin());
-        return new MVCModel(url, null);
+        return new ModelAndView(url);
     }
 
-    @Override
-    public MVCModel processPost(HttpServletRequest req) {
-        String deletedUserId = req.getParameter("deletedUserId");
-        if ((deletedUserId != null)&&(!deletedUserId.equals(""))) {
+    @RequestMapping(value = "adminPage", method = {RequestMethod.POST})
+    public ModelAndView processRequestPost(HttpServletRequest request) {
+        String deletedUserId = request.getParameter("deletedUserId");
+        if ((deletedUserId != null) && (!deletedUserId.equals(""))) {
             Long id = Long.parseLong(deletedUserId);
             adminService.deleteUserById(id);
         }
         List<User> users = adminService.getAllUsers();
-        return new MVCModel("/adminPage.jsp", users);
+        return new ModelAndView("adminPage", "data", users);
     }
 }

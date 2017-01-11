@@ -28,12 +28,12 @@ public class LoginService {
         return user;
     }
     public String getRightPageByUserLogin(String login){
-        String url = "/login.jsp";
+        String url = "login";
         if ((login != null) && !(login.equals(""))){
             if (login.equalsIgnoreCase("admin")) {
-                url="/adminPage.jsp";
+                url="adminPage";
             } else {
-                url = "/userPage.jsp";
+                url = "userPage";
             }
         }
         return url;
