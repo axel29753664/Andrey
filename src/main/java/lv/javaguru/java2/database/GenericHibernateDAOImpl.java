@@ -21,17 +21,17 @@ public class GenericHibernateDAOImpl<T> {
     protected SessionFactory sessionFactory;
 
     @Transactional
-    public void create(T obj)  throws JDBCException {
+    public void create(T obj) throws JDBCException {
         sessionFactory.getCurrentSession().save(obj);
     }
 
     @Transactional
-    public T getById(long id)  throws JDBCException {
+    public T getById(Long id) throws JDBCException {
         return (T)sessionFactory.getCurrentSession().get(persistentClass, id);
     }
 
     @Transactional
-    public void delete(long id)   throws JDBCException{
+    public void delete(Long id)   throws JDBCException{
         Session session = sessionFactory.getCurrentSession();
         T obj = (T) session.get(persistentClass, id);
         session.delete(obj);
@@ -46,5 +46,3 @@ public class GenericHibernateDAOImpl<T> {
     public List<T> getAll()  throws JDBCException {
         return sessionFactory.getCurrentSession().createCriteria(persistentClass).list();
     }
-
-}

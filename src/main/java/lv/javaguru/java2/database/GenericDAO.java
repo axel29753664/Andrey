@@ -12,8 +12,8 @@ public interface GenericDAO<T> {
 
     List<T> getAll() throws JDBCException;
 
-    T getById(long id) throws JDBCException;
+    T getById(Long id) throws JDBCException;
 
-    void delete(long id) throws JDBCException;
+    void delete(Long id) throws JDBCException;
 
 }

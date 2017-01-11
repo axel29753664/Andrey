@@ -37,7 +37,7 @@ public class DAOImpl {
         try {
             properties.load(DAOImpl.class.getClassLoader().getResourceAsStream(DB_CONFIG_FILE));
 
-            jdbcUrl = properties.getProperty("jdbcUrl"); // load data from database.properties
+            jdbcUrl = properties.getProperty("dbUrl"); // load data from database.properties
             driverClass = properties.getProperty("driverClass");
             userName = properties.getProperty("userName");
             password = properties.getProperty("password");

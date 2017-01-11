@@ -1,13 +1,27 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
+@Table(name="bets")
 public class Bet {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="BetID", length = 11)
     private Long betId;
+
+    @Column(name="UserID", length = 11, nullable = false)
     private Long userId;
+
+    @Column(name="EventID", length = 11, nullable = false)
     private Long eventId;
+
+    @Column(name="Bet_Sum", nullable = false)
     private BigDecimal betSum;
+
+    @Column(name="Winning_Condition", nullable = false)
     private Boolean winningCondition;
 
     public Bet() {
