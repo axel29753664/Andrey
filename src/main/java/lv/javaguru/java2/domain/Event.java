@@ -1,81 +1,58 @@
 package lv.javaguru.java2.domain;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name="Events")
+@Table(name = "Events")
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="EventId")
+    @Column(name = "EventId")
     private Long eventId;
 
-    @Column(name="EventName", length = 45, nullable = false)
+    @Column(name = "EventName", length = 45, nullable = false)
     private String eventName;
 
-    @Column(name="UserID", length = 20, nullable = false)
-    private Long userId;
-
-    @Column(name="CreatingDate", nullable = false)
-    private Date creatingDate;
-
-    @Column(name="FinishingDate", nullable = true)
-    private Date finishingDate;
-
-    @Column(name="EventStatus", length = 20, nullable = false)
-    private EventStatusState eventStatus;
-
-    @Column(name="EventDescription", length = 255, nullable = false)
+    @Column(name = "EventDescription", nullable = false)
     private String eventDescription;
 
+    @Column(name = "WinningCondition", nullable = false)
+    private String winningCondition;
+
+    @Column(name = "LoseCondition", nullable = false)
+    private String loseCondition;
+
+    @Column(name = "DrawCondition", nullable = false)
+    private String drawCondition;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "EventStatus", columnDefinition = "enum('ACTIVE','NOT_ACTIVE', 'FINISHED')", nullable = false)
+    private EventStatusState eventStatus;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Winner", columnDefinition = "enum('FIRST','SECOND', 'DRAW')")
+    private WinnerStatus winnerStatus;
+
+    @Column(name = "TotalBank", nullable = false)
+    private BigDecimal totalBank;
 
     public Event() {
+        this.totalBank = new BigDecimal(0);
+        this.eventStatus = EventStatusState.NOT_ACTIVE;
     }
 
-    public Event(Long eventId,
-                 String eventName,
-                 Long userId,
-                 Date creatingDate,
-                 Date finishingDate,
-                 EventStatusState eventStatus,
-                 String eventDescription) {
-        this.eventId = eventId;
+    public Event(String eventName, String eventDescription, String winningCondition, String loseCondition, String drawCondition) {
+        this();
         this.eventName = eventName;
-        this.userId = userId;
-        this.creatingDate = creatingDate;
-        this.finishingDate = finishingDate;
-        this.eventStatus = eventStatus;
         this.eventDescription = eventDescription;
+        this.winningCondition = winningCondition;
+        this.loseCondition = loseCondition;
+        this.drawCondition = drawCondition;
     }
-
-    public Event(Long eventId,
-                 String eventName,
-                 Long userId,
-                 Date creatingDate,
-                 EventStatusState eventStatus,
-                 String eventDescription) {
-        this.eventId = eventId;
-        this.eventName = eventName;
-        this.userId = userId;
-        this.creatingDate = creatingDate;
-        this.eventStatus = eventStatus;
-        this.eventDescription = eventDescription;
-    }
-
-    public Event(String eventName,
-                 Long userId,
-                 EventStatusState eventStatus,
-                 String eventDescription) {
-        this.eventName = eventName;
-        this.userId = userId;
-        this.eventStatus = eventStatus;
-        this.eventDescription = eventDescription;
-        this.creatingDate = new Date();
-    }
-
 
     public Long getEventId() {
         return eventId;
@@ -93,12 +70,36 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getEventDescription() {
+        return eventDescription;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
+    }
+
+    public String getWinningCondition() {
+        return winningCondition;
+    }
+
+    public void setWinningCondition(String winningCondition) {
+        this.winningCondition = winningCondition;
+    }
+
+    public String getLoseCondition() {
+        return loseCondition;
+    }
+
+    public void setLoseCondition(String loseCondition) {
+        this.loseCondition = loseCondition;
+    }
+
+    public String getDrawCondition() {
+        return drawCondition;
+    }
+
+    public void setDrawCondition(String drawCondition) {
+        this.drawCondition = drawCondition;
     }
 
     public EventStatusState getEventStatus() {
@@ -109,12 +110,20 @@ public class Event {
         this.eventStatus = eventStatus;
     }
 
-    public String getEventDescription() {
-        return eventDescription;
+    public WinnerStatus getWinnerStatus() {
+        return winnerStatus;
     }
 
-    public void setEventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
+    public void setWinnerStatus(WinnerStatus winnerStatus) {
+        this.winnerStatus = winnerStatus;
+    }
+
+    public BigDecimal getTotalBank() {
+        return totalBank;
+    }
+
+    public void setTotalBank(BigDecimal totalBank) {
+        this.totalBank = totalBank;
     }
 
     @Override
@@ -122,11 +131,13 @@ public class Event {
         return "Event{" +
                 "eventId=" + eventId +
                 ", eventName='" + eventName + '\'' +
-                ", userId=" + userId +
-                ", creatingDate=" + DateFormat.getDateTimeInstance().format(creatingDate) +
-                ", finishingDate=" + finishingDate +
-                ", eventStatus=" + eventStatus +
                 ", eventDescription='" + eventDescription + '\'' +
+                ", winningCondition='" + winningCondition + '\'' +
+                ", loseCondition='" + loseCondition + '\'' +
+                ", drawCondition='" + drawCondition + '\'' +
+                ", eventStatus=" + eventStatus +
+                ", winnerStatus=" + winnerStatus +
+                ", totalBank=" + totalBank +
                 '}';
     }
 }

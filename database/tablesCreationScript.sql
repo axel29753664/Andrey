@@ -14,15 +14,16 @@ CREATE TABLE `users` (
 
 
 CREATE TABLE IF NOT EXISTS `events` (
-  `EventID`       BIGINT(20)                                NOT NULL AUTO_INCREMENT,
-  `EventName`     VARCHAR(45)                               NOT NULL,
-  `UserID`        BIGINT(20)                                NOT NULL,
-  `CreatingDate`  DATETIME                                  NOT NULL,
-  `FinishingDate` DATETIME,
-  `EventStatus`   ENUM ('ACTIVE', 'NOT_ACTIVE', 'FINISHED') NOT NULL,
-  `MainEventInfo` VARCHAR(255)                              NOT NULL,
-  PRIMARY KEY (`EventID`),
-  FOREIGN KEY (`UserID`) REFERENCES users (`UserID`)
+  `EventID`          BIGINT(20)                                NOT NULL AUTO_INCREMENT,
+  `EventName`        VARCHAR(45)                               NOT NULL,
+  `EventDescription` VARCHAR(255)                              NOT NULL,
+  `WinningCondition` VARCHAR(255)                              NOT NULL,
+  `LoseCondition`    VARCHAR(255)                              NOT NULL,
+  `DrawCondition`    VARCHAR(255)                                       DEFAULT NULL,
+  `EventStatus`      ENUM ('ACTIVE', 'NOT_ACTIVE', 'FINISHED') NOT NULL,
+  `Winner`           ENUM ('FIRST', 'SECOND', 'DRAW'),
+  `TotalBank`        DECIMAL(19, 4)                            NOT NULL DEFAULT '0',
+  PRIMARY KEY (`EventID`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 1;
