@@ -7,11 +7,15 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
+<form>
+    <b> Hello ${user.firstName} ${user.lastName} You are login as "${user.login}" </b>
+</form>
 <form method="post" action="userPage">
     <button type="submit">logout</button>
     <input type="button" value="Make bet" onClick='location.href="makeBetForm"'>
-    <h1> Hello ${user.firstName} ${user.lastName} </h1>
-    <h1> You are login as "${user.login}" </h1>
+    <input type="button" value="Create Event" onClick='location.href="createEventForm"'>
+
 </form>
+<form><font color="red">${message}</font><br></form>
 </body>
 </html>

@@ -24,7 +24,7 @@ public class Event {
     @Column(name = "LoseCondition", nullable = false)
     private String loseCondition;
 
-    @Column(name = "DrawCondition", nullable = false)
+    @Column(name = "DrawCondition", nullable = true)
     private String drawCondition;
 
     @Enumerated(EnumType.STRING)

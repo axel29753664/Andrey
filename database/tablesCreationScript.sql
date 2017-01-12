@@ -23,7 +23,8 @@ CREATE TABLE IF NOT EXISTS `events` (
   `EventStatus`      ENUM ('ACTIVE', 'NOT_ACTIVE', 'FINISHED') NOT NULL,
   `Winner`           ENUM ('FIRST', 'SECOND', 'DRAW'),
   `TotalBank`        DECIMAL(19, 4)                            NOT NULL DEFAULT '0',
-  PRIMARY KEY (`EventID`)
+  PRIMARY KEY (`EventID`),
+  UNIQUE KEY `events_EventName_uindex` (`EventName`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 1;
