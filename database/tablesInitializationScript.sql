@@ -1,23 +1,20 @@
-INSERT INTO users (FirstName, LastName, Login, Password) VALUES ('axel', 'foley', 'axel', 'axel');
-INSERT INTO users (FirstName, LastName, Login, Password) VALUES ('Anna', 'Vanna', 'Anna', 'Vanna');
-INSERT INTO users (FirstName, LastName, Login, Password) VALUES ('login', ' PASSWORD ', 'login', ' PASSWORD ');
-INSERT INTO users (FirstName, LastName, Login, Password, Admin) VALUES ('administrator', 'adm', 'admin', 'admin', TRUE);
+INSERT INTO users (FirstName, LastName, Login, Password, AccountBalance) VALUES ('axel', 'foley', 'axel', 'axel', 32.5);
+INSERT INTO users (FirstName, LastName, Login, Password, AccountBalance)
+VALUES ('Anna', 'Vanna', 'Anna', 'Vanna', 0.25);
+INSERT INTO users (FirstName, LastName, Login, Password, AccountBalance)
+VALUES ('login', ' PASSWORD ', 'login', ' PASSWORD ', 12.1);
+INSERT INTO users (FirstName, LastName, Login, Password, AccountBalance, Admin)
+VALUES ('administrator', 'adm', 'admin', 'admin', 55.45, TRUE);
 
 
-INSERT INTO main_events (MainEventName, MainEventAddTime, MainEventStartTime, MainEventEndTime, MainEventInfo)
-VALUES ('Arsenal - MU', 10, 20, 30, ' TEXT about Arsenal - MU');
-INSERT INTO main_events (MainEventName, MainEventAddTime, MainEventStartTime, MainEventEndTime, MainEventInfo)
-VALUES ('Milan - Roma', 20, 30, 40, ' TEXT about Milan - Roma');
-INSERT INTO main_events (MainEventName, MainEventAddTime, MainEventStartTime, MainEventEndTime, MainEventInfo)
-VALUES (' REAL Madrid - Barcelona', 20, 30, 40, ' TEXT about REAL Madrid - Barcelona');
-
-
-INSERT INTO events (EventName) VALUES ('Arsenal - MU:3 - 1');
-INSERT INTO events (EventName) VALUES ('Arsenal - MU:2 - 3');
-INSERT INTO events (EventName) VALUES ('Arsenal - MU:4 - 4');
-INSERT INTO events (EventName) VALUES ('Milan - Roma:0 - 1');
-INSERT INTO events (EventName) VALUES ('Milan - Roma:1 - 2');
-INSERT INTO events (EventName) VALUES (' REAL Madrid - Barcelona:2 - 2');
+INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition, DrawCondition, EventStatus, Winner, TotalBank)
+VALUES ('Arsenal - MU', 'Arsenal play vs MU', 'Arsenal', 'MU', 'draw', 'FINISHED', 'FIRST', 235.43);
+INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition, DrawCondition, EventStatus, TotalBank)
+VALUES ('CSKA - MU', 'CSKA play vs MU', 'CSKA', 'MU', 'draw', 'NOT_ACTIVE', 35.12);
+INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition, DrawCondition, EventStatus,  TotalBank)
+VALUES ('Spartak - Liverpool', 'Spartak play vs Liverpool', 'Spartak', 'Liverpool', 'draw', 'ACTIVE',  123.43);
+INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition, DrawCondition, EventStatus, Winner, TotalBank)
+VALUES ('Arsenal - CSKA', 'Arsenal play vs CSKA', 'Arsenal', 'CSKA', 'draw', 'FINISHED', 'SECOND', 135.43);
 
 
 INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (1, 1, 10, 1);
@@ -28,18 +25,7 @@ INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (1, 3, 50,
 INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (2, 3, 60, 0);
 INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (3, 4, 70, 1);
 INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (3, 4, 80, 0);
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (4, 5, 90, 1);
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (4, 6, 100, 0);
+INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (4, 1, 90, 1);
+INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (4, 3, 100, 0);
 
-
-INSERT INTO accounts (AccountBalance) VALUES (10);
-INSERT INTO accounts (AccountBalance) VALUES (50);
-INSERT INTO accounts (AccountBalance) VALUES (100);
-INSERT INTO accounts (AccountBalance) VALUES (0);
-
-
-INSERT INTO userAccounts (AccountID, UserID) VALUES (1, 1);
-INSERT INTO userAccounts (AccountID, UserID) VALUES (2, 2);
-INSERT INTO userAccounts (AccountID, UserID) VALUES (3, 3);
-INSERT INTO userAccounts (AccountID, UserID) VALUES (4, 4);
 

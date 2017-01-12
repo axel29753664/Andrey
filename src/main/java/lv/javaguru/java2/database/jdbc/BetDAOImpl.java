@@ -41,7 +41,7 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
 
     @Override
     @Transactional
-    public List<Bet> getByEventIdAndWinningCondition (Long eventId, Boolean winningCondition) throws JDBCException {
+    public List<Bet> getByEventIdAndWinningCondition(Long eventId, Boolean winningCondition) throws JDBCException {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Bet.class);
         criteria.add(Restrictions.like("EventID", eventId));
         criteria.add(Restrictions.like("Winning_Condition", winningCondition));
@@ -50,9 +50,10 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
 
     @Override
     @Transactional
-    public void deleteById(Long betId) throws JDBCException {
-        String deleteQuery = "delete from " +  TABLE_NAME + " where " + betId;
+    public void deleteByUserId(Long userID) throws JDBCException {
+        String deleteQuery = "delete from " + TABLE_NAME + " where UserID= :userID";
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(deleteQuery);
+        query.setLong("userID", userID);
         query.executeUpdate();
     }
 

@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface BetDAO extends GenericDAO<Bet>{
 
-    void deleteById(Long betId);
+    void deleteByUserId(Long betId);
 
-    List<Bet> getByUserId(Long userId);
+    List getByUserId(Long userId);
 
     List<Bet> getByEventId(Long eventId);
 

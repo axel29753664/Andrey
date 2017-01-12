@@ -2,8 +2,6 @@ package lv.javaguru.java2.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.util.Date;
 
 @Entity
 @Table(name = "Events")
@@ -14,7 +12,7 @@ public class Event {
     @Column(name = "EventId")
     private Long eventId;
 
-    @Column(name = "EventName", length = 45, nullable = false)
+    @Column(name = "EventName", nullable = false)
     private String eventName;
 
     @Column(name = "EventDescription", nullable = false)

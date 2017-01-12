@@ -38,9 +38,9 @@ public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDA
     @Override
     @Transactional
     public void deleteByLogin(String login) throws JDBCException {
-
-        String hql = "DELETE FROM " + TABLE_NAME + " WHERE " + login;
+        String hql = "DELETE FROM " + TABLE_NAME + " WHERE Login= :login";
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(hql);
+        query.setString("login", login);
         query.executeUpdate();
     }
 
