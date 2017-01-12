@@ -7,12 +7,8 @@ USE `TotalizatorDB_test`;
 
 
 DROP TABLE IF EXISTS `users`;
-DROP TABLE IF EXISTS `main_events`;
 DROP TABLE IF EXISTS `events` ;
 DROP TABLE IF EXISTS `bets` ;
-DROP TABLE IF EXISTS `accounts` ;
-DROP TABLE IF EXISTS `userAccounts` ;
-DROP TABLE IF EXISTS `transactions` ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

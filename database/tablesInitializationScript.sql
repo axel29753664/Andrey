@@ -11,8 +11,8 @@ INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition
 VALUES ('Arsenal - MU', 'Arsenal play vs MU', 'Arsenal', 'MU', 'draw', 'FINISHED', 'FIRST', 235.43);
 INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition, DrawCondition, EventStatus, TotalBank)
 VALUES ('CSKA - MU', 'CSKA play vs MU', 'CSKA', 'MU', 'draw', 'NOT_ACTIVE', 35.12);
-INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition, DrawCondition, EventStatus,  TotalBank)
-VALUES ('Spartak - Liverpool', 'Spartak play vs Liverpool', 'Spartak', 'Liverpool', 'draw', 'ACTIVE',  123.43);
+INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition, DrawCondition, EventStatus, TotalBank)
+VALUES ('Spartak - Liverpool', 'Spartak play vs Liverpool', 'Spartak', 'Liverpool', 'draw', 'ACTIVE', 123.43);
 INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition, DrawCondition, EventStatus, Winner, TotalBank)
 VALUES ('Arsenal - CSKA', 'Arsenal play vs CSKA', 'Arsenal', 'CSKA', 'draw', 'FINISHED', 'SECOND', 135.43);
 
