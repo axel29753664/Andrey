@@ -5,8 +5,8 @@
 </head>
 <body>
 <form action="makeBet" method="POST">
-    <p>User ID: 1003</p>
-    <input type="hidden" name="userID" value="1003">
+    <p>User ID: 4</p>
+    <input type="hidden" name="userID" value="4">
     <p>Event ID: 2</p>
     <input type="hidden" name="eventID" value="2">
     <p>Bet sum: <input type="number" min="1" name="betSum"></p>
