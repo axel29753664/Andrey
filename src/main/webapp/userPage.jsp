@@ -10,10 +10,10 @@
 <form>
     <b> Hello ${user.firstName} ${user.lastName} You are login as "${user.login}" </b>
 </form>
-<form method="post" action="userPage">
-    <button type="submit">logout</button>
-    <input type="button" value="Make bet" onClick='location.href="makeBetForm"'>
+<form>
+    <input type="submit" name="logout" value="logout" formaction="userPage" formmethod="post" >
     <input type="button" value="Create Event" onClick='location.href="createEventForm"'>
+    <input type="button" value="Show events" onClick='location.href="events"'>
 
 </form>
 <form><font color="red">${message}</font><br></form>

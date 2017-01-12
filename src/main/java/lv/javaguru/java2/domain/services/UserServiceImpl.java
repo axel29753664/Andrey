@@ -8,6 +8,8 @@ import lv.javaguru.java2.domain.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -20,6 +22,12 @@ public class UserServiceImpl implements UserService {
 
         eventDAO.create(event);
     }
+
+    @Override
+    public List<Event> getAllEvents() {
+        return eventDAO.getAll();
+    }
+
 
     @Override
     public void makeBet(Bet bet) {
