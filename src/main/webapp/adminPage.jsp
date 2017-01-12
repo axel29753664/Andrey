@@ -25,6 +25,7 @@
             <td>Password</td>
             <td>Firstname</td>
             <td>Lastname</td>
+            <td>Balance</td>
             <td>Admin</td>
             <td></td>
         </tr>
@@ -35,6 +36,7 @@
                 <td><c:out value="${user.password}"/></td>
                 <td><c:out value="${user.firstName}"/></td>
                 <td><c:out value="${user.lastName}"/></td>
+                <td><c:out value="${user.balance}"/></td>
                 <td><c:out value="${user.admin}"/></td>
                 <td>
                     <label>

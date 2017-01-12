@@ -1,6 +1,7 @@
 package lv.javaguru.java2.domain;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "users")
@@ -25,15 +26,28 @@ public class User {
     @Column(name = "Admin")
     private boolean admin;
 
+    @Column(name = "AccountBalance", nullable = false)
+    private BigDecimal balance;
+
     public User() {
+        this.balance = new BigDecimal(0);
     }
 
     public User(String firstName, String lastName, String login, String password) {
+        this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
 
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public boolean isAdmin() {
@@ -92,6 +106,8 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
+                ", admin=" + admin +
+                ", balance=" + balance +
                 '}';
     }
 }
