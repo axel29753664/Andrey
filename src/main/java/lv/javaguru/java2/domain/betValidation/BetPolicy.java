@@ -23,14 +23,14 @@ public class BetPolicy {
     public BetSumBetRule betSumBetRule;
 
     @Autowired
-    public WinningStateBetRule winningStateBetRule;
+    public BetConditionBetRule betConditionBetRule;
 
     @PostConstruct
     public void init() {
         rules.add(userIdBetRule);
         rules.add(eventIdBetRule);
         rules.add(betSumBetRule);
-        rules.add(winningStateBetRule);
+        rules.add(betConditionBetRule);
     }
 
     public List<BetValidationError> validate(Bet bet) {

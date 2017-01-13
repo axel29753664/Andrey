@@ -4,7 +4,7 @@
     <title>MakeBetError</title>
 </head>
 <body>
-
+<jsp:include page="menu.jsp"></jsp:include>
 <center>
     <form>
         <b>Error :-(</b>

@@ -6,6 +6,8 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
+
+
 <form name="eventTable" action="events" method="post">
     <table border="2">
         <tr>

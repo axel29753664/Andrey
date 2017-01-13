@@ -2,6 +2,7 @@ package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.domain.Event;
 import lv.javaguru.java2.domain.services.UserService;
+import lv.javaguru.java2.domain.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

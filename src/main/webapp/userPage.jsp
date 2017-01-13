@@ -14,6 +14,7 @@
     <input type="submit" name="logout" value="logout" formaction="userPage" formmethod="post" >
     <input type="button" value="Create Event" onClick='location.href="createEventForm"'>
     <input type="button" value="Show events" onClick='location.href="events"'>
+    <input type="button" value="Show your's bets" onClick='location.href="bets"'>
 
 </form>
 <form><font color="red">${message}</font><br></form>

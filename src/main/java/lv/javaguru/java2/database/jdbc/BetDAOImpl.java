@@ -4,6 +4,7 @@ import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.GenericHibernateDAOImpl;
 import lv.javaguru.java2.domain.Bet;
+import lv.javaguru.java2.domain.BetWinningConditionState;
 import org.hibernate.Criteria;
 import org.hibernate.JDBCException;
 import org.hibernate.SQLQuery;
@@ -27,7 +28,7 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
     @Transactional
     public List<Bet> getByUserId(Long userId) throws JDBCException {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Bet.class);
-        criteria.add(Restrictions.like("UserID", userId));
+        criteria.add(Restrictions.eq("userId", userId));
         return criteria.list();
     }
 
@@ -35,16 +36,16 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
     @Transactional
     public List<Bet> getByEventId(Long eventId) throws JDBCException {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Bet.class);
-        criteria.add(Restrictions.like("EventID", eventId));
+        criteria.add(Restrictions.like("eventId", eventId));
         return criteria.list();
     }
 
     @Override
     @Transactional
-    public List<Bet> getByEventIdAndWinningCondition(Long eventId, Boolean winningCondition) throws JDBCException {
+    public List<Bet> getByEventIdAndBetCondition(Long eventId, BetWinningConditionState betCondition) throws JDBCException {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Bet.class);
-        criteria.add(Restrictions.like("EventID", eventId));
-        criteria.add(Restrictions.like("Winning_Condition", winningCondition));
+        criteria.add(Restrictions.like("eventId", eventId));
+        criteria.add(Restrictions.like("betCondition", betCondition));
         return criteria.list();
     }
 

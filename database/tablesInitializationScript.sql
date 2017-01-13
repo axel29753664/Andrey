@@ -17,15 +17,13 @@ INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition
 VALUES ('Arsenal - CSKA', 'Arsenal play vs CSKA', 'Arsenal', 'CSKA', 'draw', 'FINISHED', 'SECOND', 135.43);
 
 
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (1, 1, 10, 1);
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (2, 1, 20, 1);
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (3, 1, 30, 0);
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (1, 2, 40, 0);
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (1, 3, 50, 1);
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (2, 3, 60, 0);
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (3, 4, 70, 1);
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (3, 4, 80, 0);
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (4, 1, 90, 1);
-INSERT INTO bets (UserID, EventID, Bet_Sum, Winning_Condition) VALUES (4, 3, 100, 0);
-
-
+INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (1, 1, 10, 'WIN');
+INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (2, 1, 20, 'WIN');
+INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (3, 1, 30, 'LOSE');
+INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (1, 2, 40, 'DRAW');
+INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (1, 3, 50, 'WIN');
+INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (2, 3, 60, 'LOSE');
+INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (3, 4, 70, 'DRAW');
+INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (3, 4, 80, 'LOSE');
+INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (4, 1, 90, 'WIN');
+INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (4, 3, 100, 'DRAW');

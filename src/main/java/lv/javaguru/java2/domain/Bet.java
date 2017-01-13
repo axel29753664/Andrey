@@ -9,20 +9,21 @@ public class Bet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="BetID", length = 20)
+    @Column(name="BetID")
     private Long betId;
 
-    @Column(name="UserID", length = 20, nullable = false)
+    @Column(name="UserID", nullable = false)
     private Long userId;
 
-    @Column(name="EventID", length = 20, nullable = false)
+    @Column(name="EventID", nullable = false)
     private Long eventId;
 
-    @Column(name="Bet_Sum", nullable = false)
+    @Column(name="BetSum", nullable = false)
     private BigDecimal betSum;
 
-    @Column(name="Winning_Condition", nullable = false)
-    private Boolean winningCondition;
+    @Enumerated(EnumType.STRING)
+    @Column(name="BetCondition", nullable = false)
+    private BetWinningConditionState betCondition;
 
     public Bet() {
     }
@@ -30,11 +31,11 @@ public class Bet {
     public Bet(Long userId,
                Long eventId,
                BigDecimal betSum,
-               Boolean winningCondition) {
+               BetWinningConditionState betCondition) {
         this.userId = userId;
         this.eventId = eventId;
         this.betSum = betSum;
-        this.winningCondition = winningCondition;
+        this.betCondition = betCondition;
     }
 
     public Long getBetId() {
@@ -69,12 +70,12 @@ public class Bet {
         this.betSum = betSum;
     }
 
-    public Boolean getWinningCondition() {
-        return winningCondition;
+    public BetWinningConditionState getWinningCondition() {
+        return betCondition;
     }
 
-    public void setWinningCondition(Boolean winingCondition) {
-        this.winningCondition = winingCondition;
+    public void setWinningCondition(BetWinningConditionState betCondition) {
+        this.betCondition = betCondition;
     }
 
     @Override
@@ -84,7 +85,7 @@ public class Bet {
                 ", userId=" + userId +
                 ", eventId=" + eventId +
                 ", betSum=" + betSum +
-                ", winningChoice=" + winningCondition +
+                ", betCondition=" + betCondition +
                 '}';
     }
 

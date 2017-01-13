@@ -14,8 +14,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private EventDAO eventDAO;
-    @Autowired
-    private BetDAO betDAO;
+
 
     @Override
     public void createEvent(Event event) {
@@ -28,10 +27,9 @@ public class UserServiceImpl implements UserService {
         return eventDAO.getAll();
     }
 
-
     @Override
-    public void makeBet(Bet bet) {
-        betDAO.create(bet);
-
+    public Event getEventById(Long eventId) {
+        return eventDAO.getById(eventId);
     }
+
 }

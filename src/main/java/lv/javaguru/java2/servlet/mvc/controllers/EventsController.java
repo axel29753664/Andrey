@@ -13,6 +13,7 @@ import java.util.List;
 
 @Controller
 public class EventsController {
+
     @Autowired
     private UserService userService;
 
@@ -25,9 +26,12 @@ public class EventsController {
     @RequestMapping(value = "events", method = RequestMethod.POST)
     public ModelAndView processRequestPost(HttpServletRequest request) {
         String betEventId = request.getParameter("betEventId");
-//        if ((betEventId != null) && (!betEventId.equals(""))) {
-//            Long id = Long.parseLong(betEventId);
-//        }
-        return new ModelAndView("makeBetForm", "eventId", betEventId);
+        Long eventId = null;
+        if ((betEventId != null) && (!betEventId.equals(""))) {
+            eventId = Long.parseLong(betEventId);
+        }
+        Event event = userService.getEventById(eventId);
+
+        return new ModelAndView("createBetForm", "event", event);
     }
 }

@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `EventDescription` VARCHAR(255)                              NOT NULL,
   `WinningCondition` VARCHAR(255)                              NOT NULL,
   `LoseCondition`    VARCHAR(255)                              NOT NULL,
-  `DrawCondition`    VARCHAR(255)                                       DEFAULT NULL,
+  `DrawCondition`    VARCHAR(255)                              DEFAULT NULL,
   `EventStatus`      ENUM ('ACTIVE', 'NOT_ACTIVE', 'FINISHED') NOT NULL,
   `Winner`           ENUM ('FIRST', 'SECOND', 'DRAW'),
   `TotalBank`        DECIMAL(19, 4)                            NOT NULL DEFAULT '0',
@@ -31,11 +31,11 @@ CREATE TABLE IF NOT EXISTS `events` (
 
 
 CREATE TABLE IF NOT EXISTS `bets` (
-  `BetID`             BIGINT(20) AUTO_INCREMENT,
-  `UserID`            BIGINT(20) NOT NULL,
-  `EventID`           BIGINT(20) NOT NULL,
-  `Bet_Sum`           DECIMAL    NOT NULL,
-  `Winning_Condition` BOOLEAN    NOT NULL,
+  `BetID`               BIGINT(20)                             AUTO_INCREMENT,
+  `UserID`              BIGINT(20)                             NOT NULL,
+  `EventID`             BIGINT(20)                             NOT NULL,
+  `BetSum`              DECIMAL(19, 4)                         NOT NULL,
+  `BetCondition`        VARCHAR(20)                            NOT NULL,
   PRIMARY KEY (`BetID`),
   FOREIGN KEY (`UserID`) REFERENCES users (`UserID`),
   FOREIGN KEY (`EventID`) REFERENCES events (`EventID`)
