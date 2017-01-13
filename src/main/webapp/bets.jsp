@@ -19,6 +19,7 @@
                 <td> ${bet.userId}</td>
                 <td> ${bet.eventId}</td>
                 <td> ${bet.betSum}</td>
+                <td> ${bet.betCondition}</td>
             </tr>
         </c:forEach>
     </table>

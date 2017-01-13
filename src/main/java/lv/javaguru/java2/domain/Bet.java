@@ -70,11 +70,11 @@ public class Bet {
         this.betSum = betSum;
     }
 
-    public BetWinningConditionState getWinningCondition() {
+    public BetWinningConditionState getBetCondition() {
         return betCondition;
     }
 
-    public void setWinningCondition(BetWinningConditionState betCondition) {
+    public void setBetCondition(BetWinningConditionState betCondition) {
         this.betCondition = betCondition;
     }
 

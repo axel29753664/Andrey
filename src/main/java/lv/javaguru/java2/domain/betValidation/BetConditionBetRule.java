@@ -10,7 +10,7 @@ import java.util.List;
 public class BetConditionBetRule implements BetRule {
 
     public void apply(Bet bet, List<BetValidationError> errorList) {
-        if (bet.getWinningCondition() == null || bet.getWinningCondition() == BetWinningConditionState.NOT_APPLIED){
+        if (bet.getBetCondition() == null || bet.getBetCondition() == BetWinningConditionState.NOT_APPLIED){
             errorList.add(BetValidationError.WINNING_CONDITION_NOT_CHOSEN);
         }
     }

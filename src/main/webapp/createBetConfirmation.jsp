@@ -19,6 +19,7 @@
                 <td> ${data.userId}</td>
                 <td> ${data.eventId}</td>
                 <td> ${data.betSum}</td>
+                <td> ${data.betCondition}</td>
             </tr>
         </table>
     </form>
