@@ -1,6 +1,6 @@
 package lv.javaguru.java2.domain;
 
-import lv.javaguru.java2.domain.betValidation.BetValidationError;
+import lv.javaguru.java2.domain.validators.betValidation.BetValidationError;
 
 import java.util.List;
 

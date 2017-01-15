@@ -8,6 +8,15 @@
 </head>
 <body>
 <jsp:include page="userPage.jsp"></jsp:include>
+
+<form name ="BetsManagement" action="betsManagement" method="get" >
+
+    <button name="ShowUsers" onclick="showForm()">
+        Bets management
+    </button>
+
+</form>
+
 <form method="post" action="adminPage">
 
     <button name="ShowUsers" onclick="showForm()">
@@ -44,7 +53,6 @@
                                onclick="document.getElementById('userId').value = ${user.userId};
                                        document.userTable.submit(); "/>
                     </label>
-
                 </td>
             </tr>
         </c:forEach>

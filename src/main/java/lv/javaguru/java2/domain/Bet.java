@@ -23,7 +23,7 @@ public class Bet {
 
     @Enumerated(EnumType.STRING)
     @Column(name="BetCondition", nullable = false)
-    private BetWinningConditionState betCondition;
+    private BetConditionState betCondition;
 
     public Bet() {
     }
@@ -31,7 +31,7 @@ public class Bet {
     public Bet(Long userId,
                Long eventId,
                BigDecimal betSum,
-               BetWinningConditionState betCondition) {
+               BetConditionState betCondition) {
         this.userId = userId;
         this.eventId = eventId;
         this.betSum = betSum;
@@ -70,11 +70,11 @@ public class Bet {
         this.betSum = betSum;
     }
 
-    public BetWinningConditionState getWinningCondition() {
+    public BetConditionState getWinningCondition() {
         return betCondition;
     }
 
-    public void setWinningCondition(BetWinningConditionState betCondition) {
+    public void setWinningCondition(BetConditionState betCondition) {
         this.betCondition = betCondition;
     }
 

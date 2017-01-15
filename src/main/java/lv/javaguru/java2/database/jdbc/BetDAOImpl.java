@@ -1,10 +1,9 @@
 package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.BetDAO;
-import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.GenericHibernateDAOImpl;
 import lv.javaguru.java2.domain.Bet;
-import lv.javaguru.java2.domain.BetWinningConditionState;
+import lv.javaguru.java2.domain.BetConditionState;
 import org.hibernate.Criteria;
 import org.hibernate.JDBCException;
 import org.hibernate.SQLQuery;
@@ -12,11 +11,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -42,7 +36,7 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
 
     @Override
     @Transactional
-    public List<Bet> getByEventIdAndBetCondition(Long eventId, BetWinningConditionState betCondition) throws JDBCException {
+    public List<Bet> getByEventIdAndBetCondition(Long eventId, BetConditionState betCondition) throws JDBCException {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Bet.class);
         criteria.add(Restrictions.like("eventId", eventId));
         criteria.add(Restrictions.like("betCondition", betCondition));

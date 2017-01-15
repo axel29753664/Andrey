@@ -13,5 +13,4 @@ public interface UserDAO extends GenericDAO<User> {
 
     void deleteAll() throws JDBCException;
 
-
 }

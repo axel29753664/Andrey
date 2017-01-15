@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `bets` (
   `BetID`               BIGINT(20)                             AUTO_INCREMENT,
   `UserID`              BIGINT(20)                             NOT NULL,
   `EventID`             BIGINT(20)                             NOT NULL,
-  `BetSum`              DECIMAL(19, 4)                         NOT NULL,
+  `BetSum`              DECIMAL(19, 2)                         NOT NULL,
   `BetCondition`        VARCHAR(20)                            NOT NULL,
   PRIMARY KEY (`BetID`),
   FOREIGN KEY (`UserID`) REFERENCES users (`UserID`),

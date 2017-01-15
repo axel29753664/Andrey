@@ -1,7 +1,7 @@
 package lv.javaguru.java2.database;
 
 import lv.javaguru.java2.domain.Bet;
-import lv.javaguru.java2.domain.BetWinningConditionState;
+import lv.javaguru.java2.domain.BetConditionState;
 
 import java.util.List;
 
@@ -13,6 +13,6 @@ public interface BetDAO extends GenericDAO<Bet>{
 
     List<Bet> getByEventId(Long eventId);
 
-    List<Bet> getByEventIdAndBetCondition (Long eventId, BetWinningConditionState betCondition);
+    List<Bet> getByEventIdAndBetCondition (Long eventId, BetConditionState betCondition);
 
 }

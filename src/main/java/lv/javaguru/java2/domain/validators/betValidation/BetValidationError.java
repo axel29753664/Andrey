@@ -1,4 +1,4 @@
-package lv.javaguru.java2.domain.betValidation;
+package lv.javaguru.java2.domain.validators.betValidation;
 
 public enum BetValidationError {
 

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.domain.betValidation;
+package lv.javaguru.java2.domain.validators.betValidation;
 
 import lv.javaguru.java2.database.EventDAO;
 import lv.javaguru.java2.domain.Bet;
@@ -14,6 +14,7 @@ public class EventIdBetRule implements BetRule {
     @Autowired
     private EventDAO eventDao;
 
+    @Override
     public void apply(Bet bet, List<BetValidationError> errorList) {
         if (bet.getEventId() == null){
             errorList.add(BetValidationError.EVENT_NOT_CHOSEN);

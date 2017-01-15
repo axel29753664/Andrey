@@ -4,6 +4,7 @@ import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.domain.Bet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +22,11 @@ public class BetServiceImpl implements BetService {
     @Override
     public List<Bet> getAllBets() {
         return betDAO.getAll();
+    }
+
+    @Override
+    public void deleteBetById(Long betId) {
+        betDAO.delete(betId);
     }
 
 }

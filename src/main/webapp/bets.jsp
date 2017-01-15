@@ -6,6 +6,7 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
+
 <form name="betsTable" action="bets">
     <table border="2">
         <tr>
@@ -23,5 +24,6 @@
         </c:forEach>
     </table>
 </form>
+    <input type="button" onclick="history.back();" value="Назад"/>
 </body>
 </html>

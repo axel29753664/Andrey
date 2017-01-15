@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface BetService {
 
-    public List<Bet> getBetsByUserId(Long userId);
+    List<Bet> getBetsByUserId(Long userId);
 
-    public List<Bet> getAllBets();
+    List<Bet> getAllBets();
+
+    void deleteBetById(Long id);
 
 }

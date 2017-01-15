@@ -1,4 +1,4 @@
-package lv.javaguru.java2.domain.betValidation;
+package lv.javaguru.java2.domain.validators.betValidation;
 
 import lv.javaguru.java2.domain.Bet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class BetPolicy {
-
-    private List<BetRule> rules = new ArrayList();
+public class BetValidator {
 
     @Autowired
     public UserIdBetRule userIdBetRule;
@@ -24,6 +22,8 @@ public class BetPolicy {
 
     @Autowired
     public BetConditionBetRule betConditionBetRule;
+
+    private List<BetRule> rules = new ArrayList();
 
     @PostConstruct
     public void init() {
