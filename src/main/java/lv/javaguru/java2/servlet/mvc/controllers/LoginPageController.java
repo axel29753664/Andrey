@@ -27,26 +27,29 @@ public class LoginPageController {
         return new ModelAndView("login");
     }
 
-
     @RequestMapping(value = "login", method = {RequestMethod.POST})
-    public ModelAndView processPost(HttpServletRequest request) {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-
-        String url = "login";
-        String message;
-
-        try {
-            User user = loginService.login(login, password);
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            url = loginService.getUserPage(user);
-            message = null;
-            return new ModelAndView("redirect", "url", url);
-        } catch (LoginValidationException | LoginServiceException e) {
-            message = e.getMessage();
-        }
-        return new ModelAndView(url, "message", message);
-
+    public ModelAndView processRequestPost(HttpServletRequest request) {
+        return new ModelAndView("userPage");
     }
+//    @RequestMapping(value = "login", method = {RequestMethod.POST})
+//    public ModelAndView processPost(HttpServletRequest request) {
+//        String login = request.getParameter("login");
+//        String password = request.getParameter("password");
+//
+//        String url = "login";
+//        String message;
+//
+//        try {
+//            User user = loginService.login(login, password);
+//            HttpSession session = request.getSession();
+//            session.setAttribute("user", user);
+//            url = loginService.getUserPage(user);
+//            message = null;
+//            return new ModelAndView("redirect", "url", url);
+//        } catch (LoginValidationException | LoginServiceException e) {
+//            message = e.getMessage();
+//        }
+//        return new ModelAndView(url, "message", message);
+
+//    }
 }

@@ -32,7 +32,7 @@ public class MVCFilter implements Filter {
 
         }
         controllers = new HashMap<>();
-        controllers.put("/", getBean(MenuPageController.class));
+        controllers.put("/", getBean(StartPageController.class));
         controllers.put("/login", getBean(LoginPageController.class));
         controllers.put("/userPage", getBean(UserPageController.class));
         controllers.put("/registration", getBean(RegistrationPageController.class));

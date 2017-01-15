@@ -10,9 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class MenuPageController {
+public class StartPageController {
     @RequestMapping(value = "/", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
-        return new ModelAndView("menu");
+        return new ModelAndView("start");
     }
 }

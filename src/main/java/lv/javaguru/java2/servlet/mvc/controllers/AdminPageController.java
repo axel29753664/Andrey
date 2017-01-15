@@ -29,9 +29,7 @@ public class AdminPageController {
 
     @RequestMapping(value = "adminPage", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        String url = loginService.getUserPage(user);
-        return new ModelAndView(url);
+        return new ModelAndView("adminPage");
     }
 
     @RequestMapping(value = "adminPage", method = {RequestMethod.POST})

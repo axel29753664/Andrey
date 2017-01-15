@@ -8,10 +8,10 @@
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
 <form>
-    <b> Hello ${user.firstName} ${user.lastName} You are login as "${user.login}" </b>
+    <b> Hello ${user.firstName} ${user.lastName} You are login as "${pageContext.request.userPrincipal.name}" </b>
 </form>
 <form>
-    <input type="submit" name="logout" value="logout" formaction="userPage" formmethod="post" >
+
     <input type="button" value="Create Event" onClick='location.href="createEventForm"'>
     <input type="button" value="Show events" onClick='location.href="events"'>
     <input type="button" value="Show your's bets" onClick='location.href="bets"'>
