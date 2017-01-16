@@ -6,6 +6,16 @@ VALUES ('login', ' PASSWORD ', 'login', ' PASSWORD ', 12.1);
 INSERT INTO users (FirstName, LastName, Login, Password, AccountBalance)
 VALUES ('administrator', 'adm', 'admin', 'admin', 55.45);
 
+INSERT INTO roles VALUES (1, 'ROLE_USER');
+
+INSERT INTO roles VALUES (2, 'ROLE_ADMIN');
+
+
+INSERT INTO user_roles VALUES (1, 1);
+INSERT INTO user_roles VALUES (2, 1);
+INSERT INTO user_roles VALUES (3, 1);
+INSERT INTO user_roles VALUES (3, 2);
+INSERT INTO user_roles VALUES (4, 2);
 
 INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition, DrawCondition, EventStatus, Winner, TotalBank)
 VALUES ('Arsenal - MU', 'Arsenal play vs MU', 'Arsenal', 'MU', 'draw', 'FINISHED', 'FIRST', 235.43);

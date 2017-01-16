@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserDAO userDAO;
-
+    @Transactional
     public void saveToDB(User user) {
         Set<Role> roles = new HashSet<>();
         Role role = roleDAO.getById(1L);     //set default access ROLE_USER
