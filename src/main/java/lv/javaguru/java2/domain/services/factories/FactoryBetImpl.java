@@ -5,9 +5,11 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.BetConditionState;
 import lv.javaguru.java2.domain.Response;
+import lv.javaguru.java2.domain.services.ConverterDto;
 import lv.javaguru.java2.domain.services.parsers.ParsingFromStringService;
 import lv.javaguru.java2.domain.validators.betValidation.BetValidator;
 import lv.javaguru.java2.domain.validators.betValidation.BetValidationError;
+import lv.javaguru.java2.servlet.dto.BetDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-//@Scope("prototype")
+@Scope("prototype")
 public class FactoryBetImpl implements FactoryBet {
 
     @Autowired
@@ -28,38 +30,22 @@ public class FactoryBetImpl implements FactoryBet {
     private BetDAO betDAO;
 
     @Autowired
-    @Qualifier("StringToLongParser")
-    private ParsingFromStringService parsingFromStringToLongService;
-
-    @Autowired
-    @Qualifier("StringToBigDecimalParser")
-    private ParsingFromStringService parsingFromStringToBigDecimalService;
-
-    @Autowired
-    @Qualifier("StringToBetConditionStateParser")
-    private ParsingFromStringService parsingFromStringToBetConditionStateServiceImpl;
+    private ConverterDto converterDto;
 
     private List<BetValidationError> errors = new ArrayList();
     private Response response = new Response();
 
 
-    public Response creationProcess(String userIdFromRequest,
-                                    String eventIdFromRequest,
-                                    String betSumFromRequest,
-                                    String betConditionFromRequest){
+    public Response creationProcess(BetDto betDtoFromRequest){
 
-        Long userId = (Long) parsingFromStringToLongService.parse(userIdFromRequest);
-        Long eventId = (Long) parsingFromStringToLongService.parse(eventIdFromRequest);
-        BigDecimal betSum = (BigDecimal) parsingFromStringToBigDecimalService.parse(betSumFromRequest);
-        BetConditionState betCondition = (BetConditionState) parsingFromStringToBetConditionStateServiceImpl.parse(betConditionFromRequest);
-
-        Bet bet = new Bet (userId, eventId, betSum, betCondition);
+        Bet bet = converterDto.convertFromRequest(betDtoFromRequest);
         errors = betValidator.validate(bet);
 
         if (errors.size() == 0) {
             try {
                 writeInDao(bet);
-                buildResponseWithBet(bet);
+                BetDto betDtoToResponse = converterDto.convertToResponse(bet);
+                buildResponseWithBet(betDtoToResponse);
             } catch (DBException e) {
                 buildResponseWithDbError(e);
             }
@@ -74,8 +60,8 @@ public class FactoryBetImpl implements FactoryBet {
         betDAO.create(bet);
     }
 
-    private void buildResponseWithBet(Bet bet) {
-        response.setBet(bet);
+    private void buildResponseWithBet(BetDto betDto) {
+        response.setBetDto(betDto);
     }
 
     private void buildResponseWithDbError(DBException e) {

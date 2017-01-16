@@ -1,24 +1,25 @@
 package lv.javaguru.java2.domain;
 
 import lv.javaguru.java2.domain.validators.betValidation.BetValidationError;
+import lv.javaguru.java2.servlet.dto.BetDto;
 
 import java.util.List;
 
 public class Response {
 
-    private Bet bet;
+    private BetDto betDto;
     private String dbError;
     private List<BetValidationError> errors;
 
     public Response() {
     }
 
-    public void setBet(Bet bet) {
-        this.bet = bet;
+    public void setBetDto(BetDto betDto) {
+        this.betDto = betDto;
     }
 
-    public Bet getBet() {
-        return bet;
+    public BetDto getBetDto() {
+        return betDto;
     }
 
     public void setDbError(String dbError) {

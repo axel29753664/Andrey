@@ -1,4 +1,4 @@
-package lv.javaguru.java2.servlet.mvc;
+package lv.javaguru.java2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,6 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"lv.javaguru.java2"})
+
 public class WebMVCConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver() {
