@@ -1,7 +1,5 @@
 package lv.javaguru.java2.domain.services;
 
-
-import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.Event;
 import lv.javaguru.java2.domain.User;
 

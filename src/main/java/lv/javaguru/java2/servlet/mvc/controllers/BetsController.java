@@ -21,9 +21,13 @@ public class BetsController {
     @RequestMapping(value = "bets", method = RequestMethod.GET)
     public ModelAndView processRequestGet(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        Long userId = user.getUserId();
-        List<Bet> bets = betService.getBetsByUserId(userId);
+        List<Bet> bets = betService.getBetsByUserId(user.getUserId());
         return new ModelAndView("bets", "data", bets);
+    }
+
+    @RequestMapping(value = "bets", method = {RequestMethod.POST})
+    public ModelAndView processRequestPost(HttpServletRequest request) {
+        return new ModelAndView("error", "data", "Incorrect request");
     }
 
 }

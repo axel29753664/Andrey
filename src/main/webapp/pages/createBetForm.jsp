@@ -33,7 +33,7 @@
         <input type="hidden" name="eventID" value=${event.eventId}>
         <tr>
             <td> Bet sum</td>
-            <td><input type="number" name="betSum"/></td>
+            <td><input type="number" step="0.01" name="betSum"/></td>
         </tr>
         <tr>
             <td> Condition</td>
