@@ -1,4 +1,4 @@
-<jsp:useBean id="user" scope="session" type="lv.javaguru.java2.domain.User"/>
+<%--@elvariable id="user" type="lv.javaguru.java2.domain.User"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

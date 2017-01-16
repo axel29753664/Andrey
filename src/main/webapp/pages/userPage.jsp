@@ -1,5 +1,6 @@
+<%--@elvariable id="user" type="lv.javaguru.java2.domain.User"--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="user" scope="session" class="lv.javaguru.java2.domain.User"/>
 
 <html>
 <head>
@@ -9,6 +10,7 @@
 <jsp:include page="menu.jsp"></jsp:include>
 <form>
     <b> Hello ${user.firstName} ${user.lastName} You are login as "${pageContext.request.userPrincipal.name}" </b>
+
 </form>
 <form>
 
@@ -17,6 +19,5 @@
     <input type="button" value="Show your's bets" onClick='location.href="bets"'>
 
 </form>
-<form><font color="red">${message}</font><br></form>
 </body>
 </html>

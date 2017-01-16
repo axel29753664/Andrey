@@ -7,11 +7,10 @@
 
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
-<%--<c:url value="login" var="loginUrl"/>--%>
 <form action="login" method="post">
     <c:if test="${param.error != null}">
         <p>
-            Invalid username and password.
+            Invalid username or password.
         </p>
     </c:if>
     <c:if test="${param.logout != null}">
@@ -27,7 +26,7 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password"/>
     </p>
-    <button type="submit" class="btn">Log in</button>
+    <button type="submit" class="btn">Login</button>
 </form>
 </body>
 </html>

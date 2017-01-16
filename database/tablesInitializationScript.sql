@@ -3,8 +3,8 @@ INSERT INTO users (FirstName, LastName, Login, Password, AccountBalance)
 VALUES ('Anna', 'Vanna', 'Anna', 'Vanna', 0.25);
 INSERT INTO users (FirstName, LastName, Login, Password, AccountBalance)
 VALUES ('login', ' PASSWORD ', 'login', ' PASSWORD ', 12.1);
-INSERT INTO users (FirstName, LastName, Login, Password, AccountBalance, Admin)
-VALUES ('administrator', 'adm', 'admin', 'admin', 55.45, TRUE);
+INSERT INTO users (FirstName, LastName, Login, Password, AccountBalance)
+VALUES ('administrator', 'adm', 'admin', 'admin', 55.45);
 
 
 INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition, DrawCondition, EventStatus, Winner, TotalBank)

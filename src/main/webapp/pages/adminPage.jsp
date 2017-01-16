@@ -1,7 +1,5 @@
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="user" scope="session" class="lv.javaguru.java2.domain.User"/>
 <html>
 <head>
     <title>Admin page</title>
@@ -26,7 +24,6 @@
             <td>Firstname</td>
             <td>Lastname</td>
             <td>Balance</td>
-            <td>Admin</td>
             <td></td>
         </tr>
         <c:forEach items="${data}" var="user">
@@ -37,7 +34,6 @@
                 <td><c:out value="${user.firstName}"/></td>
                 <td><c:out value="${user.lastName}"/></td>
                 <td><c:out value="${user.balance}"/></td>
-                <td><c:out value="${user.admin}"/></td>
                 <td>
                     <label>
                         <input type="button" value="delete"

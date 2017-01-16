@@ -3,6 +3,7 @@ package lv.javaguru.java2.domain.services;
 
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.Event;
+import lv.javaguru.java2.domain.User;
 
 import java.util.List;
 
@@ -12,7 +13,11 @@ public interface UserService {
 
     List<Event> getAllEvents();
 
-    public Event getEventById(Long eventId);
+    Event getEventById(Long eventId);
+
+    User getUserByLogin(String login);
+
+    void saveToDB(User user);
 
 
 

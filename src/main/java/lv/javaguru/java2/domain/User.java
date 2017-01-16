@@ -1,11 +1,18 @@
 package lv.javaguru.java2.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
     @Id
     @Column(name = "userID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,14 +30,17 @@ public class User {
     @Column(name = "Password", nullable = false)
     private String password;
 
-    @Column(name = "Admin")
-    private boolean admin;
-
     @Column(name = "AccountBalance", nullable = false)
     private BigDecimal balance;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
     public User() {
         this.balance = new BigDecimal(0);
+
     }
 
     public User(String firstName, String lastName, String login, String password) {
@@ -42,20 +52,21 @@ public class User {
 
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+
     public BigDecimal getBalance() {
         return balance;
     }
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
     }
 
     public String getLogin() {
@@ -66,8 +77,43 @@ public class User {
         this.login = login;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+
+        for (Role role : roles) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole().name()));
+        }
+        return grantedAuthorities;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
@@ -106,7 +152,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                ", admin=" + admin +
                 ", balance=" + balance +
                 '}';
     }

@@ -1,24 +1,44 @@
 package lv.javaguru.java2.domain.services;
 
 
-import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.EventDAO;
-import lv.javaguru.java2.domain.Bet;
+import lv.javaguru.java2.database.RoleDAO;
+import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.Event;
+import lv.javaguru.java2.domain.Role;
+import lv.javaguru.java2.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private EventDAO eventDAO;
 
+    @Autowired
+    private RoleDAO roleDAO;
+
+    @Autowired
+    private UserDAO userDAO;
+
+    public void saveToDB(User user) {
+        Set<Role> roles = new HashSet<>();
+        Role role = roleDAO.getById(1L);     //set default access ROLE_USER
+        roles.add(role);
+        user.setRoles(roles);
+        userDAO.create(user);
+    }
 
     @Override
     public void createEvent(Event event) {
-
         eventDAO.create(event);
     }
 
@@ -32,4 +52,16 @@ public class UserServiceImpl implements UserService {
         return eventDAO.getById(eventId);
     }
 
+    @Override
+    public User getUserByLogin(String login) {
+        return userDAO.getByLogin(login);
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        User user = userDAO.getByLogin(userName);
+        if (user == null) throw new UsernameNotFoundException("User with login : " + userName + " not found.");
+        return user;
+    }
 }

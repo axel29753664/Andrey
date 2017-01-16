@@ -1,8 +1,6 @@
 package lv.javaguru.java2.domain.services;
 
-import lv.javaguru.java2.database.BetDAO;
-import lv.javaguru.java2.database.EventDAO;
-import lv.javaguru.java2.database.UserDAO;
+import lv.javaguru.java2.database.*;
 import lv.javaguru.java2.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +12,7 @@ import java.util.List;
 public class AdminService {
     @Autowired
     private UserDAO userDAO;
-    @Autowired
-    private EventDAO eventDAO;
+
     @Autowired
     private BetDAO betDAO;
 
@@ -25,6 +22,7 @@ public class AdminService {
 
     @Transactional
     public void deleteUserById(Long id) {
+
         deleteBetsByUserID(id);
         userDAO.delete(id);
     }

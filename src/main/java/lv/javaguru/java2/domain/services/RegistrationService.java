@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 public class RegistrationService {
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private UserService userService;
+
     private UserLoginValidation loginValidation = new UserLoginValidation();
     private UserPasswordValidation passwordValidation = new UserPasswordValidation();
 
@@ -27,7 +30,7 @@ public class RegistrationService {
             passwordValidation.validateToEmptyString(user.getPassword());
 
             if (!checkLoginIsInDB(user.getLogin())) {
-                userDAO.create(user);
+                userService.saveToDB(user);
             } else {
                 throw new RegistrationException("Login already taken");
             }
