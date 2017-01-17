@@ -12,17 +12,27 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigInteger;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 
 @Component
 public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDAO {
     private final String TABLE_NAME = "users";
+
+    @Override
+    @Transactional
+    public List<User> getAll() throws JDBCException {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+        Set<User> userSet = new HashSet<>();
+        userSet.addAll(criteria.list());                                                    //ПЕРЕДЕЛАТЬ
+        List<User> userList = new ArrayList<>();
+        userList.addAll(userSet);
+
+        return userList;
+    }
 
     @Override
     @Transactional
