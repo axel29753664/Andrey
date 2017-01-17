@@ -1,29 +1,12 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Admin page</title>
+    <title>User management</title>
 </head>
 <body>
-<jsp:include page="userPage.jsp"></jsp:include>
-
-<form name ="BetsManagement" action="betsManagement" method="get" >
-
-    <button name="ShowUsers" onclick="showForm()">
-        Bets management
-    </button>
-
-</form>
-
-<form method="post" action="adminPage">
-
-    <button name="ShowUsers" onclick="showForm()">
-        Show all users from DB
-    </button>
-
-</form>
-
-<form name="userTable" id="userTable" action="adminPage" method="post">
+<jsp:include page="../menu.jsp"></jsp:include>
+<form name="userTable" id="userTable" action="userManagement" method="post">
 
     <table border="1">
         <tr>
@@ -35,7 +18,7 @@
             <td>Balance</td>
             <td></td>
         </tr>
-        <c:forEach items="${data}" var="user">
+        <c:forEach items="${users}" var="user">
             <tr>
                 <td><c:out value="${user.userId}"/></td>
                 <td><c:out value="${user.login}"/></td>
@@ -55,8 +38,7 @@
     </table>
     <input type="hidden" id="userId" value="" name="deletedUserId"/>
 
-
+    <input type="button" onclick="history.back();" value="Back"/>
 </form>
-
 </body>
 </html>

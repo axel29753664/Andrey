@@ -1,8 +1,5 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
-import lv.javaguru.java2.domain.Roles;
-import lv.javaguru.java2.domain.Role;
-import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,22 +17,7 @@ public class UserPageController {
 
     @RequestMapping(value = "userPage", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("userPage");
-        Object result = request.getSession().getAttribute("user");
-
-        if (result == null) {
-            String principalUserName = request.getUserPrincipal().getName();
-            User user = userService.getUserByLogin(principalUserName);
-            request.getSession().setAttribute("user", user);
-
-            for (Role role : user.getRoles()) {
-                if (role.getRole().equals(Roles.ROLE_ADMIN)) {
-                    request.getSession().setAttribute("adminAccess", true);
-                }
-            }
-        }
-        return model;
+        return new ModelAndView("userPage");
     }
 
     @RequestMapping(value = "userPage", method = {RequestMethod.POST})

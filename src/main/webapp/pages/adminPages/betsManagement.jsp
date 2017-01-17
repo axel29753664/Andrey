@@ -5,7 +5,7 @@
     <title>Bets management</title>
 </head>
 <body>
-<jsp:include page="menu.jsp"></jsp:include>
+<jsp:include page="../menu.jsp"></jsp:include>
 
 <form name="userTable" action="betsManagement" method="post">
     <table border="2">
@@ -32,6 +32,6 @@
     <input type="hidden" id="userId" value="" name="userBetsId"/>
 </form>
 
-<input type="button" onclick="history.back();" value="Назад"/>
+<input type="button" onclick="history.back();" value="Back"/>
 </body>
 </html>

@@ -35,6 +35,7 @@ public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDA
         return user;
     }
 
+
     @Override
     @Transactional
     public void deleteByLogin(String login) throws JDBCException {

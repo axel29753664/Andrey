@@ -14,9 +14,6 @@ public class AdminService {
     private UserDAO userDAO;
 
     @Autowired
-    private RoleDAO roleDAO;
-
-    @Autowired
     private BetDAO betDAO;
 
     public List<User> getAllUsers() {

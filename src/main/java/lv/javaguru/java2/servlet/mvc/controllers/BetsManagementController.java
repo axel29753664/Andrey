@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "admin")
 public class BetsManagementController {
 
     @Autowired
@@ -26,7 +27,7 @@ public class BetsManagementController {
     @RequestMapping(value = "betsManagement", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
         List<User> users = adminService.getAllUsers();
-        return new ModelAndView("betsManagement", "data", users);
+        return new ModelAndView("adminPages/betsManagement", "data", users);
     }
 
     @RequestMapping(value = "betsManagement", method = {RequestMethod.POST})

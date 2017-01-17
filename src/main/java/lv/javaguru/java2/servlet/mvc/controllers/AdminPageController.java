@@ -12,23 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "admin")
 public class AdminPageController {
-    @Autowired
-    private AdminService adminService;
+
 
     @RequestMapping(value = "adminPage", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
-        return new ModelAndView("adminPage");
+        return new ModelAndView("adminPages/adminPage");
     }
 
     @RequestMapping(value = "adminPage", method = {RequestMethod.POST})
     public ModelAndView processRequestPost(HttpServletRequest request) {
-        String deletedUserId = request.getParameter("deletedUserId");
-        if ((deletedUserId != null) && (!deletedUserId.equals(""))) {
-            Long id = Long.parseLong(deletedUserId);
-            adminService.deleteUserById(id);
-        }
-        List<User> users = adminService.getAllUsers();
-        return new ModelAndView("adminPage", "data", users);
+
+        return new ModelAndView("adminPages/adminPage");
     }
 }
