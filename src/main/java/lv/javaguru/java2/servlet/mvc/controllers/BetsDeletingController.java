@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -28,12 +29,14 @@ public class BetsDeletingController {
     @RequestMapping(value = "betsDeleting", method = {RequestMethod.POST})
     public ModelAndView processRequestPost(HttpServletRequest request) {
         String deletedBetIdFromRequest = request.getParameter("deletingBetId");
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        HttpSession session = request.getSession();
+        Long userIdForBetDeleting = (Long) session.getAttribute("userIdForBetDeleting");
+        Long deletingBetId = null;
         if ((deletedBetIdFromRequest != null) && (!deletedBetIdFromRequest.equals(""))) {
-            Long deletingBetId = Long.parseLong(deletedBetIdFromRequest);
+            deletingBetId = Long.parseLong(deletedBetIdFromRequest);
             betService.deleteBetById(deletingBetId);
         }
-        List<Bet> bets = betService.getBetsByUserId(user.getUserId());
+        List<Bet> bets = betService.getBetsByUserId(userIdForBetDeleting);
         return new ModelAndView("adminPages/betsDeleting", "data", bets);
     }
 
