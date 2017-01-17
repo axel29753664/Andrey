@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import lv.javaguru.java2.domain.services.AdminService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -38,9 +37,7 @@ public class BetsManagementController {
             userId = Long.parseLong(userIdFromRequest);
         }
         List<Bet> bets = betService.getBetsByUserId(userId);
-        HttpSession session = request.getSession();
-        session.setAttribute("userIdForBetDeleting", userId);
-        return new ModelAndView("betsDeleting", "data", bets);
+        return new ModelAndView("adminPages/betsDeleting", "data", bets);
     }
 
 }

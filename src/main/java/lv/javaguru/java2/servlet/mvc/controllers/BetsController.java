@@ -4,6 +4,7 @@ import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.services.BetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +21,7 @@ public class BetsController {
 
     @RequestMapping(value = "bets", method = RequestMethod.GET)
     public ModelAndView processRequestGet(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
+        User user =(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Bet> bets = betService.getBetsByUserId(user.getUserId());
         return new ModelAndView("bets", "data", bets);
     }
