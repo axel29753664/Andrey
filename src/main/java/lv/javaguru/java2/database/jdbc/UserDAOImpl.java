@@ -8,14 +8,13 @@ import org.h2.engine.Session;
 import org.hibernate.Criteria;
 import org.hibernate.JDBCException;
 import org.hibernate.SQLQuery;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.DistinctRootEntityResultTransformer;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Component
@@ -26,12 +25,9 @@ public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDA
     @Transactional
     public List<User> getAll() throws JDBCException {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
-        Set<User> userSet = new HashSet<>();
-        userSet.addAll(criteria.list());                                                    //ПЕРЕДЕЛАТЬ
-        List<User> userList = new ArrayList<>();
-        userList.addAll(userSet);
+        criteria.addOrder(Order.asc("userId"));
 
-        return userList;
+        return  criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
     @Override
