@@ -2,16 +2,15 @@ package lv.javaguru.java2.domain.services.parsers;
 
 import org.springframework.stereotype.Component;
 
-@Component("StringToLongParser")
-public class ParsingFromStringToLongServiceImpl implements ParsingFromStringService {
+//@Component("StringToLongParser")
+public class ParsingFromStringToLongServiceImpl {
 
-    @Override
-    public Long parse(String obj){
-        Long returnObj = null;
-        if ((obj != null) && (!obj.equals(""))) {
-            returnObj = Long.parseLong(obj);
+    public static Long parse(String string){
+        Long aLong = null;
+        if ((string != null) && (!string.equals(""))) {
+            aLong = Long.parseLong(string);
             }
-        return returnObj;
+        return aLong;
     }
 
 }

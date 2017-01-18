@@ -3,10 +3,10 @@ package lv.javaguru.java2.domain.services;
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.servlet.dto.BetDto;
 
-public interface ConverterDto {
+public interface ConverterDto<ENTITY, DTO> {
 
-    Bet convertFromRequest(BetDto betDto);
+    ENTITY convertFromRequest(DTO dto);
 
-    BetDto convertToResponse (Bet bet);
+    DTO convertToResponse (ENTITY bet);
 
 }

@@ -30,7 +30,7 @@ public class FactoryBetImpl implements FactoryBet {
     private BetDAO betDAO;
 
     @Autowired
-    private ConverterDto converterDto;
+    private ConverterDto<Bet,BetDto> converterDto;
 
     private List<BetValidationError> errors = new ArrayList();
     private Response response = new Response();

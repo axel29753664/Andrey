@@ -32,11 +32,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Transactional
     public void saveToDB(User user) {
-        setUserRoles(user);
+        if (user.getRoles().size() == 0) {
+            setDefaultUserRoles(user);
+        }
         userDAO.create(user);
     }
 
-    private void setUserRoles(User user) {
+    private void setDefaultUserRoles(User user) {
         Set<Role> roles = new HashSet<>();
         Role role = new Role();                                   //set default access ROLE_USER
         role.setId(Roles.ROLE_USER.getIdInDB());
