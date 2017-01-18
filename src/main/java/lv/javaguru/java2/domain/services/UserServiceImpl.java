@@ -6,6 +6,7 @@ import lv.javaguru.java2.database.RoleDAO;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.Event;
 import lv.javaguru.java2.domain.Role;
+import lv.javaguru.java2.domain.Roles;
 import lv.javaguru.java2.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,13 +29,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserDAO userDAO;
+
     @Transactional
     public void saveToDB(User user) {
+        setUserRoles(user);
+        userDAO.create(user);
+    }
+
+    private void setUserRoles(User user) {
         Set<Role> roles = new HashSet<>();
-        Role role = roleDAO.getById(1L);     //set default access ROLE_USER
+        Role role = new Role();                                   //set default access ROLE_USER
+        role.setId(Roles.ROLE_USER.getIdInDB());
+        role.setRole(Roles.ROLE_USER);
         roles.add(role);
         user.setRoles(roles);
-        userDAO.create(user);
     }
 
     @Override

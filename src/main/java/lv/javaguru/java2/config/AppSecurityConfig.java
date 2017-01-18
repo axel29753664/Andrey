@@ -1,6 +1,7 @@
 package lv.javaguru.java2.config;
 
 
+import lv.javaguru.java2.domain.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,7 +28,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/registration", "login").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasRole(Roles.ROLE_ADMIN.toStringWithOutPrefixROLE())
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
 //                .defaultSuccessUrl("/", true)

@@ -22,7 +22,7 @@ public class UserPageController {
     private UserService userService;
 
     @RequestMapping(value = "userPage", method = {RequestMethod.GET})
-    public ModelAndView processRequestGet(Principal principal) {
+    public ModelAndView processRequestGet() {
 
 //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
