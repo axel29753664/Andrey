@@ -21,9 +21,6 @@ public class BetManagementController {
     @Autowired
     private BetManagementService betManagementService;
 
-    @Autowired
-    private BetService betService;
-
     @RequestMapping(value = "betManagement", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
         List<UserDto> usersDto = betManagementService.prepareUserList();
