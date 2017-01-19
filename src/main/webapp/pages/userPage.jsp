@@ -18,7 +18,7 @@
     <input type="button" value="Create Event"
            onClick='location.href="${pageContext.request.contextPath}/createEventForm"'>
     <input type="button" value="Show events" onClick='location.href="${pageContext.request.contextPath}/events"'>
-    <input type="button" value="Show your's bets" onClick='location.href="${pageContext.request.contextPath}/bets"'>
+    <input type="button" value="Show your's bets" onClick='location.href="${pageContext.request.contextPath}/betList"'>
 
 </form>
 </body>

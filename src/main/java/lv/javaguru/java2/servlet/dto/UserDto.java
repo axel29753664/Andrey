@@ -9,6 +9,10 @@ public class UserDto {
     public UserDto() {
     }
 
+    public UserDto(String userId){
+        this.userId = userId;
+    }
+
     public UserDto(String userId,
                    String firstName,
                    String lastName) {

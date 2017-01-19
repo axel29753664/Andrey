@@ -7,7 +7,7 @@
 <body>
 <jsp:include page="../userPage.jsp"></jsp:include>
 
-<input type="button" value="Bets management" onClick='location.href="${pageContext.request.contextPath}/admin/betsManagement"'>
+<input type="button" value="Bets management" onClick='location.href="${pageContext.request.contextPath}/admin/betManagement"'>
 <input type="button" value="Show all users from DB" onClick='location.href="${pageContext.request.contextPath}/admin/userManagement"'>
 
 </body>

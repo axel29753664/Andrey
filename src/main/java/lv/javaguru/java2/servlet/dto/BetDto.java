@@ -11,10 +11,26 @@ public class BetDto {
     public BetDto() {
     }
 
+    public BetDto(String betId) {
+        this.betId = betId;
+    }
+
     public BetDto(String userId,
                   String eventId,
                   String betSum,
                   String betCondition) {
+        this.userId = userId;
+        this.eventId = eventId;
+        this.betSum = betSum;
+        this.betCondition = betCondition;
+    }
+
+    public BetDto(String betId,
+                  String userId,
+                  String eventId,
+                  String betSum,
+                  String betCondition) {
+        this.betId = betId;
         this.userId = userId;
         this.eventId = eventId;
         this.betSum = betSum;

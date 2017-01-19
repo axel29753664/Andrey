@@ -38,8 +38,9 @@ public class MVCFilter implements Filter {
         controllers.put("/registration", getBean(RegistrationPageController.class));
         controllers.put("/adminPage", getBean(AdminPageController.class));
         controllers.put("/createBetForm", getBean(CreateBetFormController.class));
-        controllers.put("/betsManagement", getBean(BetsManagementController.class));
-        controllers.put("/betsDeleting", getBean(BetsDeletingController.class));
+        controllers.put("/betList", getBean(CreateBetFormController.class));
+        controllers.put("/betManagement", getBean(BetManagementController.class));
+        controllers.put("/betDeleting", getBean(BetDeletingController.class));
     }
 
     @Override

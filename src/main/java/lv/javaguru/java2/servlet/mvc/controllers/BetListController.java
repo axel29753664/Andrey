@@ -1,9 +1,7 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
-import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.domain.services.BetService;
-import lv.javaguru.java2.domain.services.dtoConverters.ConverterDtoList;
+import lv.javaguru.java2.domain.services.BetListService;
 import lv.javaguru.java2.servlet.dto.BetDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,23 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-public class BetsController {
+public class BetListController {
 
     @Autowired
-    private BetService betService;
+    private BetListService betListService;
 
-    @Autowired
-    private ConverterDtoList converterDtoList;
-
-    @RequestMapping(value = "bets", method = RequestMethod.GET)
+    @RequestMapping(value = "betList", method = RequestMethod.GET)
     public ModelAndView processRequestGet(HttpServletRequest request) {
         User user =(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Bet> bets = betService.getBetsByUserId(user.getUserId());
-        List<BetDto> betsDto = converterDtoList.convertBetListToResponse(bets);
-        return new ModelAndView("bets", "data", betsDto);
+        List<BetDto> betsDto = betListService.prepareBetList(user);
+        return new ModelAndView("betList", "data", betsDto);
     }
 
-    @RequestMapping(value = "bets", method = {RequestMethod.POST})
+    @RequestMapping(value = "betList", method = {RequestMethod.POST})
     public ModelAndView processRequestPost(HttpServletRequest request) {
         return new ModelAndView("error", "data", "Incorrect request");
     }

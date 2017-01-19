@@ -7,7 +7,7 @@
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
 
-<form name="betsTable" action="bets">
+<form name="betsTable" action="betList">
     <table border="2">
         <tr>
             <td>UserID</td>

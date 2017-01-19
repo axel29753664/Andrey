@@ -40,7 +40,6 @@ public class User implements UserDetails {
 
     public User() {
         this.balance = new BigDecimal(0);
-
     }
 
     public User(String firstName, String lastName, String login, String password) {

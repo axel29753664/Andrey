@@ -28,20 +28,22 @@ public class ConverterBetDtoImpl implements ConverterBetDto {
 
     @Override
     public Bet convertFromRequest(BetDto betDto){
+        Long betId = (Long) parsingFromStringToLongService.parse(betDto.getBetId());
         Long userId = (Long) parsingFromStringToLongService.parse(betDto.getUserId());
         Long eventId = (Long) parsingFromStringToLongService.parse(betDto.getEventId());
         BigDecimal betSum = (BigDecimal) parsingFromStringToBigDecimalService.parse(betDto.getBetSum());
         BetConditionState betCondition = (BetConditionState) parsingFromStringToBetConditionStateServiceImpl.parse(betDto.getBetCondition());
-        return new Bet(userId, eventId, betSum, betCondition);
+        return new Bet(betId, userId, eventId, betSum, betCondition);
     }
 
    @Override
     public BetDto convertToResponse (Bet bet) {
+        String betId = bet.getBetId().toString();
         String userId = bet.getUserId().toString();
         String eventId = bet.getEventId().toString();
         String betSum = bet.getBetSum().toString();
         String betCondition = bet.getBetCondition().toString();
-        return new BetDto(userId, eventId, betSum, betCondition);
+        return new BetDto(betId, userId, eventId, betSum, betCondition);
     }
 
 }

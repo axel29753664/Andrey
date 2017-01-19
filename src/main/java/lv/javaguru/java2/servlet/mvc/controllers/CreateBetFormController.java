@@ -33,14 +33,12 @@ public class CreateBetFormController {
         String betConditionFromRequest = request.getParameter("betCondition");
 
         BetDto betDto = new BetDto(userIdFromRequest, eventIdFromRequest, betSumFromRequest, betConditionFromRequest);
-
         FactoryBet factoryBet = context.getBean(FactoryBet.class);
         Response response = factoryBet.creationProcess(betDto);
 
         ModelAndView model = preparationModelAndView(response);
         return model;
     }
-
 
     private ModelAndView preparationModelAndView(Response response) {
         if (response.getDbError() != null) {

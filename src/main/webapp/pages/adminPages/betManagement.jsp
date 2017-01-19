@@ -7,7 +7,7 @@
 <body>
 <jsp:include page="../menu.jsp"></jsp:include>
 
-<form name="userTable" action="betsManagement" method="post">
+<form name="userTable" action="betManagement" method="post">
     <table border="1">
         <tr>
             <td>UserID</td>
@@ -21,7 +21,7 @@
                 <td> ${user.lastName}</td>
                 <td>
                     <label>
-                        <input type="button" value="show user's bets"
+                        <input type="button" value="Show user's bets"
                                onclick="document.getElementById('userId').value = ${user.userId};
                                        document.userTable.submit(); "/>
                     </label>
@@ -29,7 +29,7 @@
             </tr>
         </c:forEach>
     </table>
-    <input type="hidden" id="userId" value="" name="userBetsId"/>
+    <input type="hidden" id="userId" value="" name="userIdForBetDeleting"/>
 </form>
 <input type="button" onclick="history.back();" value="Back"/>
 </body>

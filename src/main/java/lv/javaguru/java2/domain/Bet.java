@@ -38,6 +38,18 @@ public class Bet {
         this.betCondition = betCondition;
     }
 
+    public Bet(Long betId,
+               Long userId,
+               Long eventId,
+               BigDecimal betSum,
+               BetConditionState betCondition) {
+        this.betId = betId;
+        this.userId = userId;
+        this.eventId = eventId;
+        this.betSum = betSum;
+        this.betCondition = betCondition;
+    }
+
     public Long getBetId() {
         return betId;
     }

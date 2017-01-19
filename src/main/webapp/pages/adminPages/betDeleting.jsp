@@ -7,8 +7,8 @@
 <body>
 <jsp:include page="../menu.jsp"></jsp:include>
 
-<form name="betsDeletingTable" action="betsDeleting" method="post">
-    <table border="2">
+<form name="betsDeletingTable" action="betDeleting" method="post">
+    <table border="1">
         <tr>
             <td>EventID</td>
             <td>BetSum</td>
@@ -18,20 +18,20 @@
             <tr>
                 <td> ${bet.eventId}</td>
                 <td> ${bet.betSum}</td>
+                <td> ${bet.betCondition}</td>
                 <td>
                     <label>
                         <input type="button" value="Delete bet"
                                onclick="document.getElementById('betId').value = ${bet.betId};
                                        document.betsDeletingTable.submit(); "/>
                     </label>
-
                 </td>
             </tr>
         </c:forEach>
     </table>
-    <input type="hidden" id="betId" value="" name="deletingBetId"/>
+    <input type="hidden" id="betId" value="" name="betIdForDeleting"/>
 
 </form>
-<input type="button" onclick="history.back();" value="Назад"/>
+<input type="button" onClick='location.href="${pageContext.request.contextPath}/admin/betManagement"' value="Назад"/>
 </body>
 </html>
