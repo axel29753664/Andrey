@@ -3,19 +3,15 @@ package lv.javaguru.java2.domain.services.factories;
 import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Bet;
-import lv.javaguru.java2.domain.BetConditionState;
 import lv.javaguru.java2.domain.Response;
-import lv.javaguru.java2.domain.services.ConverterDto;
-import lv.javaguru.java2.domain.services.parsers.ParsingFromStringService;
+import lv.javaguru.java2.domain.services.dtoConverters.ConverterBetDto;
 import lv.javaguru.java2.domain.validators.betValidation.BetValidator;
 import lv.javaguru.java2.domain.validators.betValidation.BetValidationError;
 import lv.javaguru.java2.servlet.dto.BetDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +26,7 @@ public class FactoryBetImpl implements FactoryBet {
     private BetDAO betDAO;
 
     @Autowired
-    private ConverterDto converterDto;
+    private ConverterBetDto converterDto;
 
     private List<BetValidationError> errors = new ArrayList();
     private Response response = new Response();

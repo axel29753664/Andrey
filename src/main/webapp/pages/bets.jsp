@@ -25,6 +25,6 @@
         </c:forEach>
     </table>
 </form>
-    <input type="button" onclick="history.back();" value="Назад"/>
+<input type="button" onclick="history.back();" value="Back"/>
 </body>
 </html>

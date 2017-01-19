@@ -1,4 +1,4 @@
-package lv.javaguru.java2.domain.services;
+package lv.javaguru.java2.domain.services.dtoConverters;
 
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.BetConditionState;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 
 @Service
-public class ConverterDtoImpl implements ConverterDto {
+public class ConverterBetDtoImpl implements ConverterBetDto {
 
     @Autowired
     @Qualifier("StringToLongParser")
@@ -28,16 +28,14 @@ public class ConverterDtoImpl implements ConverterDto {
 
     @Override
     public Bet convertFromRequest(BetDto betDto){
-
         Long userId = (Long) parsingFromStringToLongService.parse(betDto.getUserId());
         Long eventId = (Long) parsingFromStringToLongService.parse(betDto.getEventId());
         BigDecimal betSum = (BigDecimal) parsingFromStringToBigDecimalService.parse(betDto.getBetSum());
         BetConditionState betCondition = (BetConditionState) parsingFromStringToBetConditionStateServiceImpl.parse(betDto.getBetCondition());
         return new Bet(userId, eventId, betSum, betCondition);
-
     }
 
-    @Override
+   @Override
     public BetDto convertToResponse (Bet bet) {
         String userId = bet.getUserId().toString();
         String eventId = bet.getEventId().toString();

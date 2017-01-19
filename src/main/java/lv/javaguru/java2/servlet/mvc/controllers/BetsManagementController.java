@@ -3,6 +3,8 @@ package lv.javaguru.java2.servlet.mvc.controllers;
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.services.BetService;
+import lv.javaguru.java2.domain.services.dtoConverters.ConverterDtoList;
+import lv.javaguru.java2.servlet.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +26,14 @@ public class BetsManagementController {
     @Autowired
     private BetService betService;
 
+    @Autowired
+    private ConverterDtoList converterDtoList;
+
     @RequestMapping(value = "betsManagement", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
         List<User> users = adminService.getAllUsers();
-        return new ModelAndView("adminPages/betsManagement", "data", users);
+        List<UserDto> usersDto = converterDtoList.convertUserListToResponse(users);
+        return new ModelAndView("adminPages/betsManagement", "data", usersDto);
     }
 
     @RequestMapping(value = "betsManagement", method = {RequestMethod.POST})
@@ -44,4 +50,3 @@ public class BetsManagementController {
     }
 
 }
-

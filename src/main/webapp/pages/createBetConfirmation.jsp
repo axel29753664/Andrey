@@ -24,5 +24,6 @@
         </table>
     </form>
 </center>
+<input type="button" onClick='location.href="${pageContext.request.contextPath}/events"' value="Back"/>
 </body>
 </html>

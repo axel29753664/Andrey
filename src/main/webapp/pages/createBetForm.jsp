@@ -45,6 +45,7 @@
         </tr>
     </table>
     <input type="submit" value="Send"/>
+    <input type="button" onClick='location.href="${pageContext.request.contextPath}/events"' value="Back"/>
 </form>
 </body>
 </html>

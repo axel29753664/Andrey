@@ -8,7 +8,7 @@
 <jsp:include page="../menu.jsp"></jsp:include>
 
 <form name="userTable" action="betsManagement" method="post">
-    <table border="2">
+    <table border="1">
         <tr>
             <td>UserID</td>
             <td>Firstname</td>
@@ -31,7 +31,6 @@
     </table>
     <input type="hidden" id="userId" value="" name="userBetsId"/>
 </form>
-
 <input type="button" onclick="history.back();" value="Back"/>
 </body>
 </html>

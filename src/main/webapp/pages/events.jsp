@@ -37,5 +37,6 @@
     </table>
     <input type="hidden" id="betEvent" value="" name="betEventId"/>
 </form>
+<input type="button" onclick="history.back();" value="Back"/>
 </body>
 </html>
