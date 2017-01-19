@@ -35,7 +35,7 @@ public class MVCFilter implements Filter {
         controllers.put("/", getBean(StartPageController.class));
         controllers.put("/login", getBean(LoginPageController.class));
         controllers.put("/userPage", getBean(UserPageController.class));
-        controllers.put("/registration", getBean(RegistrationPageController.class));
+        controllers.put("/registration", getBean(RegistrationController.class));
         controllers.put("/adminPage", getBean(AdminPageController.class));
         controllers.put("/createBetForm", getBean(CreateBetFormController.class));
         controllers.put("/betsManagement", getBean(BetsManagementController.class));

@@ -4,7 +4,7 @@ import lv.javaguru.java2.domain.BetConditionState;
 import org.springframework.stereotype.Component;
 
 //@Component("StringToBetConditionStateParser")
-public class ParsingFromStringToBetConditionStateServiceImpl {
+public class ParserStringToBetConditionState {
 
     private final static String conditionWin = "WIN";
     private final static String conditionLose = "LOSE";

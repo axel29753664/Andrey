@@ -1,32 +1,32 @@
 package lv.javaguru.java2.servlet.dto;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class UserDTO {
 
-    private String userId;
+    @Size(max = 50, message = "character allowed < 50")
     private String firstName;
+    @Size(max = 50, message = "character allowed < 50")
     private String lastName;
+    @NotEmpty
+    @Size(min = 3, max = 20 , message = "Login must between 3 to 20 symbols")
     private String login;
+    @NotEmpty
+    @Size(min = 4, max = 16, message = "Password must between 4 to 14 symbols")
     private String password;
-    private String balance;
-    private String roles;
 
-    public UserDTO(String userId, String firstName, String lastName, String login, String password, String balance, String roles) {
-        this.userId = userId;
+    public UserDTO() {
+    }
+
+    public UserDTO(String firstName, String lastName, String login, String password) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
-        this.balance = balance;
-        this.roles = roles;
-    }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -61,19 +61,5 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getBalance() {
-        return balance;
-    }
 
-    public void setBalance(String balance) {
-        this.balance = balance;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
 }

@@ -2,11 +2,10 @@ package lv.javaguru.java2.domain.services.factories;
 
 
 import lv.javaguru.java2.servlet.dto.UserDTO;
+import org.springframework.validation.Errors;
 
 public interface UserFactory {
 
-    boolean create(UserDTO userDTO);
-
-    void getErrors();
+    void create(UserDTO userDTO, Errors errors);
 
 }

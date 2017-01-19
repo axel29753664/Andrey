@@ -7,6 +7,6 @@ public interface ConverterDto<ENTITY, DTO> {
 
     ENTITY convertFromRequest(DTO dto);
 
-    DTO convertToResponse (ENTITY bet);
+    DTO convertToResponse (ENTITY entity);
 
 }

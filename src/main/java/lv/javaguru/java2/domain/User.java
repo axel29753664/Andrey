@@ -40,7 +40,7 @@ public class User implements UserDetails {
 
     public User() {
         this.balance = new BigDecimal(0);
-
+        this.roles = createDefaultUserRoles();
     }
 
     public User(String firstName, String lastName, String login, String password) {
@@ -50,6 +50,24 @@ public class User implements UserDetails {
         this.login = login;
         this.password = password;
 
+    }
+
+    public User(String firstName, String lastName, String login, String password, BigDecimal balance, Set<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.login = login;
+        this.password = password;
+        this.balance = balance;
+        this.roles = roles;
+    }
+
+    private Set<Role> createDefaultUserRoles() {
+        Set<Role> roleSet =new HashSet<>();
+        Role role = new Role();
+        role.setId(Roles.ROLE_USER.getIdInDB());
+        role.setRole(Roles.ROLE_USER);                          //create default access ROLE_USER
+        roleSet.add(role);
+        return roleSet;
     }
 
     public Set<Role> getRoles() {

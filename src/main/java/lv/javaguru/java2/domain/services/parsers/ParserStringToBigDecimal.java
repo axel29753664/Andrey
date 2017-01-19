@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 //@Component("StringToBigDecimalParser")
-public class ParsingFromStringToBigDecimalServiceImpl{
+public class ParserStringToBigDecimal {
 
     public static BigDecimal parse(String string){
         BigDecimal decimal = null;

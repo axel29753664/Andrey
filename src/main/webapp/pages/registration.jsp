@@ -1,32 +1,45 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Registration page</title>
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
-<form method="post" action="registration">
-    <font color="red">${message}</font><br>
+<form:form method="post" action="registration" commandName="userDTOForm">
     <table>
+
         <tr>
-            <td> Name</td>
-            <td><input type="text" name="firstName"/></td>
+            <td>Name:<font color="red"><form:errors path="firstName"/></font></td>
         </tr>
         <tr>
-            <td>Lastname</td>
-            <td><input type="text" name="lastName"/></td>
+            <td><form:input path="firstName"/></td>
         </tr>
         <tr>
-            <td>Login</td>
-            <td><input type="text" name="login"/></td>
+            <td>Lastname<font color="red"><form:errors path="lastName"/></font></td>
         </tr>
         <tr>
-            <td>Password</td>
-            <td><input type="text" name="password"/></td>
+            <td><form:input path="lastName"/></td>
         </tr>
+
+
+        <tr>
+            <td>Login<font color="red"><form:errors path="login"/></font></td>
+        </tr>
+        <tr>
+            <td><form:input path="login"/></td>
+        </tr>
+
+        <tr>
+            <td>Password<font color="red"><form:errors path="password"/></font></td>
+        </tr>
+        <tr>
+            <td><form:input path="password"/></td>
+        </tr>
+
     </table>
 
     <input type="submit" value="Send"/>
-</form>
+</form:form>
 </body>
 </html>
