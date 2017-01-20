@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>Bets management</title>
@@ -7,7 +8,7 @@
 <body>
 <jsp:include page="../menu.jsp"></jsp:include>
 
-<form name="userTable" action="betManagement" method="post">
+<form name="userTable" action="${contextPath}/admin/betManagement" method="post">
     <table border="1">
         <tr>
             <td>UserID</td>

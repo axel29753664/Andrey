@@ -19,13 +19,11 @@ public class ConverterUserDTO implements ConverterDto<User, UserDTO> {
         String password = userDTO.getPassword();
         User user =new User(firstName, lastName, login, password);
         user.setUserId(userId);
-
         return user;
     }
 
     @Override
     public UserDTO convertToResponse(User user) {
-
         String userId = user.getUserId().toString();
         String firstName = user.getFirstName();
         String lastName = user.getLastName();

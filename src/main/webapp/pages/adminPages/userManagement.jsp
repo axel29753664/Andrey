@@ -1,12 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>User management</title>
 </head>
 <body>
 <jsp:include page="../menu.jsp"></jsp:include>
-<form name="userTable" id="userTable" action="userManagement" method="post">
+<form name="userTable" id="userTable" action="${contextPath}/admin/userManagement" method="post">
 
     <table border="1">
         <tr>

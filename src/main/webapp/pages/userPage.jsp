@@ -2,6 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="user" type="lv.javaguru.java2.domain.User"--%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <sec:authentication var="user" property="principal"/>
 <html>
 <head>
@@ -16,9 +17,9 @@
 <form>
 
     <input type="button" value="Create Event"
-           onClick='location.href="${pageContext.request.contextPath}/createEventForm"'>
-    <input type="button" value="Show events" onClick='location.href="${pageContext.request.contextPath}/events"'>
-    <input type="button" value="Show your's bets" onClick='location.href="${pageContext.request.contextPath}/betList"'>
+           onClick='location.href="${contextPath}/createEventForm"'>
+    <input type="button" value="Show events" onClick='location.href="${contextPath}/events"'>
+    <input type="button" value="Show your's bets" onClick='location.href="${contextPath}/betList"'>
 
 </form>
 </body>

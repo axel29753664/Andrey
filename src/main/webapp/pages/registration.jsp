@@ -6,7 +6,7 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
-<form:form method="post" action="registration" commandName="userDTOForm">
+<form:form method="post" action="registration" modelAttribute="userDTOForm">
     <table>
 
         <tr>

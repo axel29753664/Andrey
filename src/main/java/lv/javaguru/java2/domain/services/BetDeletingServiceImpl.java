@@ -28,9 +28,9 @@ public class BetDeletingServiceImpl implements BetDeletingService {
     private BetService betService;
 
     @Override
-    public List<BetDto> deletingProcess(BetDto betDto, UserDTO userForBetDeleting){
+    public List<BetDto> deletingProcess(BetDto betDto, UserDTO userForBetDeleting){    // nuzhno tolko UserId, zachem ves user ?
         Bet bet = converterBetDto.convertFromRequest(betDto);
-        User user = converterUserDto.convertFromRequest(userForBetDeleting);
+        User user = converterUserDto.convertFromRequest(userForBetDeleting); // userDTO.getId.parseLong
         betService.deleteBetById(bet.getBetId());
         List<Bet> bets = betService.getBetsByUserId(user.getUserId());
         List<BetDto> betsDto = converterDtoList.convertBetListToResponse(bets);

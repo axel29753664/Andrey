@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>Bets deleting</title>
@@ -7,7 +8,7 @@
 <body>
 <jsp:include page="../menu.jsp"></jsp:include>
 
-<form name="betsDeletingTable" action="betDeleting" method="post">
+<form name="betsDeletingTable" action="${contextPath}/admin/betDeleting" method="post">
     <table border="1">
         <tr>
             <td>EventID</td>
