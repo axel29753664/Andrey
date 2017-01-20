@@ -15,6 +15,11 @@ public class BetServiceImpl implements BetService {
     private BetDAO betDAO;
 
     @Override
+    public void writeInDatabase(Bet bet){
+        betDAO.create(bet);
+    }
+
+    @Override
     public List<Bet> getBetsByUserId(Long userId) {
         return betDAO.getByUserId(userId);
     }

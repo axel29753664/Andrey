@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface BetService {
 
+    void writeInDatabase(Bet bet);
+
     List<Bet> getBetsByUserId(Long userId);
 
     List<Bet> getAllBets();

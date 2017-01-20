@@ -31,6 +31,7 @@ public class FactoryBetImpl implements FactoryBet {
 
     @Autowired
     private ConverterDto<Bet,BetDto> converterDto;
+    private BetService betService;
 
     private List<BetValidationError> errors = new ArrayList();
     private Response response = new Response();
@@ -43,9 +44,9 @@ public class FactoryBetImpl implements FactoryBet {
 
         if (errors.size() == 0) {
             try {
-                writeInDao(bet);
-                BetDto betDtoToResponse = converterDto.convertToResponse(bet);
-                buildResponseWithBet(betDtoToResponse);
+                betService.writeInDatabase(bet);
+                BetDto betDto = converterDto.convertToResponse(bet);
+                buildResponseWithBet(betDto);
             } catch (DBException e) {
                 buildResponseWithDbError(e);
             }
@@ -55,10 +56,6 @@ public class FactoryBetImpl implements FactoryBet {
         return response;
     }
 
-
-    private void writeInDao(Bet bet) {
-        betDAO.create(bet);
-    }
 
     private void buildResponseWithBet(BetDto betDto) {
         response.setBetDto(betDto);
