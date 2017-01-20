@@ -2,9 +2,7 @@ package lv.javaguru.java2.domain.services;
 
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.domain.services.dtoConverters.ConverterBetDto;
 import lv.javaguru.java2.domain.services.dtoConverters.ConverterDtoList;
-import lv.javaguru.java2.domain.services.dtoConverters.ConverterUserDto;
 import lv.javaguru.java2.servlet.dto.BetDto;
 import lv.javaguru.java2.servlet.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
