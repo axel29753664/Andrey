@@ -2,7 +2,7 @@ package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.domain.services.BetDeletingService;
 import lv.javaguru.java2.servlet.dto.BetDto;
-import lv.javaguru.java2.servlet.dto.UserDto;
+import lv.javaguru.java2.servlet.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +30,7 @@ public class BetDeletingController {
         String betIdFromRequest = request.getParameter("betIdForDeleting");
         BetDto betDto = new BetDto(betIdFromRequest);
         HttpSession session = request.getSession();
-        UserDto userForBetDeleting = (UserDto) session.getAttribute("userForBetDeleting");
+        UserDTO userForBetDeleting = (UserDTO) session.getAttribute("userForBetDeleting");
         List<BetDto> betsDto = betDeletingService.deletingProcess(betDto, userForBetDeleting);
         return new ModelAndView("adminPages/betDeleting", "data", betsDto);
     }

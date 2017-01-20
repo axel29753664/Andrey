@@ -2,16 +2,14 @@ package lv.javaguru.java2.domain.services.factories;
 
 
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.domain.services.ConverterDto;
+import lv.javaguru.java2.domain.services.dtoConverters.ConverterDto;
 import lv.javaguru.java2.domain.services.UserService;
 import lv.javaguru.java2.domain.validators.UserValidator;
 import lv.javaguru.java2.servlet.dto.UserDTO;
 import org.hibernate.JDBCException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
 @Service
 public class UserFactoryImpl implements UserFactory {
