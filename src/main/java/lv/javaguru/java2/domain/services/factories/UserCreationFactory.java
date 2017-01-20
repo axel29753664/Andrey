@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
 @Service
-public class UserFactoryImpl implements UserFactory {
+public class UserCreationFactory implements CreationFactory<UserDTO> {
 
     @Autowired
     private ConverterDto<User, UserDTO> converterDto;
@@ -29,7 +29,7 @@ public class UserFactoryImpl implements UserFactory {
             try {
                 userService.saveToDB(user);
             } catch (JDBCException e) {
-                validResult.rejectValue("firstName", "message.saveToDBError", "Error save to DB [" + e.getMessage() + "]");
+                validResult.rejectValue("firstName", "message.saveToDBError", "Error save to DB [" + e.getCause().getMessage() + "]");
             }
         }
     }

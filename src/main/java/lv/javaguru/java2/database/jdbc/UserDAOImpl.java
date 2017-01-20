@@ -60,7 +60,7 @@ public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDA
     }
 
 
-    //       public void create(User user) throws DBException {
+    //       public void saveToDB(User user) throws DBException {
 //       if (user == null) {
 //            return;
 //        }
@@ -81,7 +81,7 @@ public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDA
 //                user.setUserId(rs.getLong(1));
 //            }
 //        } catch (Throwable e) {
-//            System.out.println("exception while execute UserDAOImpl.create()");
+//            System.out.println("exception while execute UserDAOImpl.saveToDB()");
 //            e.printStackTrace();
 //            throw new DBException(e);
 //        } finally {

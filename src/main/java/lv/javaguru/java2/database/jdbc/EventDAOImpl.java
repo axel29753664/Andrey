@@ -4,7 +4,10 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.EventDAO;
 import lv.javaguru.java2.database.GenericHibernateDAOImpl;
 import lv.javaguru.java2.domain.Event;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +21,20 @@ public class EventDAOImpl extends GenericHibernateDAOImpl<Event> implements Even
 
     private final String TABLE_NAME = "events";
     private final String EVENT_ID = "EventID";
+
+    @Override
+    @Transactional
+    public Event getByEventName(String name) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Event.class);
+        criteria.add(Restrictions.eq("eventName", name));
+        Object result = criteria.uniqueResult();
+        Event event = null;
+        if (result != null) {
+            event = (Event) result;
+        }
+        return event;
+
+    }
 
 //    public Event getById(Long eventId) throws DBException {
 //        String searchQuery = "select * from " +  TABLE_NAME + " where " + EVENT_ID + " = " + eventId;

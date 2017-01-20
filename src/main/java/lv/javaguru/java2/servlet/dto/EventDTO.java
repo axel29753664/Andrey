@@ -1,49 +1,29 @@
-package lv.javaguru.java2.domain;
+package lv.javaguru.java2.servlet.dto;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
+import lv.javaguru.java2.domain.EventStatusState;
+import lv.javaguru.java2.domain.WinnerStatus;
+import org.hibernate.validator.constraints.NotEmpty;
 
-@Entity
-@Table(name = "Events")
-public class Event {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "EventId")
+public class EventDTO {
     private Long eventId;
-
-    @Column(name = "EventName", nullable = false)
+    @NotEmpty
     private String eventName;
-
-    @Column(name = "EventDescription", nullable = false)
+    @NotEmpty
     private String eventDescription;
-
-    @Column(name = "WinningCondition", nullable = false)
+    @NotEmpty
     private String winningCondition;
-
-    @Column(name = "LoseCondition", nullable = false)
+    @NotEmpty
     private String loseCondition;
-
-    @Column(name = "DrawCondition")
     private String drawCondition;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "EventStatus", columnDefinition = "enum('ACTIVE','NOT_ACTIVE', 'FINISHED')", nullable = false)
     private EventStatusState eventStatus;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "Winner", columnDefinition = "enum('FIRST','SECOND', 'DRAW')")
     private WinnerStatus winnerStatus;
 
-    @Column(name = "TotalBank", nullable = false)
-    private BigDecimal totalBank;
-
-    public Event() {
-        this.totalBank = new BigDecimal(0);
-        this.eventStatus = EventStatusState.NOT_ACTIVE;
+    public EventDTO() {
+        this.eventStatus=EventStatusState.NOT_ACTIVE;
     }
 
-    public Event(String eventName, String eventDescription, String winningCondition, String loseCondition, String drawCondition) {
+    public EventDTO(String eventName, String eventDescription, String winningCondition, String loseCondition, String drawCondition) {
         this();
         this.eventName = eventName;
         this.eventDescription = eventDescription;
@@ -114,28 +94,5 @@ public class Event {
 
     public void setWinnerStatus(WinnerStatus winnerStatus) {
         this.winnerStatus = winnerStatus;
-    }
-
-    public BigDecimal getTotalBank() {
-        return totalBank;
-    }
-
-    public void setTotalBank(BigDecimal totalBank) {
-        this.totalBank = totalBank;
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "eventId=" + eventId +
-                ", eventName='" + eventName + '\'' +
-                ", eventDescription='" + eventDescription + '\'' +
-                ", winningCondition='" + winningCondition + '\'' +
-                ", loseCondition='" + loseCondition + '\'' +
-                ", drawCondition='" + drawCondition + '\'' +
-                ", eventStatus=" + eventStatus +
-                ", winnerStatus=" + winnerStatus +
-                ", totalBank=" + totalBank +
-                '}';
     }
 }

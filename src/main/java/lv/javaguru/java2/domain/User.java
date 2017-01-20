@@ -66,7 +66,7 @@ public class User implements UserDetails {
         Set<Role> roleSet =new HashSet<>();
         Role role = new Role();
         role.setId(Roles.ROLE_USER.getIdInDB());
-        role.setRole(Roles.ROLE_USER);                          //create default access ROLE_USER
+        role.setRole(Roles.ROLE_USER);                          //saveToDB default access ROLE_USER
         roleSet.add(role);
         return roleSet;
     }

@@ -60,7 +60,7 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
     private final String BET_SUM = "Bet_Sum";
     private final String WINNING_CONDITION = "Winning_Condition";
 
-    public void create(Bet bet) throws DBException {
+    public void saveToDB(Bet bet) throws DBException {
         if (bet == null) {
             return;
         }
@@ -78,7 +78,7 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
                 bet.setBetId(rs.getLong(1)); // заносим ID в поле класса Ставка
             }
         } catch (Throwable e) {
-            System.out.println("Exception while execute BetDAOImpl.create()");
+            System.out.println("Exception while execute BetDAOImpl.saveToDB()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {

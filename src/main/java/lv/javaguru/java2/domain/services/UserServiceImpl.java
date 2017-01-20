@@ -29,11 +29,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void createEvent(Event event) {
-        eventDAO.create(event);
-    }
-
-    @Override
     public List<Event> getAllEvents() {
         return eventDAO.getAll();
     }

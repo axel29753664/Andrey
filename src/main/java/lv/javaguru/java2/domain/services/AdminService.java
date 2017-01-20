@@ -23,7 +23,6 @@ public class AdminService {
 
     @Transactional
     public void deleteUserById(Long id) {
-
         deleteBetsByUserID(id);
         userDAO.delete(id);
     }

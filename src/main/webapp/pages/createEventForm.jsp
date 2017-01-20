@@ -1,3 +1,5 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -5,31 +7,37 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
-<form method="post" action="createEventForm">
-    <font color="red">${message}</font><br>
+<form:form method="post" action="createEventForm" modelAttribute="eventDTO">
     <table>
+        <c:set var="height" value="50"/>
         <tr>
-            <td> Event name</td>
-            <td><input type="text" name="eventName"/></td>
+            <td height="${height}">Event name:</td>
+            <td><form:input path="eventName"/></td>
+            <td><font color="red"><form:errors path="eventName"/></font></td>
+
         </tr>
         <tr>
-            <td>Event Description</td>
-            <td><input type="text" name="eventDescription"/></td>
+            <td height="${height}">Event Description:</td>
+            <td><form:input path="eventDescription"/></td>
+            <td><font color="red"><form:errors path="eventDescription"/></font></td>
         </tr>
         <tr>
-            <td>Winning condition</td>
-            <td><input type="text" name="winningCondition"/></td>
+            <td height="${height}">Winning condition:</td>
+            <td><form:input path="winningCondition"/></td>
+            <td><font color="red"><form:errors path="winningCondition"/></font></td>
         </tr>
         <tr>
-            <td>Lose condition</td>
-            <td><input type="text" name="loseCondition"/></td>
+            <td height="${height}">Lose condition:</td>
+            <td><form:input path="loseCondition"/></td>
+            <td><font color="red"><form:errors path="loseCondition"/></font></td>
         </tr>
         <tr>
-            <td>Draw condition</td>
-            <td><input type="text" name="drawCondition"/></td>
+            <td height="${height}">Draw condition:</td>
+            <td><form:input path="drawCondition"/></td>
+            <td><font color="red"><form:errors path="drawCondition"/></font></td>
         </tr>
     </table>
     <input type="submit" value="Send"/>
-</form>
+</form:form>
 </body>
 </html>

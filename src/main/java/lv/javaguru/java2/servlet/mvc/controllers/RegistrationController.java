@@ -1,7 +1,6 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
-import lv.javaguru.java2.domain.services.factories.UserFactory;
-import lv.javaguru.java2.domain.validators.UserValidator;
+import lv.javaguru.java2.domain.services.factories.CreationFactory;
 import lv.javaguru.java2.servlet.dto.UserDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import javax.validation.Valid;
 public class RegistrationController {
 
     @Autowired
-    private UserFactory userFactory;
+    private CreationFactory<UserDTO> userCreationFactory;
 
     @RequestMapping(value = "registration",method = {RequestMethod.GET})
     public ModelAndView processGet(ModelAndView model) {
@@ -34,7 +33,7 @@ public class RegistrationController {
     public ModelAndView processPost(@Valid @ModelAttribute("userDTOForm") UserDTO userDTO,
                                     BindingResult result, ModelAndView model) {
         if (!result.hasErrors()) {
-            userFactory.create(userDTO, result);
+            userCreationFactory.create(userDTO, result);
             if (!result.hasErrors()) {
                 model.setViewName("registrationSuccess");
             }

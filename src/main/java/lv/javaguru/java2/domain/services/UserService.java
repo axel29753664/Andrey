@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface UserService {
 
-    void createEvent(Event event);
-
     List<Event> getAllEvents();
 
     Event getEventById(Long eventId);

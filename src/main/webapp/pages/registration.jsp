@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="height" value="50"/>
 <html>
 <head>
     <title>Registration page</title>
@@ -11,11 +10,11 @@
 <form:form method="post" action="registration" modelAttribute="userDTOForm">
 
     <table>
-
+        <c:set var="height" value="50"/>
         <tr>
             <td height="${height}">Name:</td>
             <td><form:input path="firstName"/></td>
-            <td style="width:100%"><font color="red"><form:errors path="firstName"/></font></td>
+            <td><font color="red"><form:errors path="firstName"/></font></td>
         </tr>
 
         <tr>
