@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class CreateBetFormController {
 
-//    @Autowired
-//    private WebApplicationContext context;
     @Autowired
     private FactoryBet factoryBet;
 
@@ -35,7 +33,7 @@ public class CreateBetFormController {
 
         BetDto betDto = new BetDto(userIdFromRequest, eventIdFromRequest, betSumFromRequest, betConditionFromRequest);
 
-//        FactoryBet factoryBet = context.getBean(FactoryBet.class);
+
         Response response = factoryBet.creationProcess(betDto);
 
         ModelAndView model = preparationModelAndView(response);

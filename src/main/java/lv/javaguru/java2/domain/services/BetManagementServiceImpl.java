@@ -2,6 +2,7 @@ package lv.javaguru.java2.domain.services;
 
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.domain.services.dtoConverters.ConverterDto;
 import lv.javaguru.java2.domain.services.dtoConverters.ConverterDtoList;
 import lv.javaguru.java2.servlet.dto.BetDto;
 import lv.javaguru.java2.servlet.dto.UserDTO;
@@ -14,7 +15,7 @@ import java.util.List;
 public class BetManagementServiceImpl implements BetManagementService{
 
     @Autowired
-    private ConverterUserDto converterUserDto;
+    private ConverterDto<User, UserDTO> converterUserDto;
 
     @Autowired
     private ConverterDtoList converterDtoList;

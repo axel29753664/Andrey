@@ -4,6 +4,7 @@ import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.Response;
+import lv.javaguru.java2.domain.services.BetService;
 import lv.javaguru.java2.domain.services.dtoConverters.ConverterDto;
 import lv.javaguru.java2.domain.validators.betValidation.BetValidator;
 import lv.javaguru.java2.domain.validators.betValidation.BetValidationError;
@@ -23,17 +24,16 @@ public class FactoryBetImpl implements FactoryBet {
     private BetValidator betValidator;
 
     @Autowired
-    private BetDAO betDAO;
+    private ConverterDto<Bet, BetDto> converterDto;
 
     @Autowired
-    private ConverterDto<Bet,BetDto> converterDto;
     private BetService betService;
 
-    private List<BetValidationError> errors = new ArrayList();
+    private List<BetValidationError> errors = new ArrayList<>();
     private Response response = new Response();
 
 
-    public Response creationProcess(BetDto betDtoFromRequest){
+    public Response creationProcess(BetDto betDtoFromRequest) {
 
         Bet bet = converterDto.convertFromRequest(betDtoFromRequest);
         errors = betValidator.validate(bet);
@@ -61,7 +61,7 @@ public class FactoryBetImpl implements FactoryBet {
         response.setDbError(e.getMessage());
     }
 
-    private void buildResponseWithErrors (List<BetValidationError> errors) {
+    private void buildResponseWithErrors(List<BetValidationError> errors) {
         response.setErrorsList(errors);
     }
 

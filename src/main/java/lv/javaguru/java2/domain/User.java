@@ -43,6 +43,7 @@ public class User implements UserDetails {
         this.roles = createDefaultUserRoles();
     }
 
+
     public User(String firstName, String lastName, String login, String password) {
         this();
         this.firstName = firstName;

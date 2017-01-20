@@ -14,7 +14,7 @@ import java.util.List;
 public class ConverterDtoListImpl implements ConverterDtoList{
 
     @Autowired
-    private ConverterBetDto converterBetDto;
+    private ConverterDto<Bet, BetDto> converterBetDto;
 
     @Autowired
     private ConverterDto<User,UserDTO> converterUserDto;
