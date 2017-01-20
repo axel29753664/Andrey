@@ -1,6 +1,7 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.domain.Event;
+import lv.javaguru.java2.domain.services.EventServices;
 import lv.javaguru.java2.domain.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,11 +16,11 @@ import java.util.List;
 public class EventsController {
 
     @Autowired
-    private UserService userService;
+    private EventServices eventServices;
 
     @RequestMapping(value = "events", method = RequestMethod.GET)
     public ModelAndView processRequestGet(HttpServletRequest request) {
-        List<Event> events = userService.getAllEvents();
+        List<Event> events = eventServices.getAllEvents();
         return new ModelAndView("events", "eventList", events);
     }
 
@@ -30,8 +31,9 @@ public class EventsController {
         if ((betEventId != null) && (!betEventId.equals(""))) {
             eventId = Long.parseLong(betEventId);
         }
-        Event event = userService.getEventById(eventId);
+        Event event = eventServices.getEventById(eventId);
 
         return new ModelAndView("createBetForm", "event", event);
     }
+
 }

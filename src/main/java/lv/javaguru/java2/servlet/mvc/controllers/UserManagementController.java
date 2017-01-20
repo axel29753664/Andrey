@@ -1,7 +1,7 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.domain.services.AdminService;
+import lv.javaguru.java2.domain.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping(value = "admin")
 public class UserManagementController {
     @Autowired
-    private AdminService adminService;
+    private UserService userService;
 
     @RequestMapping(value = "userManagement", method = RequestMethod.GET)
     public ModelAndView processMethodGet() {
@@ -33,7 +33,7 @@ public class UserManagementController {
         String deletedUserId = request.getParameter("deletedUserId");
         if ((deletedUserId != null) && (!deletedUserId.equals(""))) {
             Long id = Long.parseLong(deletedUserId);
-            adminService.deleteUserById(id);
+            userService.deleteUserById(id);
         }
         List<User> users = getUserList();
         model.addObject("users", users);
@@ -43,7 +43,7 @@ public class UserManagementController {
     }
 
     private List<User> getUserList() {
-        return adminService.getAllUsers();
+        return userService.getAllUsers();
     }
 
 }

@@ -17,25 +17,26 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
-    @Autowired
-    private EventDAO eventDAO;
 
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private BetService betService;
 
     @Transactional
     public void saveToDB(User user) {
         userDAO.create(user);
     }
 
-    @Override
-    public List<Event> getAllEvents() {
-        return eventDAO.getAll();
+    @Transactional
+    public void deleteUserById(Long id) {
+        betService.deleteBetById(id);
+        userDAO.delete(id);
     }
 
     @Override
-    public Event getEventById(Long eventId) {
-        return eventDAO.getById(eventId);
+    public List<User> getAllUsers() {
+        return userDAO.getAll();
     }
 
     @Override

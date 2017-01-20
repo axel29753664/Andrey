@@ -24,12 +24,12 @@ public class BetManagementServiceImpl implements BetManagementService{
     private BetService betService;
 
     @Autowired
-    private AdminService adminService;
+    private UserService userService;
 
 
     @Override
     public List<UserDTO> prepareUserList() {
-        List<User> users = adminService.getAllUsers();
+        List<User> users = userService.getAllUsers();
         List<UserDTO> usersDto = converterDtoList.convertUserListToResponse(users);
         return usersDto;
     }

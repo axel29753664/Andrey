@@ -8,14 +8,12 @@ import java.util.List;
 
 public interface UserService {
 
-    List<Event> getAllEvents();
-
-    Event getEventById(Long eventId);
-
     User getUserByLogin(String login);
 
     void saveToDB(User user);
 
+    void deleteUserById(Long id);
 
+    List<User> getAllUsers();
 
 }
