@@ -12,19 +12,26 @@
 <form name="eventTable" action="${contextPath}/admin/allEvents" method="post">
     <table border="2">
         <tr>
+            <td>Event ID</td>
             <td>Name</td>
             <td>Description</td>
             <td>Winning condition</td>
             <td>Lose condition</td>
             <td>Draw condition</td>
+            <td>Winner</td>
+            <td>Status</td>
         </tr>
         <c:forEach items="${eventList}" var="event">
             <tr>
+                <td> ${event.eventId}</td>
                 <td> ${event.eventName}</td>
                 <td> ${event.eventDescription}</td>
                 <td> ${event.winningCondition}</td>
                 <td> ${event.loseCondition}</td>
                 <td> ${event.drawCondition}</td>
+                <td> ${event.winnerStatus}</td>
+                <td> ${event.eventStatus}</td>
+
                 <td>
                     <label>
                         <input type="button" value="Delete"
