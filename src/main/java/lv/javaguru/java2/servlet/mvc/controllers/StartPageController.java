@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class StartPageController {
-    @RequestMapping(value = "/start", method = {RequestMethod.GET})
+    @RequestMapping(value = "/", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
         return new ModelAndView("start");
     }
