@@ -1,4 +1,6 @@
+<%@ page import="lv.javaguru.java2.domain.WinnerStatus" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
@@ -29,9 +31,18 @@
                 <td> ${event.winningCondition}</td>
                 <td> ${event.loseCondition}</td>
                 <td> ${event.drawCondition}</td>
-                <td> ${event.winnerStatus}</td>
-                <td> ${event.eventStatus}</td>
-
+                <td>
+                    <form:select path="winner">
+                        <form:option value="0" label="${event.winnerStatus}"/>
+                        <form:options items="${winner}"/>
+                    </form:select>
+                </td>
+                <td>
+                    <form:select path="eventsStatus">
+                        <form:option value="0" label="${event.eventStatus}"/>
+                        <form:options items="${eventsStatus}"/>
+                    </form:select>
+                </td>
                 <td>
                     <label>
                         <input type="button" value="Delete"

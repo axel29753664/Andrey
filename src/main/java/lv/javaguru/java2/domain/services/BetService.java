@@ -14,4 +14,6 @@ public interface BetService {
 
     void deleteBetById(Long id);
 
+    void deleteByEventId(Long id);
+
 }

@@ -34,4 +34,9 @@ public class BetServiceImpl implements BetService {
         betDAO.delete(betId);
     }
 
+    @Override
+    public void deleteByEventId(Long id) {
+        betDAO.deleteByEventId(id);
+    }
+
 }

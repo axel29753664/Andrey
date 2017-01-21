@@ -6,6 +6,7 @@ import lv.javaguru.java2.domain.Event;
 import lv.javaguru.java2.servlet.dto.EventDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,13 +15,18 @@ public class EventServicesImpl implements EventServices {
     @Autowired
     private EventDAO eventDAO;
 
+    @Autowired
+    private BetService betService;
+
     @Override
     public void saveToDB(Event event) {
         eventDAO.create(event);
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
+        betService.deleteByEventId(id);
         eventDAO.delete(id);
     }
 

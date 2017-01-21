@@ -7,6 +7,7 @@ import lv.javaguru.java2.domain.BetConditionState;
 import org.hibernate.Criteria;
 import org.hibernate.JDBCException;
 import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
@@ -49,6 +50,15 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
         String deleteQuery = "delete from " + TABLE_NAME + " where UserID= :userID";
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(deleteQuery);
         query.setLong("userID", userID);
+        query.executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public void deleteByEventId(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        SQLQuery query = session.createSQLQuery("delete from " + TABLE_NAME + " where EventID = :ID");
+        query.setParameter("ID", id);
         query.executeUpdate();
     }
 
