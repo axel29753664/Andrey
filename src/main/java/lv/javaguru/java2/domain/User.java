@@ -53,7 +53,7 @@ public class User implements UserDetails {
 
     }
 
-    public User(String firstName, String lastName, String login, String password, BigDecimal balance, Set<Role> roles) {
+    public User(String firstName, String lastName, String login, String password, Set<Role> roles, BigDecimal balance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
@@ -63,11 +63,8 @@ public class User implements UserDetails {
     }
 
     private Set<Role> createDefaultUserRoles() {
-        Set<Role> roleSet =new HashSet<>();
-        Role role = new Role();
-        role.setId(Roles.ROLE_USER.getIdInDB());
-        role.setRole(Roles.ROLE_USER);                          //saveToDB default access ROLE_USER
-        roleSet.add(role);
+        Set<Role> roleSet = new HashSet<>();                                            //saveToDB default access ROLE_USER
+        roleSet.add(RolesSet.USER);
         return roleSet;
     }
 
@@ -101,7 +98,7 @@ public class User implements UserDetails {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
         for (Role role : roles) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole().name()));
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }
         return grantedAuthorities;
     }
@@ -172,6 +169,7 @@ public class User implements UserDetails {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", balance=" + balance +
+                ", roles=" + roles +
                 '}';
     }
 }

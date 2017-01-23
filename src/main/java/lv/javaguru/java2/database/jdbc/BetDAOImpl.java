@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
+
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -42,6 +43,15 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
         criteria.add(Restrictions.like("eventId", eventId));
         criteria.add(Restrictions.like("betCondition", betCondition));
         return criteria.list();
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) throws JDBCException {
+        Session session = sessionFactory.getCurrentSession();
+        SQLQuery query = session.createSQLQuery("delete from " + TABLE_NAME + " where BetID = :ID");
+        query.setParameter("ID", id);
+        query.executeUpdate();
     }
 
     @Override

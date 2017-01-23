@@ -13,8 +13,7 @@ public class Role {
     private Long id;
 
     @Column(name = "name")
-    @Enumerated(EnumType.STRING)
-    private Roles role;
+    private String name;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
@@ -22,12 +21,9 @@ public class Role {
     public Role() {
     }
 
-    public Roles getRole() {
-        return role;
-    }
-
-    public void setRole(Roles role) {
-        this.role = role;
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Long getId() {
@@ -38,6 +34,13 @@ public class Role {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Set<User> getUsers() {
         return users;

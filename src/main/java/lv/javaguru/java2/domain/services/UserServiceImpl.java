@@ -5,6 +5,7 @@ import lv.javaguru.java2.database.EventDAO;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.Event;
 import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.domain.services.dtoConverters.ConverterDto;
 import lv.javaguru.java2.servlet.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserDAO userDAO;
     @Autowired
     private BetService betService;
+    @Autowired
+    private ConverterDto<User, UserDTO> converterDto;
 
     @Transactional
     public void saveToDB(User user) {
@@ -37,6 +40,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public List<User> getAllUsers() {
         return userDAO.getAll();
+    }
+
+    @Override
+    public User getById(Long id) {
+        return userDAO.getById(id);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userDAO.update(user);
+    }
+
+    @Override
+    public User convertUserDTO(UserDTO userDTO) {
+        return converterDto.convertFromRequest(userDTO);
+    }
+
+    @Override
+    public UserDTO convertUser(User user) {
+        return converterDto.convertToResponse(user);
     }
 
     @Override

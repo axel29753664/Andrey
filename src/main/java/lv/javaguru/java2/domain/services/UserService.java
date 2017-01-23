@@ -16,4 +16,12 @@ public interface UserService {
 
     List<User> getAllUsers();
 
+    User getById(Long id);
+
+    void updateUser(User user);
+
+    User convertUserDTO(UserDTO userDTO);
+
+    UserDTO convertUser(User user);
+
 }

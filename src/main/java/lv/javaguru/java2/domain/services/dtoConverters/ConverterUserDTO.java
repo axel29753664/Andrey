@@ -1,10 +1,14 @@
 package lv.javaguru.java2.domain.services.dtoConverters;
 
 
+import lv.javaguru.java2.domain.Role;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.services.parsers.ParserStringToLong;
 import lv.javaguru.java2.servlet.dto.UserDTO;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.Set;
 
 
 @Service
@@ -13,11 +17,14 @@ public class ConverterUserDTO implements ConverterDto<User, UserDTO> {
     @Override
     public User convertFromRequest(UserDTO userDTO) {
         Long userId = ParserStringToLong.parse(userDTO.getUserId());
+
         String firstName = userDTO.getFirstName();
         String lastName = userDTO.getLastName();
         String login = userDTO.getLogin();
         String password = userDTO.getPassword();
-        User user =new User(firstName, lastName, login, password);
+        BigDecimal balance = userDTO.getBalance();
+        Set<Role> roleSet = userDTO.getRoles();
+        User user = new User(firstName, lastName, login, password, roleSet, balance);
         user.setUserId(userId);
         return user;
     }
@@ -29,7 +36,9 @@ public class ConverterUserDTO implements ConverterDto<User, UserDTO> {
         String lastName = user.getLastName();
         String login = user.getLogin();
         String password = user.getPassword();
-        return new UserDTO(userId, firstName, lastName, login, password);
+        Set<Role> roleSet = user.getRoles();
+        BigDecimal balance = user.getBalance();
+        return new UserDTO(userId, firstName, lastName, login, password, roleSet, balance);
 
     }
 }
