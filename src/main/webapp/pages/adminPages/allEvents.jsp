@@ -1,4 +1,4 @@
-<%@ page import="lv.javaguru.java2.domain.WinnerStatus" %>
+<%--@elvariable id="event" type="lv.javaguru.java2.domain.Event"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,9 +17,6 @@
             <td>Event ID</td>
             <td>Name</td>
             <td>Description</td>
-            <td>Winning condition</td>
-            <td>Lose condition</td>
-            <td>Draw condition</td>
             <td>Winner</td>
             <td>Status</td>
         </tr>
@@ -28,20 +25,17 @@
                 <td> ${event.eventId}</td>
                 <td> ${event.eventName}</td>
                 <td> ${event.eventDescription}</td>
-                <td> ${event.winningCondition}</td>
-                <td> ${event.loseCondition}</td>
-                <td> ${event.drawCondition}</td>
+
                 <td>
-                    <form:select path="winner">
-                        <form:option value="0" label="${event.winnerStatus}"/>
-                        <form:options items="${winner}"/>
-                    </form:select>
+                    <select name="select${event.eventId}">
+                        <option>${event.winnerStatus}</option>
+                        <option>WIN</option>
+                        <option>LOSE</option>
+                    </select>
+
                 </td>
                 <td>
-                    <form:select path="eventsStatus">
-                        <form:option value="0" label="${event.eventStatus}"/>
-                        <form:options items="${eventsStatus}"/>
-                    </form:select>
+                    ${event.betSide}
                 </td>
                 <td>
                     <label>
@@ -54,6 +48,7 @@
             </tr>
         </c:forEach>
     </table>
+    <input type="submit">
     <input type="hidden" id="eventId" value="" name="deletedEventId"/>
 </form>
 <input type="button" onclick="history.back();" value="Back"/>

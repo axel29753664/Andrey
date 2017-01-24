@@ -15,16 +15,12 @@
         <tr>
             <td>Name</td>
             <td>Description</td>
-            <td>Winning condition</td>
-            <td>Lose condition</td>
-            <td>Draw condition</td>
+            <td>Coefficient</td>
         </tr>
         <tr>
             <td> ${event.eventName}</td>
             <td> ${event.eventDescription}</td>
-            <td> ${event.winningCondition}</td>
-            <td> ${event.loseCondition}</td>
-            <td> ${event.drawCondition}</td>
+            <td> ${event.coefficient}</td>
         </tr>
     </table>
     <br>
@@ -37,12 +33,7 @@
             <td> Bet sum</td>
             <td><input type="number" step="0.01" name="betSum"/></td>
         </tr>
-        <tr>
-            <td> Condition</td>
-            <td><input type="radio" name="betCondition" value="WIN"> Win
-                <input type="radio" name="betCondition" value="LOSE"> Lose
-                <input type="radio" name="betCondition" value="DRAW"> Draw </td>
-        </tr>
+
     </table>
     <input type="submit" value="Send"/>
     <input type="button" onClick='location.href="${pageContext.request.contextPath}/events"' value="Back"/>

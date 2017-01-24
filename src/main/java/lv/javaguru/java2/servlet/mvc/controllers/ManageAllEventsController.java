@@ -1,7 +1,7 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.domain.Event;
-import lv.javaguru.java2.domain.EventStatusState;
+import lv.javaguru.java2.domain.BetSide;
 import lv.javaguru.java2.domain.WinnerStatus;
 import lv.javaguru.java2.domain.services.EventServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.List;
 
 @Controller
@@ -32,6 +33,9 @@ public class ManageAllEventsController {
     @RequestMapping(value = "allEvents", method = RequestMethod.POST)
     public ModelAndView processRequestPost(HttpServletRequest request, ModelAndView model) {
         String deletedEventId = request.getParameter("deletedEventId");
+        System.out.println(request.getParameter("select1"));
+        System.out.println(request.getParameter("select2"));
+        System.out.println(request.getParameter("select3"));
 
         if ((deletedEventId != null) && (!deletedEventId.equals(""))) {
             Long eventId = Long.parseLong(deletedEventId);
@@ -46,6 +50,5 @@ public class ManageAllEventsController {
 
     private void modelAddEventAndWinnerStates(ModelAndView model) {
         model.addObject("winner", WinnerStatus.values());
-        model.addObject("eventsStatus", EventStatusState.values());
     }
 }
