@@ -40,8 +40,7 @@
         <tr>
             <td> Condition</td>
             <td><input type="radio" name="betCondition" value="WIN"> Win
-                <input type="radio" name="betCondition" value="LOSE"> Lose
-                <input type="radio" name="betCondition" value="DRAW"> Draw </td>
+                <input type="radio" name="betCondition" value="LOSE"> Lose</td>
         </tr>
     </table>
     <input type="submit" value="Send"/>

@@ -27,13 +27,13 @@ INSERT INTO events (EventName, EventDescription, WinningCondition, LoseCondition
 VALUES ('Arsenal - CSKA', 'Arsenal play vs CSKA', 'Arsenal', 'CSKA', 'draw', 'FINISHED', 'SECOND', 135.43);
 
 
-INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (1, 1, 10, 'WIN');
-INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (2, 1, 20, 'WIN');
-INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (3, 1, 30, 'LOSE');
-INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (1, 2, 40, 'DRAW');
-INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (1, 3, 50, 'WIN');
-INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (2, 3, 60, 'LOSE');
-INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (3, 4, 70, 'DRAW');
-INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (3, 4, 80, 'LOSE');
-INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (4, 1, 90, 'WIN');
-INSERT INTO bets (UserID, EventID, BetSum, BetCondition) VALUES (4, 3, 100, 'DRAW');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredBetSum, BetCondition) VALUES (1, 1, 10, 10,'FOR');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredBetSum, BetCondition) VALUES (2, 1, 20, 10,'FOR');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredBetSum, BetCondition) VALUES (3, 1, 30, 10,'AGAINST');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredBetSum, BetCondition) VALUES (1, 2, 40, 10,'FOR');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredBetSum, BetCondition) VALUES (1, 3, 50, 10,'FOR');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredBetSum, BetCondition) VALUES (2, 3, 60, 10,'AGAINST');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredBetSum, BetCondition) VALUES (3, 4, 70, 10,'DRAW');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredBetSum, BetCondition) VALUES (3, 4, 80, 10,'AGAINST');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredBetSum, BetCondition) VALUES (4, 1, 90, 10,'FOR');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredBetSum, BetCondition) VALUES (4, 3, 100, 10,'FOR');

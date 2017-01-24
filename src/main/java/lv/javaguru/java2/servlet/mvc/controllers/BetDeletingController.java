@@ -28,7 +28,8 @@ public class BetDeletingController {
     @RequestMapping(value = "betDeleting", method = {RequestMethod.POST})
     public ModelAndView processRequestPost(HttpServletRequest request) {
         String betIdFromRequest = request.getParameter("betIdForDeleting");
-        BetDto betDto = new BetDto(betIdFromRequest);
+        BetDto betDto = new BetDto();
+        betDto.setBetId(betIdFromRequest);
         HttpSession session = request.getSession();
         UserDTO userForBetDeleting = (UserDTO) session.getAttribute("userForBetDeleting");
         List<BetDto> betsDto = betDeletingService.deletingProcess(betDto, userForBetDeleting);

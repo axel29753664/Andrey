@@ -21,14 +21,17 @@ public class Bet {
     @Column(name="BetSum", nullable = false)
     private BigDecimal betSum;
 
+    @Column(name="UncoveredBetSum", nullable = false)
+    private BigDecimal uncoveredBetSum;
+
     @Enumerated(EnumType.STRING)
-    @Column(name="BetCondition", nullable = false)
+    @Column(name="BetCondition", columnDefinition = "enum('FOR', 'AGAINST', 'NOT_APPLIED')", nullable = false)
     private BetConditionState betCondition;
 
     public Bet() {
     }
 
-    public Bet(Long userId,
+    /*public Bet(Long userId,
                Long eventId,
                BigDecimal betSum,
                BetConditionState betCondition) {
@@ -48,7 +51,7 @@ public class Bet {
         this.eventId = eventId;
         this.betSum = betSum;
         this.betCondition = betCondition;
-    }
+    }*/
 
     public Long getBetId() {
         return betId;
@@ -82,6 +85,14 @@ public class Bet {
         this.betSum = betSum;
     }
 
+    public BigDecimal getUncoveredBetSum() {
+        return uncoveredBetSum;
+    }
+
+    public void setUncoveredBetSum(BigDecimal uncoveredBetSum) {
+        this.uncoveredBetSum = uncoveredBetSum;
+    }
+
     public BetConditionState getBetCondition() {
         return betCondition;
     }
@@ -97,6 +108,7 @@ public class Bet {
                 ", userId=" + userId +
                 ", eventId=" + eventId +
                 ", betSum=" + betSum +
+                ", uncoveredBetSum=" + uncoveredBetSum +
                 ", betCondition=" + betCondition +
                 '}';
     }
