@@ -4,6 +4,7 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.EventDAO;
 import lv.javaguru.java2.database.GenericHibernateDAOImpl;
 import lv.javaguru.java2.domain.Event;
+import lv.javaguru.java2.domain.WinnerStatus;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ public class EventDAOImpl extends GenericHibernateDAOImpl<Event> implements Even
     private final String TABLE_NAME = "events";
     private final String EVENT_ID = "EventID";
 
+
     @Override
     @Transactional
     public Event getByEventName(String name) {
@@ -34,6 +36,14 @@ public class EventDAOImpl extends GenericHibernateDAOImpl<Event> implements Even
         }
         return event;
 
+    }
+
+    @Override
+    @Transactional
+    public List<Event> getEventsWhereWinnerStatusIsNull() {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Event.class);
+        criteria.add(Restrictions.like("winnerStatus", WinnerStatus.NOT_SET));
+        return criteria.list();
     }
 
 //    public Event getById(Long eventId) throws DBException {

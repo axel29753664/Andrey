@@ -22,20 +22,13 @@
             <td><font color="red"><form:errors path="eventDescription"/></font></td>
         </tr>
         <tr>
-            <td height="${height}">Winning condition:</td>
-            <td><form:input path="winningCondition"/></td>
-            <td><font color="red"><form:errors path="winningCondition"/></font></td>
+            <td height="${height}">Coefficient:</td>
+            <td><form:input path="coefficient"/></td>
+            <td><font color="red"><form:errors path="coefficient"/></font></td>
         </tr>
-        <tr>
-            <td height="${height}">Lose condition:</td>
-            <td><form:input path="loseCondition"/></td>
-            <td><font color="red"><form:errors path="loseCondition"/></font></td>
-        </tr>
-        <tr>
-            <td height="${height}">Draw condition:</td>
-            <td><form:input path="drawCondition"/></td>
-            <td><font color="red"><form:errors path="drawCondition"/></font></td>
-        </tr>
+        <tr> Bet sum</tr>
+        <td><input type="number" step="0.01" name="betSum"/></td>
+
     </table>
     <input type="submit" value="Send"/>
 </form:form>

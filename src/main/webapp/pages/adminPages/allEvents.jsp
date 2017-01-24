@@ -1,4 +1,4 @@
-<%@ page import="lv.javaguru.java2.domain.WinnerStatus" %>
+<%--@elvariable id="event" type="lv.javaguru.java2.domain.Event"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,44 +17,49 @@
             <td>Event ID</td>
             <td>Name</td>
             <td>Description</td>
-            <td>Winning condition</td>
-            <td>Lose condition</td>
-            <td>Draw condition</td>
-            <td>Winner</td>
+            <td>Coefficient</td>
+            <td>Total Bank</td>
             <td>Status</td>
+            <td>Winner</td>
+
         </tr>
-        <c:forEach items="${eventList}" var="event">
+        <c:forEach items="${eventList}" var="event" varStatus="i">
             <tr>
                 <td> ${event.eventId}</td>
                 <td> ${event.eventName}</td>
                 <td> ${event.eventDescription}</td>
-                <td> ${event.winningCondition}</td>
-                <td> ${event.loseCondition}</td>
-                <td> ${event.drawCondition}</td>
+                <td> ${event.coefficient}</td>
+                <td> ${event.totalBank}</td>
+                <td> ${event.betSide} </td>
+
                 <td>
-                    <form:select path="winner">
-                        <form:option value="0" label="${event.winnerStatus}"/>
-                        <form:options items="${winner}"/>
-                    </form:select>
+                    <select name="winner${event.eventId}">
+                        <option>${event.winnerStatus}</option>
+                        <option>WIN</option>
+                        <option>LOSE</option>
+                    </select>
+
                 </td>
                 <td>
-                    <form:select path="eventsStatus">
-                        <form:option value="0" label="${event.eventStatus}"/>
-                        <form:options items="${eventsStatus}"/>
-                    </form:select>
-                </td>
-                <td>
-                    <label>
-                        <input type="button" value="Delete"
-                               onclick="document.getElementById('eventId').value = ${event.eventId};
-                                       document.eventTable.submit(); "/>
-                    </label>
+                    <input type="checkbox" value="${event.eventId}" name="${i.index}">
 
                 </td>
             </tr>
         </c:forEach>
     </table>
-    <input type="hidden" id="eventId" value="" name="deletedEventId"/>
+
+    <input type="button" value="update"
+           onclick="document.getElementById('buttonId').value = 'update';
+                   document.eventTable.submit(); "/>
+
+    <input type="button" value="Delete"
+           onclick="document.getElementById('buttonId').value ='delete';
+                   document.eventTable.submit(); "/>
+
+    <input type="hidden" id="buttonId" value="" name="buttonPressed"/>
+    <input type="hidden" value="${eventList.size()}" name="eventListSize"/>
+
+
 </form>
 <input type="button" onclick="history.back();" value="Back"/>
 </body>

@@ -18,38 +18,40 @@ public class Event {
     @Column(name = "EventDescription", nullable = false)
     private String eventDescription;
 
-    @Column(name = "WinningCondition", nullable = false)
-    private String winningCondition;
-
-    @Column(name = "LoseCondition", nullable = false)
-    private String loseCondition;
-
-    @Column(name = "DrawCondition")
-    private String drawCondition;
+    @Column(name = "BetSide", nullable = false)
+    private boolean betSide;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "EventStatus", columnDefinition = "enum('ACTIVE','NOT_ACTIVE', 'FINISHED')", nullable = false)
-    private EventStatusState eventStatus;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "Winner", columnDefinition = "enum('FIRST','SECOND', 'DRAW')")
+    @Column(name = "Winner", columnDefinition = "enum('WIN', 'LOSE')")
     private WinnerStatus winnerStatus;
+
+    @Column(name = "Coefficient", nullable = false)
+    private double coefficient;
 
     @Column(name = "TotalBank", nullable = false)
     private BigDecimal totalBank;
 
     public Event() {
         this.totalBank = new BigDecimal(0);
-        this.eventStatus = EventStatusState.NOT_ACTIVE;
+        this.betSide = false;
+        this.winnerStatus=WinnerStatus.NOT_SET;
     }
 
-    public Event(String eventName, String eventDescription, String winningCondition, String loseCondition, String drawCondition) {
+    public Event(String eventName, String eventDescription, double coefficient) {
         this();
         this.eventName = eventName;
         this.eventDescription = eventDescription;
-        this.winningCondition = winningCondition;
-        this.loseCondition = loseCondition;
-        this.drawCondition = drawCondition;
+        this.coefficient = coefficient;
+    }
+
+    public Event(Long eventId, String eventName, String eventDescription, boolean betSide, WinnerStatus winnerStatus, double coefficient, BigDecimal totalBank) {
+        this.eventId = eventId;
+        this.eventName = eventName;
+        this.eventDescription = eventDescription;
+        this.betSide = betSide;
+        this.winnerStatus = winnerStatus;
+        this.coefficient = coefficient;
+        this.totalBank = totalBank;
     }
 
     public Long getEventId() {
@@ -76,36 +78,12 @@ public class Event {
         this.eventDescription = eventDescription;
     }
 
-    public String getWinningCondition() {
-        return winningCondition;
+    public boolean getBetSide() {
+        return betSide;
     }
 
-    public void setWinningCondition(String winningCondition) {
-        this.winningCondition = winningCondition;
-    }
-
-    public String getLoseCondition() {
-        return loseCondition;
-    }
-
-    public void setLoseCondition(String loseCondition) {
-        this.loseCondition = loseCondition;
-    }
-
-    public String getDrawCondition() {
-        return drawCondition;
-    }
-
-    public void setDrawCondition(String drawCondition) {
-        this.drawCondition = drawCondition;
-    }
-
-    public EventStatusState getEventStatus() {
-        return eventStatus;
-    }
-
-    public void setEventStatus(EventStatusState eventStatus) {
-        this.eventStatus = eventStatus;
+    public void setBetSide(boolean betSide) {
+        this.betSide = betSide;
     }
 
     public WinnerStatus getWinnerStatus() {
@@ -114,6 +92,14 @@ public class Event {
 
     public void setWinnerStatus(WinnerStatus winnerStatus) {
         this.winnerStatus = winnerStatus;
+    }
+
+    public double getCoefficient() {
+        return coefficient;
+    }
+
+    public void setCoefficient(double coefficient) {
+        this.coefficient = coefficient;
     }
 
     public BigDecimal getTotalBank() {
@@ -130,11 +116,9 @@ public class Event {
                 "eventId=" + eventId +
                 ", eventName='" + eventName + '\'' +
                 ", eventDescription='" + eventDescription + '\'' +
-                ", winningCondition='" + winningCondition + '\'' +
-                ", loseCondition='" + loseCondition + '\'' +
-                ", drawCondition='" + drawCondition + '\'' +
-                ", eventStatus=" + eventStatus +
+                ", betSide=" + betSide +
                 ", winnerStatus=" + winnerStatus +
+                ", coefficient=" + coefficient +
                 ", totalBank=" + totalBank +
                 '}';
     }

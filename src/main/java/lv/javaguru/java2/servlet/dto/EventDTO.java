@@ -1,8 +1,14 @@
 package lv.javaguru.java2.servlet.dto;
 
-import lv.javaguru.java2.domain.EventStatusState;
+import lv.javaguru.java2.domain.BetSide;
 import lv.javaguru.java2.domain.WinnerStatus;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.NumberFormat;
+import org.w3c.dom.stylesheets.StyleSheetList;
+
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 
 public class EventDTO {
@@ -11,25 +17,35 @@ public class EventDTO {
     private String eventName;
     @NotEmpty
     private String eventDescription;
-    @NotEmpty
-    private String winningCondition;
-    @NotEmpty
-    private String loseCondition;
-    private String drawCondition;
-    private EventStatusState eventStatus;
+
+    private boolean betSide;
     private WinnerStatus winnerStatus;
 
+    @DecimalMin("0.1")
+    private double coefficient;
+    private BigDecimal totalBank;
+
     public EventDTO() {
-        this.eventStatus=EventStatusState.NOT_ACTIVE;
+        this.betSide = false;
+        this.totalBank = new BigDecimal(0);
+        this.winnerStatus=WinnerStatus.NOT_SET;
     }
 
-    public EventDTO(String eventName, String eventDescription, String winningCondition, String loseCondition, String drawCondition) {
+    public EventDTO(String eventName, String eventDescription, double coefficient) {
         this();
         this.eventName = eventName;
         this.eventDescription = eventDescription;
-        this.winningCondition = winningCondition;
-        this.loseCondition = loseCondition;
-        this.drawCondition = drawCondition;
+        this.coefficient = coefficient;
+    }
+
+    public EventDTO(Long eventId, String eventName, String eventDescription, boolean betSide, WinnerStatus winnerStatus, double coefficient, BigDecimal totalBank) {
+        this.eventId = eventId;
+        this.eventName = eventName;
+        this.eventDescription = eventDescription;
+        this.betSide = betSide;
+        this.winnerStatus = winnerStatus;
+        this.coefficient = coefficient;
+        this.totalBank = totalBank;
     }
 
     public Long getEventId() {
@@ -56,36 +72,12 @@ public class EventDTO {
         this.eventDescription = eventDescription;
     }
 
-    public String getWinningCondition() {
-        return winningCondition;
+    public boolean getBetSide() {
+        return betSide;
     }
 
-    public void setWinningCondition(String winningCondition) {
-        this.winningCondition = winningCondition;
-    }
-
-    public String getLoseCondition() {
-        return loseCondition;
-    }
-
-    public void setLoseCondition(String loseCondition) {
-        this.loseCondition = loseCondition;
-    }
-
-    public String getDrawCondition() {
-        return drawCondition;
-    }
-
-    public void setDrawCondition(String drawCondition) {
-        this.drawCondition = drawCondition;
-    }
-
-    public EventStatusState getEventStatus() {
-        return eventStatus;
-    }
-
-    public void setEventStatus(EventStatusState eventStatus) {
-        this.eventStatus = eventStatus;
+    public void setBetSide(boolean betSide) {
+        this.betSide = betSide;
     }
 
     public WinnerStatus getWinnerStatus() {
@@ -94,5 +86,21 @@ public class EventDTO {
 
     public void setWinnerStatus(WinnerStatus winnerStatus) {
         this.winnerStatus = winnerStatus;
+    }
+
+    public double getCoefficient() {
+        return coefficient;
+    }
+
+    public void setCoefficient(double coefficient) {
+        this.coefficient = coefficient;
+    }
+
+    public BigDecimal getTotalBank() {
+        return totalBank;
+    }
+
+    public void setTotalBank(BigDecimal totalBank) {
+        this.totalBank = totalBank;
     }
 }
