@@ -17,14 +17,20 @@
             <td>Event ID</td>
             <td>Name</td>
             <td>Description</td>
-            <td>Winner</td>
+            <td>Coefficient</td>
+            <td>Total Bank</td>
             <td>Status</td>
+            <td>Winner</td>
+
         </tr>
         <c:forEach items="${eventList}" var="event" varStatus="i">
             <tr>
                 <td> ${event.eventId}</td>
                 <td> ${event.eventName}</td>
                 <td> ${event.eventDescription}</td>
+                <td> ${event.coefficient}</td>
+                <td> ${event.totalBank}</td>
+                <td> ${event.betSide} </td>
 
                 <td>
                     <select name="winner${event.eventId}">
@@ -35,10 +41,7 @@
 
                 </td>
                 <td>
-                        ${event.betSide}
-                </td>
-                <td>
-                    <input type="checkbox" value="${event.eventId}"  name="${i.index}">
+                    <input type="checkbox" value="${event.eventId}" name="${i.index}">
 
                 </td>
             </tr>

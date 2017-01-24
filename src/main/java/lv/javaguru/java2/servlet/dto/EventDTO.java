@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.NumberFormat;
 import org.w3c.dom.stylesheets.StyleSheetList;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -19,14 +20,15 @@ public class EventDTO {
 
     private boolean betSide;
     private WinnerStatus winnerStatus;
-    @NotNull
-    @NumberFormat
+
+    @DecimalMin("0.1")
     private double coefficient;
     private BigDecimal totalBank;
 
     public EventDTO() {
         this.betSide = false;
         this.totalBank = new BigDecimal(0);
+        this.winnerStatus=WinnerStatus.NOT_SET;
     }
 
     public EventDTO(String eventName, String eventDescription, double coefficient) {

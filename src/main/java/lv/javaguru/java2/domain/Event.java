@@ -34,6 +34,7 @@ public class Event {
     public Event() {
         this.totalBank = new BigDecimal(0);
         this.betSide = false;
+        this.winnerStatus=WinnerStatus.NOT_SET;
     }
 
     public Event(String eventName, String eventDescription, double coefficient) {
