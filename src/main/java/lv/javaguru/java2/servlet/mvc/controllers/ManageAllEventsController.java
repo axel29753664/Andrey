@@ -1,7 +1,6 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.domain.Event;
-import lv.javaguru.java2.domain.BetSide;
 import lv.javaguru.java2.domain.WinnerStatus;
 import lv.javaguru.java2.domain.services.EventServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,10 @@ public class ManageAllEventsController {
 
     @RequestMapping(value = "allEvents", method = RequestMethod.GET)
     public ModelAndView eventManagementProcessGet() {
-        List<Event> events = eventServices.getAllEvents();
+
+        List<Event> eventList = eventServices.getAllEvents();
         ModelAndView model = new ModelAndView();
-        model.addObject("eventList", events);
+        model.addObject("eventList", eventList);
         modelAddEventAndWinnerStates(model);
         model.setViewName("adminPages/allEvents");
         return model;
@@ -32,17 +32,37 @@ public class ManageAllEventsController {
 
     @RequestMapping(value = "allEvents", method = RequestMethod.POST)
     public ModelAndView processRequestPost(HttpServletRequest request, ModelAndView model) {
-        String deletedEventId = request.getParameter("deletedEventId");
-        System.out.println(request.getParameter("select1"));
-        System.out.println(request.getParameter("select2"));
-        System.out.println(request.getParameter("select3"));
+        String buttonPressed = request.getParameter("buttonPressed");
+        int eventListSize = Integer.parseInt(request.getParameter("eventListSize"));
 
-        if ((deletedEventId != null) && (!deletedEventId.equals(""))) {
-            Long eventId = Long.parseLong(deletedEventId);
-            eventServices.delete(eventId);
-            List<Event> eventList = eventServices.getAllEvents();
-            model.addObject("eventList", eventList);
+        if ((buttonPressed != null) && (!buttonPressed.equals(""))) {
+            if (buttonPressed.equals("delete")) {
+                for (int i = 0; i < eventListSize; i++) {
+                    String result = request.getParameter(String.valueOf(i));  // get deleted Event id from checkbox
+                    if (result != null) {
+                        Long id = Long.parseLong(result);
+                        eventServices.delete(id);
+                    }
+                }
+
+            } else {
+                if (buttonPressed.equals("update")) {
+                    for (int i = 0; i < eventListSize; i++) {
+                        String result = request.getParameter(String.valueOf(i));  // get updated Event id from checkbox
+                        if (result != null) {
+                            Long id = Long.parseLong(result);
+                            Event event = eventServices.getEventById(id);
+                            WinnerStatus winnerStatus = WinnerStatus.valueOf(request.getParameter("winner" + id)); //need add check to null
+                            event.setWinnerStatus(winnerStatus);
+                            eventServices.updateEvent(event);
+                        }
+                    }
+                }
+            }
         }
+        List<Event> eventList = eventServices.getAllEvents();
+        model.addObject("eventList", eventList);
+
         modelAddEventAndWinnerStates(model);
         model.setViewName("adminPages/allEvents");
         return model;

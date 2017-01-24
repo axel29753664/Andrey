@@ -20,14 +20,14 @@
             <td>Winner</td>
             <td>Status</td>
         </tr>
-        <c:forEach items="${eventList}" var="event">
+        <c:forEach items="${eventList}" var="event" varStatus="i">
             <tr>
                 <td> ${event.eventId}</td>
                 <td> ${event.eventName}</td>
                 <td> ${event.eventDescription}</td>
 
                 <td>
-                    <select name="select${event.eventId}">
+                    <select name="winner${event.eventId}">
                         <option>${event.winnerStatus}</option>
                         <option>WIN</option>
                         <option>LOSE</option>
@@ -35,21 +35,28 @@
 
                 </td>
                 <td>
-                    ${event.betSide}
+                        ${event.betSide}
                 </td>
                 <td>
-                    <label>
-                        <input type="button" value="Delete"
-                               onclick="document.getElementById('eventId').value = ${event.eventId};
-                                       document.eventTable.submit(); "/>
-                    </label>
+                    <input type="checkbox" value="${event.eventId}"  name="${i.index}">
 
                 </td>
             </tr>
         </c:forEach>
     </table>
-    <input type="submit">
-    <input type="hidden" id="eventId" value="" name="deletedEventId"/>
+
+    <input type="button" value="update"
+           onclick="document.getElementById('buttonId').value = 'update';
+                   document.eventTable.submit(); "/>
+
+    <input type="button" value="Delete"
+           onclick="document.getElementById('buttonId').value ='delete';
+                   document.eventTable.submit(); "/>
+
+    <input type="hidden" id="buttonId" value="" name="buttonPressed"/>
+    <input type="hidden" value="${eventList.size()}" name="eventListSize"/>
+
+
 </form>
 <input type="button" onclick="history.back();" value="Back"/>
 </body>
