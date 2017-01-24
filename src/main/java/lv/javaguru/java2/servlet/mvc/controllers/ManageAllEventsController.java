@@ -51,10 +51,13 @@ public class ManageAllEventsController {
                         String result = request.getParameter(String.valueOf(i));  // get updated Event id from checkbox
                         if (result != null) {
                             Long id = Long.parseLong(result);
+                            //@Transactional
                             Event event = eventServices.getEventById(id);
-                            WinnerStatus winnerStatus = WinnerStatus.valueOf(request.getParameter("winner" + id)); //need add check to null
+                            WinnerStatus winnerStatus = WinnerStatus.valueOf(request.getParameter("winner" + id));
                             event.setWinnerStatus(winnerStatus);
                             eventServices.updateEvent(event);
+                            //send money to winners from total bank
+                            //Transaction end
                         }
                     }
                 }
