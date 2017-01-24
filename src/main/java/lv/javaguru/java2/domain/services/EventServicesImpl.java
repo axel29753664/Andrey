@@ -50,4 +50,9 @@ public class EventServicesImpl implements EventServices {
         eventDAO.update(event);
     }
 
+    @Override
+    public List<Event> getEventsWhereWinnerStatusNotSet() {
+        return eventDAO.getEventsWhereWinnerStatusIsNull();
+    }
+
 }

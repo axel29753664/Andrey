@@ -31,13 +31,13 @@ CREATE TABLE `user_roles` (
 
 
 CREATE TABLE `events` (
-  `EventID`          BIGINT(20)     NOT NULL AUTO_INCREMENT,
+  `EventID`          BIGINT(20)     NOT NULL            AUTO_INCREMENT,
   `EventName`        VARCHAR(45)    NOT NULL,
-  `EventDescription` VARCHAR(255)            DEFAULT NULL,
-  `BetSide`          TINYINT(1)     NOT NULL DEFAULT '0',
-  `Winner`           ENUM ('WIN', 'LOSE')    DEFAULT NULL,
-  `Coefficient`      DOUBLE         NOT NULL DEFAULT '1',
-  `TotalBank`        DECIMAL(19, 4) NOT NULL DEFAULT '0.0000',
+  `EventDescription` VARCHAR(255)                       DEFAULT NULL,
+  `BetSide`          TINYINT(1)     NOT NULL            DEFAULT '0',
+  `Winner`           ENUM ('WIN', 'LOSE', 'NOT_SET')    DEFAULT NULL,
+  `Coefficient`      DOUBLE         NOT NULL            DEFAULT '1',
+  `TotalBank`        DECIMAL(19, 4) NOT NULL            DEFAULT '0.0000',
   PRIMARY KEY (`EventID`)
 )
   ENGINE = InnoDB

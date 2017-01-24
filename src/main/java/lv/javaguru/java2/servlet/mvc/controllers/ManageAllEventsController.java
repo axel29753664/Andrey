@@ -22,7 +22,7 @@ public class ManageAllEventsController {
     @RequestMapping(value = "allEvents", method = RequestMethod.GET)
     public ModelAndView eventManagementProcessGet() {
 
-        List<Event> eventList = eventServices.getAllEvents();
+        List<Event> eventList = eventServices.getEventsWhereWinnerStatusNotSet();
         ModelAndView model = new ModelAndView();
         model.addObject("eventList", eventList);
         modelAddEventAndWinnerStates(model);
@@ -60,7 +60,7 @@ public class ManageAllEventsController {
                 }
             }
         }
-        List<Event> eventList = eventServices.getAllEvents();
+        List<Event> eventList = eventServices.getEventsWhereWinnerStatusNotSet();
         model.addObject("eventList", eventList);
 
         modelAddEventAndWinnerStates(model);

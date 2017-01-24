@@ -2,5 +2,5 @@ package lv.javaguru.java2.domain;
 
 
 public enum WinnerStatus {
-    WIN, LOSE
+    WIN, LOSE, NOT_SET
 }

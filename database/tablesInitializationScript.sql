@@ -19,10 +19,10 @@ INSERT INTO user_roles VALUES (4, 2);
 
 INSERT INTO events (EventName, EventDescription, BetSide, Winner, Coefficient, TotalBank)
 VALUES ('Arsenal - MU', 'Arsenal play vs MU', FALSE, 'WIN', 1.5, 235.4);
-INSERT INTO events (EventName, EventDescription, BetSide, Coefficient, TotalBank)
-VALUES ('CSKA - MU', 'CSKA play vs MU', TRUE, 0.5, 35.4);
-INSERT INTO events (EventName, EventDescription, BetSide, Coefficient, TotalBank)
-VALUES ('Spartak - Liverpool', 'Spartak play vs Liverpool', TRUE, 1.2, 135.4);
+INSERT INTO events (EventName, EventDescription, BetSide, Winner, Coefficient, TotalBank)
+VALUES ('CSKA - MU', 'CSKA play vs MU', TRUE, 'NOT_SET', 0.5, 35.4);
+INSERT INTO events (EventName, EventDescription, BetSide, Winner, Coefficient, TotalBank)
+VALUES ('Spartak - Liverpool', 'Spartak play vs Liverpool', TRUE, 'NOT_SET', 1.2, 135.4);
 INSERT INTO events (EventName, EventDescription, BetSide, Winner, Coefficient, TotalBank)
 VALUES ('Arsenal - CSKA', 'Arsenal play vs CSKA', FALSE, 'LOSE', 0.5, 35.4);
 
