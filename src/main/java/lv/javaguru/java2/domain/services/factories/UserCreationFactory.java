@@ -1,8 +1,7 @@
 package lv.javaguru.java2.domain.services.factories;
 
-
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.domain.services.dtoConverters.ConverterDto;
+import lv.javaguru.java2.domain.services.dtoConverters.ConverterDTO;
 import lv.javaguru.java2.domain.services.UserService;
 import lv.javaguru.java2.domain.validators.UserValidator;
 import lv.javaguru.java2.servlet.dto.UserDTO;
@@ -15,7 +14,7 @@ import org.springframework.validation.Errors;
 public class UserCreationFactory implements CreationFactory<UserDTO> {
 
     @Autowired
-    private ConverterDto<User, UserDTO> converterDto;
+    private ConverterDTO<User, UserDTO> converterDTO;
     @Autowired
     private UserService userService;
     @Autowired
@@ -25,7 +24,7 @@ public class UserCreationFactory implements CreationFactory<UserDTO> {
     public void create(UserDTO userDTO, Errors validResult) {
         validator.validate(userDTO, validResult);
         if (!validResult.hasErrors()) {
-            User user = converterDto.convertFromRequest(userDTO);
+            User user = converterDTO.convertFromRequest(userDTO);
             try {
                 userService.saveToDB(user);
             } catch (JDBCException e) {

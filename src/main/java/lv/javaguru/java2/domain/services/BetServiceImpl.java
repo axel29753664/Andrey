@@ -5,6 +5,7 @@ import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.BetConditionState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +18,7 @@ public class BetServiceImpl implements BetService {
     private BetDAO betDAO;
 
     @Override
-    public void writeInDatabase(Bet bet) {
+    public void saveToDB(Bet bet){
         betDAO.create(bet);
     }
 

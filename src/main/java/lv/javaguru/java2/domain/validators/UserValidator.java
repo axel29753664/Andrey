@@ -1,6 +1,5 @@
 package lv.javaguru.java2.domain.validators;
 
-
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.servlet.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;

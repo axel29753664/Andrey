@@ -1,46 +1,41 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--@elvariable id="user" type="lv.javaguru.java2.domain.User"--%>
-<sec:authentication var="user" property="principal"/>
 <html>
 <head>
     <title>Bet creation form</title>
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
-<form method="post" action="createBetForm">
-    <font color="red">${message}</font><br>
-    <b>Selected event:</b>
-    <table border="2">
-        <tr>
-            <td>Name</td>
-            <td>Description</td>
-            <td>Coefficient</td>
-        </tr>
-        <tr>
-            <td> ${event.eventName}</td>
-            <td> ${event.eventDescription}</td>
-            <td> ${event.coefficient}</td>
-        </tr>
-    </table>
-    <br>
-    <br>
-    <b>Now enter your bet amount and select condition:</b>
+<form:form method="post" action="createBetForm" modelAttribute="betDTOForm">
     <table>
-        <input type="hidden" name="userID" value=${user.userId}>
-        <input type="hidden" name="eventID" value=${event.eventId}>
+        <c:set var="height" value="50"/>
         <tr>
-            <td> Bet sum</td>
-            <td><input type="number" step="0.01" name="betSum"/></td>
+            <td><form:hidden path="userId"/> </td>
+            <td><font color="red"><form:errors path="userId"/></font></td>
+        </tr>
+
+        <tr>
+            <td><form:hidden path="eventId"/></td>
+            <td><font color="red"><form:errors path="eventId"/></font></td>
         </tr>
         <tr>
-            <td> Condition</td>
-            <td><input type="radio" name="betCondition" value="WIN"> Win
-                <input type="radio" name="betCondition" value="LOSE"> Lose</td>
+            <td height="${height}">Bet Sum:</td>
+            <td><form:input path="betSum"/></td>
+            <td><font color="red"><form:errors path="betSum"/></font></td>
         </tr>
-    </table>
-    <input type="submit" value="Send"/>
-    <input type="button" onClick='location.href="${pageContext.request.contextPath}/events"' value="Back"/>
-</form>
+        <tr>
+            <td height="${height}">Bet Condition:</td>
+            <td><form:select path="betCondition">
+                    <form:option value="NOT_APPLIED" label="--- Select ---"/>
+                    <form:option value="WIN"/>
+                    <form:option value="LOSE"/>
+                </form:select>
+            </td>
+            <td><font color="red"><form:errors path="betCondition"/></font></td>
+        </tr>
+ </table>
+ <input type="submit" value="Send"/>
+</form:form>
 </body>
 </html>

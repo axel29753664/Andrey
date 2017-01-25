@@ -1,10 +1,7 @@
 package lv.javaguru.java2.domain.services.parsers;
 
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 
-//@Component("StringToBigDecimalParser")
 public class ParserStringToBigDecimal {
 
     public static BigDecimal parse(String string){

@@ -4,7 +4,7 @@ import lv.javaguru.java2.domain.Role;
 import lv.javaguru.java2.domain.RolesSet;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.services.UserService;
-import lv.javaguru.java2.domain.services.dtoConverters.ConverterDto;
+import lv.javaguru.java2.domain.services.dtoConverters.ConverterDTO;
 import lv.javaguru.java2.servlet.dto.UserDTO;
 import lv.javaguru.java2.servlet.dto.UserRolesModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UserManagementController {
     private UserService userService;
 
     @Autowired
-    private ConverterDto<User, UserDTO> converterDto;
+    private ConverterDTO<User, UserDTO> converterDTO;
 
     @RequestMapping(value = "userManagement", method = RequestMethod.GET)
     public ModelAndView processMethodGet() {
@@ -51,7 +51,7 @@ public class UserManagementController {
         if ((updatedUserId != null) && (!updatedUserId.equals(""))) {
             Long id = Long.parseLong(updatedUserId);
             User user = userService.getById(id);
-            UserDTO userDTO = converterDto.convertToResponse(user);
+            UserDTO userDTO = converterDTO.convertToResponse(user);
             model.addObject("user", userDTO);
             model.addObject("userRoles", new UserRolesModel(user.getRoles()));
             model.setViewName("adminPages/updateUser");

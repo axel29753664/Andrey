@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 
 @Service
-public class ConverterEventDTO implements ConverterDto<Event, EventDTO> {
+public class ConverterEventDTO implements ConverterDTO<Event, EventDTO> {
     @Override
     public Event convertFromRequest(EventDTO eventDTO) {
         Long eventId = eventDTO.getEventId();

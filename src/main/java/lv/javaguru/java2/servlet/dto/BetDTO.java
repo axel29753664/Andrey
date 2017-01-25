@@ -1,54 +1,53 @@
-package lv.javaguru.java2.domain;
+package lv.javaguru.java2.servlet.dto;
 
-import javax.persistence.*;
+import lv.javaguru.java2.domain.BetConditionState;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name="bets")
-public class Bet {
+public class BetDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="BetID")
     private Long betId;
 
-    @Column(name="UserID", nullable = false)
+    //@NotNull(message = "You are not login")
     private Long userId;
 
-    @Column(name="EventID", nullable = false)
+    //@NotNull(message = "You didn't choose event")
     private Long eventId;
 
-    @Column(name="BetSum", nullable = false)
+    //@NotNull(message = "Enter your bet")
+    //@DecimalMin(value = "0.01", message = "You must bid at least 0.01")
     private BigDecimal betSum;
 
-    @Column(name="UncoveredSum", nullable = false)
     private BigDecimal uncoveredSum;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="BetCondition", columnDefinition = "enum('WIN', 'LOSE')", nullable = false)
+    //@NotEmpty(message = "Choose winning condition")
     private BetConditionState betCondition;
 
-    public Bet() {
+
+    public BetDTO() {
+        this.uncoveredSum = new BigDecimal(0);
     }
 
-    public Bet(Long userId,
-               Long eventId,
-               BigDecimal betSum,
-               BigDecimal uncoveredSum,
-               BetConditionState betCondition) {
+    public BetDTO(Long betId) {
+        this.betId = betId;
+    }
+
+    public BetDTO(Long userId,
+                  Long eventId,
+                  BigDecimal betSum,
+                  BetConditionState betCondition) {
+        this();
         this.userId = userId;
         this.eventId = eventId;
         this.betSum = betSum;
-        this.uncoveredSum = uncoveredSum;
         this.betCondition = betCondition;
     }
 
-    public Bet(Long betId,
-               Long userId,
-               Long eventId,
-               BigDecimal betSum,
-               BigDecimal uncoveredSum,
-               BetConditionState betCondition) {
+    public BetDTO(Long betId,
+                  Long userId,
+                  Long eventId,
+                  BigDecimal betSum,
+                  BigDecimal uncoveredSum,
+                  BetConditionState betCondition) {
         this.betId = betId;
         this.userId = userId;
         this.eventId = eventId;
@@ -103,18 +102,6 @@ public class Bet {
 
     public void setBetCondition(BetConditionState betCondition) {
         this.betCondition = betCondition;
-    }
-
-    @Override
-    public String toString() {
-        return "Bet{" +
-                "betId=" + betId +
-                ", userId=" + userId +
-                ", eventId=" + eventId +
-                ", betSum=" + betSum +
-                ", uncoveredBetSum=" + uncoveredSum +
-                ", betCondition=" + betCondition +
-                '}';
     }
 
 }

@@ -1,6 +1,5 @@
 package lv.javaguru.java2.servlet.dto;
 
-
 import lv.javaguru.java2.domain.Role;
 import lv.javaguru.java2.domain.RolesSet;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -12,7 +11,7 @@ import java.util.Set;
 
 public class UserDTO {
 
-    private String userId;
+    private Long userId;
     @Size(max = 50, message = "character allowed < 50")
     private String firstName;
     @Size(max = 50, message = "character allowed < 50")
@@ -31,7 +30,7 @@ public class UserDTO {
         this.roles = createDefaultUserRoles();
     }
 
-    public UserDTO(String userId) {
+    public UserDTO(Long userId) {
         this();
         this.userId = userId;
     }
@@ -43,7 +42,7 @@ public class UserDTO {
         this.password = password;
     }
 
-    public UserDTO(String userId, String firstName, String lastName, String login, String password, Set<Role> roles, BigDecimal balance) {
+    public UserDTO(Long userId, String firstName, String lastName, String login, String password, Set<Role> roles, BigDecimal balance) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -59,11 +58,11 @@ public class UserDTO {
         return roleSet;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -114,6 +113,5 @@ public class UserDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
 }

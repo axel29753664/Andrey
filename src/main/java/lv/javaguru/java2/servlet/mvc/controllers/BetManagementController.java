@@ -1,7 +1,8 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.domain.services.BetManagementService;
-import lv.javaguru.java2.servlet.dto.BetDto;
+import lv.javaguru.java2.domain.services.parsers.ParserStringToLong;
+import lv.javaguru.java2.servlet.dto.BetDTO;
 import lv.javaguru.java2.servlet.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +30,9 @@ public class BetManagementController {
     @RequestMapping(value = "betManagement", method = {RequestMethod.POST})
     public ModelAndView processRequestPost(HttpServletRequest request) {
         String userIdFromRequest = request.getParameter("userIdForBetDeleting");
-        UserDTO userDTO = new UserDTO(userIdFromRequest);
-        List<BetDto> betsDto = betManagementService.managementProcess(userDTO);
+        Long userId = ParserStringToLong.parse(userIdFromRequest);
+        UserDTO userDTO = new UserDTO(userId);
+        List<BetDTO> betsDto = betManagementService.managementProcess(userDTO);
         HttpSession session = request.getSession();
         session.setAttribute("userForBetDeleting", userDTO);
         return new ModelAndView("adminPages/betDeleting", "data", betsDto);

@@ -8,7 +8,7 @@ import java.util.Set;
 
 public interface BetService {
 
-    void writeInDatabase(Bet bet);
+    void saveToDB(Bet bet);
 
     List<Bet> getBetsByUserId(Long userId);
 

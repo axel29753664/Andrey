@@ -24,6 +24,8 @@
                 <td> ${data.betCondition}</td>
             </tr>
         </table>
+        ${data.betCondition.name()}
+
     </form>
 </center>
 <input type="button" onClick='location.href="${pageContext.request.contextPath}/events"' value="Back"/>

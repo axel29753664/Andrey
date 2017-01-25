@@ -2,11 +2,12 @@ package lv.javaguru.java2.domain.services;
 
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.domain.services.dtoConverters.ConverterDto;
+import lv.javaguru.java2.domain.services.dtoConverters.ConverterDTO;
 import lv.javaguru.java2.domain.services.dtoConverters.ConverterDtoList;
-import lv.javaguru.java2.servlet.dto.BetDto;
+import lv.javaguru.java2.servlet.dto.BetDTO;
 import lv.javaguru.java2.servlet.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,25 +16,25 @@ import java.util.List;
 public class BetDeletingServiceImpl implements BetDeletingService {
 
     @Autowired
-    private ConverterDto<Bet, BetDto> converterBetDto;
+    private ConverterDTO<Bet, BetDTO> converterBetDto;
 
     @Autowired
-    private ConverterDto<User,UserDTO> converterUserDto;
-
+    private ConverterDTO<User,UserDTO> converterUserDto;
 
     @Autowired
-    private ConverterDtoList converterDtoList;
+    @Qualifier("ConverterBetDtoList")
+    private ConverterDtoList converterBetDtoList;
 
     @Autowired
     private BetService betService;
 
     @Override
-    public List<BetDto> deletingProcess(BetDto betDto, UserDTO userForBetDeleting){    // nuzhno tolko UserId, zachem ves user ?
+    public List<BetDTO> deletingProcess(BetDTO betDto, UserDTO userForBetDeleting){    // nuzhno tolko UserId, zachem ves user ?
         Bet bet = converterBetDto.convertFromRequest(betDto);
         User user = converterUserDto.convertFromRequest(userForBetDeleting); // userDTO.getId.parseLong
         betService.deleteBetById(bet.getBetId());
         List<Bet> bets = betService.getBetsByUserId(user.getUserId());
-        List<BetDto> betsDto = converterDtoList.convertBetListToResponse(bets);
+        List<BetDTO> betsDto = converterBetDtoList.convertListToResponse(bets);
         return betsDto;
     }
 

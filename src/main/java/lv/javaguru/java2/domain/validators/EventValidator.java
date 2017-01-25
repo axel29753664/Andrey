@@ -1,6 +1,5 @@
 package lv.javaguru.java2.domain.validators;
 
-
 import lv.javaguru.java2.domain.Event;
 import lv.javaguru.java2.domain.services.EventServices;
 import lv.javaguru.java2.servlet.dto.EventDTO;

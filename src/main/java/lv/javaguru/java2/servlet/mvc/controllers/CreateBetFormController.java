@@ -1,22 +1,23 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
-import lv.javaguru.java2.domain.Response;
-import lv.javaguru.java2.domain.services.factories.FactoryBet;
-import lv.javaguru.java2.servlet.dto.BetDto;
+import lv.javaguru.java2.domain.services.factories.CreationFactory;
+import lv.javaguru.java2.servlet.dto.BetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 public class CreateBetFormController {
 
     @Autowired
-    private FactoryBet factoryBet;
+    private CreationFactory<BetDTO> betCreationFactory;
 
     @RequestMapping(value = "createBetForm", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
@@ -24,31 +25,17 @@ public class CreateBetFormController {
     }
 
     @RequestMapping(value = "createBetForm", method = {RequestMethod.POST})
-    public ModelAndView processRequestPost(HttpServletRequest request) {
+    public ModelAndView processRequestPost(@Valid @ModelAttribute("betDTOForm") BetDTO betDTO,
+                                           BindingResult result, ModelAndView model) {
 
-        String userIdFromRequest = request.getParameter("userID");
-        String eventIdFromRequest = request.getParameter("eventID");
-        String betSumFromRequest = request.getParameter("betSum");
-        String betConditionFromRequest = request.getParameter("betCondition");
-
-        BetDto betDto = new BetDto(userIdFromRequest, eventIdFromRequest, betSumFromRequest, betConditionFromRequest);
-
-
-        Response response = factoryBet.creationProcess(betDto);
-
-        ModelAndView model = preparationModelAndView(response);
+        if (!result.hasErrors()) {
+            betCreationFactory.create(betDTO, result);
+            if (!result.hasErrors()) {
+                model.setViewName("createBetConfirmation");
+                model.addObject("bet", betDTO);
+            }
+        }
         return model;
-    }
-
-
-    private ModelAndView preparationModelAndView(Response response) {
-        if (response.getDbError() != null) {
-            return new ModelAndView("createBetError", "data", response.getDbError());
-        }
-        if (response.getErrorsList() != null) {
-            return new ModelAndView("createBetError", "data", response.getErrorsList());
-        }
-        return new ModelAndView("createBetConfirmation", "data", response.getBetDto());
     }
 
 }
