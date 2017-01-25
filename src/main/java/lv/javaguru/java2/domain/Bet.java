@@ -31,13 +31,15 @@ public class Bet {
     public Bet() {
     }
 
-    /*public Bet(Long userId,
+    public Bet(Long userId,
                Long eventId,
                BigDecimal betSum,
+               BigDecimal uncoveredBetSum,
                BetConditionState betCondition) {
         this.userId = userId;
         this.eventId = eventId;
         this.betSum = betSum;
+        this.uncoveredBetSum = uncoveredBetSum;
         this.betCondition = betCondition;
     }
 
@@ -45,13 +47,15 @@ public class Bet {
                Long userId,
                Long eventId,
                BigDecimal betSum,
+               BigDecimal uncoveredBetSum,
                BetConditionState betCondition) {
         this.betId = betId;
         this.userId = userId;
         this.eventId = eventId;
         this.betSum = betSum;
+        this.uncoveredBetSum = uncoveredBetSum;
         this.betCondition = betCondition;
-    }*/
+    }
 
     public Long getBetId() {
         return betId;

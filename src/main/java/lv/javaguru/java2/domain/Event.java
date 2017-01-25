@@ -22,8 +22,8 @@ public class Event {
     private boolean betSide;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "Winner", columnDefinition = "enum('WIN', 'LOSE')")
-    private WinnerStatus winnerStatus;
+    @Column(name = "Winner", columnDefinition = "enum('WIN', 'LOSE', NOT_SET)")
+    private BetConditionState winnerStatus;
 
     @Column(name = "Coefficient", nullable = false)
     private double coefficient;
@@ -34,7 +34,7 @@ public class Event {
     public Event() {
         this.totalBank = new BigDecimal(0);
         this.betSide = false;
-        this.winnerStatus=WinnerStatus.NOT_SET;
+        this.winnerStatus=BetConditionState.NOT_SET;
     }
 
     public Event(String eventName, String eventDescription, double coefficient) {
@@ -44,7 +44,7 @@ public class Event {
         this.coefficient = coefficient;
     }
 
-    public Event(Long eventId, String eventName, String eventDescription, boolean betSide, WinnerStatus winnerStatus, double coefficient, BigDecimal totalBank) {
+    public Event(Long eventId, String eventName, String eventDescription, boolean betSide, BetConditionState winnerStatus, double coefficient, BigDecimal totalBank) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
@@ -86,11 +86,11 @@ public class Event {
         this.betSide = betSide;
     }
 
-    public WinnerStatus getWinnerStatus() {
+    public BetConditionState getWinnerStatus() {
         return winnerStatus;
     }
 
-    public void setWinnerStatus(WinnerStatus winnerStatus) {
+    public void setWinnerStatus(BetConditionState winnerStatus) {
         this.winnerStatus = winnerStatus;
     }
 

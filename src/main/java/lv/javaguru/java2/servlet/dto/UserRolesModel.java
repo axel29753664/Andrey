@@ -10,10 +10,6 @@ public class UserRolesModel {
     private boolean admin;
     private boolean user;
 
-    public boolean isAdmin() {
-        return admin;
-    }
-
     public UserRolesModel() {
     }
 
@@ -37,6 +33,10 @@ public class UserRolesModel {
             roleSet.add(RolesSet.USER);
         }
         return roleSet;
+    }
+
+    public boolean isAdmin() {
+        return admin;
     }
 
     public void setAdmin(boolean admin) {

@@ -4,10 +4,11 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.GenericHibernateDAOImpl;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
-import org.h2.engine.Session;
+
 import org.hibernate.Criteria;
 import org.hibernate.JDBCException;
 import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.DistinctRootEntityResultTransformer;
@@ -21,13 +22,27 @@ import java.util.List;
 public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDAO {
     private final String TABLE_NAME = "users";
 
+//    @Override
+//    public User getById(Long id) throws JDBCException {
+//        Session session = sessionFactory.getCurrentSession();
+//        SQLQuery query = session.createSQLQuery("select from " + TABLE_NAME + " where UserID = :ID");
+//        query.addEntity(User.class);
+//        query.setParameter("ID", id);
+//        List results = query.list();
+//        User user = null;
+//        if (results.size() > 0) {
+//            user = (User) results.get(0);
+//        }
+//        return user;
+//    }
+
     @Override
     @Transactional
     public List<User> getAll() throws JDBCException {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
         criteria.addOrder(Order.asc("userId"));
 
-        return  criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+        return criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
     @Override

@@ -4,6 +4,7 @@ import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.GenericHibernateDAOImpl;
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.BetConditionState;
+import lv.javaguru.java2.domain.exception.BetDBException;
 import org.hibernate.Criteria;
 import org.hibernate.JDBCException;
 import org.hibernate.SQLQuery;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Component
@@ -45,6 +47,7 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
         return criteria.list();
     }
 
+
     @Override
     @Transactional
     public void delete(Long id) throws JDBCException {
@@ -61,6 +64,22 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(deleteQuery);
         query.setLong("userID", userID);
         query.executeUpdate();
+    }
+
+    @Override
+    public Bet getUncoveredEventBetByEventId(Long id) throws BetDBException {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Bet.class);
+        criteria.add(Restrictions.like("eventId", id));
+        criteria.add(Restrictions.gt("uncoveredSum", new BigDecimal(0)));
+        if (criteria.list().size() > 1) {
+            throw new BetDBException("More than one bet is uncovered");
+        }
+        Bet bet = null;
+        if (criteria.list().size() > 0) {
+            bet = (Bet) criteria.list().get(0);
+        }
+        return bet;
+
     }
 
     @Override

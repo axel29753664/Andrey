@@ -2,8 +2,7 @@ package lv.javaguru.java2.domain.services;
 
 
 import lv.javaguru.java2.database.EventDAO;
-import lv.javaguru.java2.domain.Event;
-import lv.javaguru.java2.servlet.dto.EventDTO;
+import lv.javaguru.java2.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,11 +11,19 @@ import java.util.List;
 
 @Service
 public class EventServicesImpl implements EventServices {
+
+
     @Autowired
     private EventDAO eventDAO;
 
     @Autowired
     private BetService betService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private TransferService transferService;
 
     @Override
     public void saveToDB(Event event) {
@@ -55,4 +62,16 @@ public class EventServicesImpl implements EventServices {
         return eventDAO.getEventsWhereWinnerStatusIsNull();
     }
 
+    @Override
+    @Transactional
+    public void closeEvent(BetConditionState winnerStatus, Long eventId) {
+        Event event = getEventById(eventId);
+        event.setWinnerStatus(winnerStatus);
+        updateEvent(event);
+        transferService.transferMoneyToWinners(event);
+
+    }
+
+
 }
+

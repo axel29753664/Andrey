@@ -1,8 +1,7 @@
 package lv.javaguru.java2.domain.services.dtoConverters;
 
+import lv.javaguru.java2.domain.BetConditionState;
 import lv.javaguru.java2.domain.Event;
-import lv.javaguru.java2.domain.BetSide;
-import lv.javaguru.java2.domain.WinnerStatus;
 import lv.javaguru.java2.servlet.dto.EventDTO;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ public class ConverterEventDTO implements ConverterDto<Event, EventDTO> {
         String eventName = eventDTO.getEventName();
         String eventDescription = eventDTO.getEventDescription();
         boolean betSide = eventDTO.getBetSide();
-        WinnerStatus winnerStatus = eventDTO.getWinnerStatus();
+        BetConditionState winnerStatus = eventDTO.getWinnerStatus();
         double coefficient = eventDTO.getCoefficient();
         BigDecimal totalBank = eventDTO.getTotalBank();
 
@@ -29,7 +28,7 @@ public class ConverterEventDTO implements ConverterDto<Event, EventDTO> {
         String eventName = event.getEventName();
         String eventDescription = event.getEventDescription();
         boolean betSide = event.getBetSide();
-        WinnerStatus winnerStatus = event.getWinnerStatus();
+        BetConditionState winnerStatus = event.getWinnerStatus();
         double coefficient = event.getCoefficient();
         BigDecimal totalBank = event.getTotalBank();
 

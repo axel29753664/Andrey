@@ -33,7 +33,7 @@
                 <td> ${event.betSide} </td>
 
                 <td>
-                    <select name="winner${event.eventId}">
+                    <select name="winnerStatus${event.eventId}">
                         <option>${event.winnerStatus}</option>
                         <option>WIN</option>
                         <option>LOSE</option>

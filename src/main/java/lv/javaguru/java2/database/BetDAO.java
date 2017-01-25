@@ -9,6 +9,8 @@ public interface BetDAO extends GenericDAO<Bet> {
 
     void deleteByUserId(Long betId);
 
+    Bet getUncoveredEventBetByEventId(Long id);
+
     void deleteByEventId(Long id);
 
     List getByUserId(Long userId);
@@ -16,5 +18,6 @@ public interface BetDAO extends GenericDAO<Bet> {
     List<Bet> getByEventId(Long eventId);
 
     List<Bet> getByEventIdAndBetCondition(Long eventId, BetConditionState betCondition);
+
 
 }
