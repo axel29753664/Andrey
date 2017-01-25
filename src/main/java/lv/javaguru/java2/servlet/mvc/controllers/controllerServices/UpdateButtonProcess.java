@@ -18,7 +18,7 @@ public class UpdateButtonProcess implements Process {
         for (Long id : idList) {
             String winnerStatusFromRequest = request.getParameter("winnerStatus" + id);
             BetConditionState winnerStatus = BetConditionState.valueOf(winnerStatusFromRequest);
-            eventServices.setEventWinner(winnerStatus, id);
+            eventServices.closeEvent(winnerStatus, id);
         }
     }
 }

@@ -32,7 +32,7 @@ public class BetServiceImpl implements BetService {
     }
 
     @Override
-    public Bet getUncoveredEventBet(Long id) {
+    public Bet getEventUncoveredBet(Long id) {
         return betDAO.getUncoveredEventBetByEventId(id);
     }
 

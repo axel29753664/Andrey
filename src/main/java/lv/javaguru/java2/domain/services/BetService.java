@@ -14,7 +14,7 @@ public interface BetService {
 
     List<Bet> getEventBets(Long eventId);
 
-    Bet getUncoveredEventBet(Long id);
+    Bet getEventUncoveredBet(Long id);
 
     List<Bet> getAllBets();
 

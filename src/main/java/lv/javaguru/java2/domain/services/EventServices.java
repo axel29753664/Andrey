@@ -21,5 +21,5 @@ public interface EventServices {
 
     List<Event> getEventsWhereWinnerStatusNotSet();
 
-    void setEventWinner(BetConditionState winnerStatus, Long id);
+    void closeEvent(BetConditionState winnerStatus, Long id);
 }
