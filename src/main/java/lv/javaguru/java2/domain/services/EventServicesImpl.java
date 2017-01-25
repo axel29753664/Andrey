@@ -3,11 +3,13 @@ package lv.javaguru.java2.domain.services;
 
 import lv.javaguru.java2.database.EventDAO;
 import lv.javaguru.java2.domain.Event;
+import lv.javaguru.java2.domain.WinnerStatus;
 import lv.javaguru.java2.servlet.dto.EventDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -53,6 +55,16 @@ public class EventServicesImpl implements EventServices {
     @Override
     public List<Event> getEventsWhereWinnerStatusNotSet() {
         return eventDAO.getEventsWhereWinnerStatusIsNull();
+    }
+
+    @Override
+    @Transactional
+    public void setEventWinner(WinnerStatus winnerStatus, Long id) {
+        Event event = getEventById(id);
+        event.setWinnerStatus(winnerStatus);
+        updateEvent(event);
+        //send money to winners from total bank
+        //Transaction end
     }
 
 }
