@@ -1,13 +1,9 @@
 package lv.javaguru.java2.servlet.dto;
 
-import lv.javaguru.java2.domain.BetSide;
-import lv.javaguru.java2.domain.WinnerStatus;
+import lv.javaguru.java2.domain.BetConditionState;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.NumberFormat;
-import org.w3c.dom.stylesheets.StyleSheetList;
 
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 
@@ -19,7 +15,7 @@ public class EventDTO {
     private String eventDescription;
 
     private boolean betSide;
-    private WinnerStatus winnerStatus;
+    private BetConditionState winnerStatus;
 
     @DecimalMin("0.1")
     private double coefficient;
@@ -28,7 +24,7 @@ public class EventDTO {
     public EventDTO() {
         this.betSide = false;
         this.totalBank = new BigDecimal(0);
-        this.winnerStatus=WinnerStatus.NOT_SET;
+        this.winnerStatus= BetConditionState.NOT_SET;
     }
 
     public EventDTO(String eventName, String eventDescription, double coefficient) {
@@ -38,7 +34,7 @@ public class EventDTO {
         this.coefficient = coefficient;
     }
 
-    public EventDTO(Long eventId, String eventName, String eventDescription, boolean betSide, WinnerStatus winnerStatus, double coefficient, BigDecimal totalBank) {
+    public EventDTO(Long eventId, String eventName, String eventDescription, boolean betSide, BetConditionState winnerStatus, double coefficient, BigDecimal totalBank) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
@@ -80,11 +76,11 @@ public class EventDTO {
         this.betSide = betSide;
     }
 
-    public WinnerStatus getWinnerStatus() {
+    public BetConditionState getWinnerStatus() {
         return winnerStatus;
     }
 
-    public void setWinnerStatus(WinnerStatus winnerStatus) {
+    public void setWinnerStatus(BetConditionState winnerStatus) {
         this.winnerStatus = winnerStatus;
     }
 

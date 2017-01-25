@@ -4,25 +4,28 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name="bets")
+@Table(name = "bets")
 public class Bet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="BetID")
+    @Column(name = "BetID")
     private Long betId;
 
-    @Column(name="UserID", nullable = false)
+    @Column(name = "UserID", nullable = false)
     private Long userId;
 
-    @Column(name="EventID", nullable = false)
+    @Column(name = "EventID", nullable = false)
     private Long eventId;
 
-    @Column(name="BetSum", nullable = false)
+    @Column(name = "BetSum", nullable = false)
     private BigDecimal betSum;
 
+    @Column(name = "uncoveredSum", nullable = false)
+    private BigDecimal uncoveredSum;
+
     @Enumerated(EnumType.STRING)
-    @Column(name="BetCondition", nullable = false)
+    @Column(name = "BetCondition", nullable = false)
     private BetConditionState betCondition;
 
     public Bet() {
@@ -48,6 +51,14 @@ public class Bet {
         this.eventId = eventId;
         this.betSum = betSum;
         this.betCondition = betCondition;
+    }
+
+    public BigDecimal getUncoveredSum() {
+        return uncoveredSum;
+    }
+
+    public void setUncoveredSum(BigDecimal uncoveredSum) {
+        this.uncoveredSum = uncoveredSum;
     }
 
     public Long getBetId() {

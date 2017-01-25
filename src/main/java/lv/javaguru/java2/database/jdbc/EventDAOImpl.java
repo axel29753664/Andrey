@@ -1,20 +1,14 @@
 package lv.javaguru.java2.database.jdbc;
 
-import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.EventDAO;
 import lv.javaguru.java2.database.GenericHibernateDAOImpl;
+import lv.javaguru.java2.domain.BetConditionState;
 import lv.javaguru.java2.domain.Event;
-import lv.javaguru.java2.domain.WinnerStatus;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -42,7 +36,7 @@ public class EventDAOImpl extends GenericHibernateDAOImpl<Event> implements Even
     @Transactional
     public List<Event> getEventsWhereWinnerStatusIsNull() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Event.class);
-        criteria.add(Restrictions.like("winnerStatus", WinnerStatus.NOT_SET));
+        criteria.add(Restrictions.like("winnerStatus", BetConditionState.NOT_SET));
         return criteria.list();
     }
 
