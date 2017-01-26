@@ -4,6 +4,7 @@ import lv.javaguru.java2.domain.Role;
 import lv.javaguru.java2.domain.RolesSet;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -23,6 +24,7 @@ public class UserDTO {
     @Size(min = 4, max = 16, message = "Password must between 4 to 14 symbols")
     private String password;
     private Set<Role> roles;
+    @Min(value = 0, message = "Balance must be >0")
     private BigDecimal balance;
 
     public UserDTO() {

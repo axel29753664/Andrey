@@ -31,13 +31,14 @@ CREATE TABLE `user_roles` (
 
 
 CREATE TABLE `events` (
-  `EventID`          BIGINT(20)     NOT NULL            AUTO_INCREMENT,
-  `EventName`        VARCHAR(45)    NOT NULL,
-  `EventDescription` VARCHAR(255)                       DEFAULT NULL,
-  `BetSide`          TINYINT(1)     NOT NULL            DEFAULT '0',
-  `Winner`           ENUM ('WIN', 'LOSE', 'NOT_SET')    DEFAULT NULL,
-  `Coefficient`      DOUBLE         NOT NULL            DEFAULT '1',
-  `TotalBank`        DECIMAL(19, 4) NOT NULL            DEFAULT '0.0000',
+  `EventID`                     BIGINT(20)                      NOT NULL                 AUTO_INCREMENT,
+  `EventName`                   VARCHAR(45)                     NOT NULL,
+  `EventDescription`            VARCHAR(255)                                             DEFAULT NULL,
+  `WinningConditionDescription` VARCHAR(255)                    NOT NULL                 DEFAULT NULL,
+  `BetSide`                     ENUM ('WIN', 'LOSE', 'NOT_SET') NOT NULL                 DEFAULT 'LOSE',
+  `Winner`                      ENUM ('WIN', 'LOSE', 'NOT_SET') NOT NULL                 DEFAULT 'NOT_SET',
+  `Coefficient`                 DOUBLE                          NOT NULL                 DEFAULT '1',
+  `TotalBank`                   DECIMAL(19, 4)                  NOT NULL                 DEFAULT '0.0000',
   PRIMARY KEY (`EventID`)
 )
   ENGINE = InnoDB
@@ -45,12 +46,12 @@ CREATE TABLE `events` (
 
 
 CREATE TABLE IF NOT EXISTS `bets` (
-  `BetID`               BIGINT(20)                             AUTO_INCREMENT,
-  `UserID`              BIGINT(20)                             NOT NULL,
-  `EventID`             BIGINT(20)                             NOT NULL,
-  `BetSum`              DECIMAL(19, 2)                         NOT NULL,
-  `UncoveredSum`        DECIMAL(19, 2)                         NOT NULL,
-  `BetCondition`        VARCHAR(20)                            NOT NULL,
+  `BetID`        BIGINT(20)              AUTO_INCREMENT,
+  `UserID`       BIGINT(20)     NOT NULL,
+  `EventID`      BIGINT(20)     NOT NULL,
+  `BetSum`       DECIMAL(19, 2) NOT NULL DEFAULT '0.00',
+  `UncoveredSum` DECIMAL(19, 2) NOT NULL DEFAULT '0.00',
+  `BetCondition` VARCHAR(20)    NOT NULL,
   PRIMARY KEY (`BetID`),
   FOREIGN KEY (`UserID`) REFERENCES users (`UserID`),
   FOREIGN KEY (`EventID`) REFERENCES events (`EventID`)

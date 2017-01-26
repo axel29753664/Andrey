@@ -13,35 +13,47 @@ public class EventDTO {
     private String eventName;
     @NotEmpty
     private String eventDescription;
+    @NotEmpty
+    private String winDescription;
 
-    private boolean betSide;
+    private BetConditionState betSide;
     private BetConditionState winnerStatus;
 
-    @DecimalMin("0.1")
+    @DecimalMin("0.01")
     private double coefficient;
     private BigDecimal totalBank;
 
     public EventDTO() {
-        this.betSide = false;
+        this.betSide = BetConditionState.LOSE;
         this.totalBank = new BigDecimal(0);
-        this.winnerStatus= BetConditionState.NOT_SET;
+        this.winnerStatus = BetConditionState.NOT_SET;
     }
 
-    public EventDTO(String eventName, String eventDescription, double coefficient) {
+    public EventDTO(String eventName, String eventDescription, String winDescription, double coefficient) {
         this();
         this.eventName = eventName;
         this.eventDescription = eventDescription;
+        this.winDescription = winDescription;
         this.coefficient = coefficient;
     }
 
-    public EventDTO(Long eventId, String eventName, String eventDescription, boolean betSide, BetConditionState winnerStatus, double coefficient, BigDecimal totalBank) {
+    public EventDTO(Long eventId, String eventName, String eventDescription, String winDescription, BetConditionState betSide, BetConditionState winnerStatus, double coefficient, BigDecimal totalBank) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
+        this.winDescription = winDescription;
         this.betSide = betSide;
         this.winnerStatus = winnerStatus;
         this.coefficient = coefficient;
         this.totalBank = totalBank;
+    }
+
+    public String getWinDescription() {
+        return winDescription;
+    }
+
+    public void setWinDescription(String winDescription) {
+        this.winDescription = winDescription;
     }
 
     public Long getEventId() {
@@ -68,11 +80,11 @@ public class EventDTO {
         this.eventDescription = eventDescription;
     }
 
-    public boolean getBetSide() {
+    public BetConditionState getBetSide() {
         return betSide;
     }
 
-    public void setBetSide(boolean betSide) {
+    public void setBetSide(BetConditionState betSide) {
         this.betSide = betSide;
     }
 

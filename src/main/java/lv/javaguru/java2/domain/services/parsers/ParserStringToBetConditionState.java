@@ -10,7 +10,7 @@ public class ParserStringToBetConditionState {
 
     public static BetConditionState parse(String string){
 
-        BetConditionState returnObj = BetConditionState.NOT_APPLIED;
+        BetConditionState returnObj = BetConditionState.NOT_SET;
         if ((string != null) && (!string.equals(""))) {
             returnObj = compareBetCondition(string, returnObj);
         }

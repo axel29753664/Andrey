@@ -7,7 +7,7 @@
     <title>User management</title>
 </head>
 <body>
-<jsp:include page="../menu.jsp"></jsp:include>
+<jsp:include page="../adminPages/adminPage.jsp"></jsp:include>
 
 <form name="userTable" id="userTable" action="${contextPath}/admin/userManagement" method="post">
 
@@ -61,7 +61,6 @@
     <input type="hidden" id="delete" value="" name="deletedUserId"/>
     <input type="hidden" id="update" value="" name="updatedUserId"/>
 
-    <input type="button" onclick="history.back();" value="Back"/>
 </form>
 </body>
 </html>

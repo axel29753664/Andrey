@@ -12,12 +12,14 @@
             <tr>
                 <td>Name</td>
                 <td>Description</td>
+                <td>Winning condition description</td>
                 <td>Coefficient</td>
 
             </tr>
             <tr>
                 <td> ${event.eventName}</td>
                 <td> ${event.eventDescription}</td>
+                <td> ${event.winDescription}</td>
                 <td> ${event.coefficient}</td>
 
             </tr>

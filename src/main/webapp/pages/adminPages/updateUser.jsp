@@ -7,7 +7,7 @@
     <title>Update User</title>
 </head>
 <body>
-
+<jsp:include page="../adminPages/adminPage.jsp"></jsp:include>
 
 <form method="post" action="${contextPath}/admin/userUpdate">
     <table border="1">
@@ -41,9 +41,10 @@
             <td><font color="red"><form:errors path="firstName"/></font></td>
             <td><font color="red"><form:errors path="lastName"/></font></td>
             <form:form modelAttribute="userRoles">
-                <%--<td><font color="red"><form:errors path="admin"/><form:errors path="user"/></font></td>--%>
+                <td><font color="red"><form:errors path="admin"/></font></td>
+                <td><font color="red"><form:errors path="user"/></font></td>
             </form:form>
-                <%--<td><font color="red"><form:errors path="balance"/></font></td>--%>
+            <td><font color="red"><form:errors path="balance"/></font></td>
             </form:form>
         </tr>
     </table>

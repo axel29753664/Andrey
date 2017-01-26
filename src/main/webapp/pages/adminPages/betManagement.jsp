@@ -6,7 +6,7 @@
     <title>Bets management</title>
 </head>
 <body>
-<jsp:include page="../menu.jsp"></jsp:include>
+<jsp:include page="../adminPages/adminPage.jsp"></jsp:include>
 
 <form name="userTable" action="${contextPath}/admin/betManagement" method="post">
     <table border="1">
@@ -32,6 +32,5 @@
     </table>
     <input type="hidden" id="userId" value="" name="userIdForBetDeleting"/>
 </form>
-<input type="button" onclick="history.back();" value="Back"/>
 </body>
 </html>

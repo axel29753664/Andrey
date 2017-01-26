@@ -20,9 +20,6 @@ public class EventServicesImpl implements EventServices {
     private BetService betService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private TransferService transferService;
 
     @Override

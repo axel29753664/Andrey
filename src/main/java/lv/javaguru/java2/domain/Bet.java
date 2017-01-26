@@ -25,7 +25,7 @@ public class Bet {
     private BigDecimal uncoveredSum;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="BetCondition", columnDefinition = "enum('WIN', 'LOSE')", nullable = false)
+    @Column(name="BetCondition", columnDefinition = "enum('WIN', 'LOSE, NOT_SET')", nullable = false)
     private BetConditionState betCondition;
 
     public Bet() {

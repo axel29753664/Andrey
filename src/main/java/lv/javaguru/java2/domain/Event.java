@@ -15,11 +15,15 @@ public class Event {
     @Column(name = "EventName", nullable = false)
     private String eventName;
 
-    @Column(name = "EventDescription", nullable = false)
+    @Column(name = "EventDescription")
     private String eventDescription;
 
-    @Column(name = "BetSide", nullable = false)
-    private boolean betSide;
+    @Column(name = "WinningConditionDescription", nullable = false)
+    private String winDescription;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "BetSIde", columnDefinition = "enum('WIN', 'LOSE', NOT_SET)")
+    private BetConditionState betSide;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "Winner", columnDefinition = "enum('WIN', 'LOSE', NOT_SET)")
@@ -33,25 +37,35 @@ public class Event {
 
     public Event() {
         this.totalBank = new BigDecimal(0);
-        this.betSide = false;
-        this.winnerStatus=BetConditionState.NOT_SET;
+        this.betSide = BetConditionState.LOSE;
+        this.winnerStatus = BetConditionState.NOT_SET;
     }
 
-    public Event(String eventName, String eventDescription, double coefficient) {
+    public Event(String eventName, String eventDescription, String winDescription, double coefficient) {
         this();
         this.eventName = eventName;
         this.eventDescription = eventDescription;
+        this.winDescription = winDescription;
         this.coefficient = coefficient;
     }
 
-    public Event(Long eventId, String eventName, String eventDescription, boolean betSide, BetConditionState winnerStatus, double coefficient, BigDecimal totalBank) {
+    public Event(Long eventId, String eventName, String eventDescription, String winDescription, BetConditionState betSide, BetConditionState winnerStatus, double coefficient, BigDecimal totalBank) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
+        this.winDescription = winDescription;
         this.betSide = betSide;
         this.winnerStatus = winnerStatus;
         this.coefficient = coefficient;
         this.totalBank = totalBank;
+    }
+
+    public String getWinDescription() {
+        return winDescription;
+    }
+
+    public void setWinDescription(String winDescription) {
+        this.winDescription = winDescription;
     }
 
     public Long getEventId() {
@@ -78,11 +92,11 @@ public class Event {
         this.eventDescription = eventDescription;
     }
 
-    public boolean getBetSide() {
+    public BetConditionState getBetSide() {
         return betSide;
     }
 
-    public void setBetSide(boolean betSide) {
+    public void setBetSide(BetConditionState betSide) {
         this.betSide = betSide;
     }
 

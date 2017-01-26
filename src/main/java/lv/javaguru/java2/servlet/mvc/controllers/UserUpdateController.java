@@ -26,7 +26,7 @@ public class UserUpdateController {
 
     @RequestMapping(value = "userUpdate", method = RequestMethod.POST)
     public ModelAndView processPost(@ModelAttribute("userRoles") UserRolesModel userRolesModel,
-                                    /*@Valid*/ @ModelAttribute("user") UserDTO userDTO, BindingResult result) {
+                                    @Valid @ModelAttribute("user") UserDTO userDTO, BindingResult result) {
         ModelAndView model = new ModelAndView();
         if (!result.hasErrors()) {
             // validate to same login

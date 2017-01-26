@@ -68,7 +68,7 @@ public class TransferService {
     }
 
     private double coefficientSetPercent(double coefficient) {
-        return coefficient * PERCENTS;               // -10% to Totalizator
+        return coefficient * PERCENTS;                                              // -10% to Totalizator
     }
 
     private void transferUncoveredBet(Bet bet) {
@@ -83,38 +83,36 @@ public class TransferService {
 
     private void addUncoveredBetSumToUserBalance(User user, Bet bet) {
         uncoveredBetSum = bet.getUncoveredSum();
-        userBalance = user.getBalance();
-        userBalance = userBalance.add(uncoveredBetSum);
-        eventBank = event.getTotalBank();
-        eventBank = eventBank.subtract(uncoveredBetSum);
-        event.setTotalBank(eventBank);
-        user.setBalance(userBalance);
+        transferFromEventBankToUserBalance(user, event, uncoveredBetSum);
     }
 
     private void addCoveredBetSumToUserBalance(User user, Bet bet) {
         uncoveredBetSum = bet.getUncoveredSum();
         betSum = bet.getBetSum();
         BigDecimal coveredBetSum = betSum.subtract(uncoveredBetSum);
-        winSum = coveredBetSum.multiply(coefficientWithPercent);
-        totalWinSum = winSum.add(coveredBetSum);
-        userBalance = user.getBalance();
-        userBalance = userBalance.add(totalWinSum);
-        eventBank = event.getTotalBank();
-        eventBank = eventBank.subtract(totalWinSum);
-        event.setTotalBank(eventBank);
-        user.setBalance(userBalance);
+
+        totalWinSum = getTotalWinSum(coveredBetSum, coefficientWithPercent);
+        transferFromEventBankToUserBalance(user, event, totalWinSum);
     }
 
     private void addWinningSumToUserBalance(User user, Bet bet) {
-        userBalance = user.getBalance();
         betSum = bet.getBetSum();
-        winSum = betSum.multiply(coefficientWithPercent);
-        totalWinSum = winSum.add(betSum);
-        userBalance = userBalance.add(totalWinSum);
+        totalWinSum = getTotalWinSum(betSum, coefficientWithPercent);
+        transferFromEventBankToUserBalance(user, event, totalWinSum);
+
+    }
+
+    private BigDecimal getTotalWinSum(BigDecimal betSum, BigDecimal coefficient) {
+        winSum = betSum.multiply(coefficient);
+        return winSum.add(betSum);
+    }
+
+    private void transferFromEventBankToUserBalance(User user, Event event, BigDecimal sum) {
+        userBalance = user.getBalance();
+        userBalance = userBalance.add(sum);
         eventBank = event.getTotalBank();
-        eventBank = eventBank.subtract(totalWinSum);
+        eventBank = eventBank.subtract(sum);
         event.setTotalBank(eventBank);
         user.setBalance(userBalance);
-
     }
 }

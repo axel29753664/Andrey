@@ -13,13 +13,17 @@
         <tr>
             <td>Name</td>
             <td>Description</td>
+            <td>Winning condition description</td>
             <td>Coefficient</td>
+            <td>Current bet side</td>
         </tr>
         <c:forEach items="${eventList}" var="event">
             <tr>
                 <td> ${event.eventName}</td>
                 <td> ${event.eventDescription}</td>
+                <td> ${event.winDescription}</td>
                 <td> ${event.coefficient}</td>
+                <td> ${event.betSide}</td>
                 <td>
                     <label>
                         <input type="button" value="Make bet"

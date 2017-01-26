@@ -17,9 +17,10 @@
             <td>Event ID</td>
             <td>Name</td>
             <td>Description</td>
+            <td>Winning description</td>
             <td>Coefficient</td>
             <td>Total Bank</td>
-            <td>Status</td>
+            <td>Current bet side</td>
             <td>Winner</td>
 
         </tr>
@@ -28,6 +29,7 @@
                 <td> ${event.eventId}</td>
                 <td> ${event.eventName}</td>
                 <td> ${event.eventDescription}</td>
+                <td> ${event.winDescription}</td>
                 <td> ${event.coefficient}</td>
                 <td> ${event.totalBank}</td>
                 <td> ${event.betSide} </td>
@@ -61,5 +63,4 @@
 
 
 </form>
-<input type="button" onclick="history.back();" value="Back"/>
 </body>

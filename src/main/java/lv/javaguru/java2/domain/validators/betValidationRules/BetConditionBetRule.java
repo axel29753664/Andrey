@@ -17,7 +17,7 @@ public class BetConditionBetRule implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         BetDTO betDTO = (BetDTO) obj;
-        if (betDTO.getBetCondition() == null || betDTO.getBetCondition() == BetConditionState.NOT_APPLIED){
+        if (betDTO.getBetCondition() == null || betDTO.getBetCondition() == BetConditionState.NOT_SET){
             errors.rejectValue("betCondition", "message.notChosen", "Winning condition not chosen.");
             return;
         }

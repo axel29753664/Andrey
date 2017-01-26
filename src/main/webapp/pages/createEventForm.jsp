@@ -22,6 +22,11 @@
             <td><font color="red"><form:errors path="eventDescription"/></font></td>
         </tr>
         <tr>
+            <td height="${height}">Winning condition description:</td>
+            <td><form:input path="winDescription"/></td>
+            <td><font color="red"><form:errors path="winDescription"/></font></td>
+        </tr>
+        <tr>
             <td height="${height}">Coefficient:</td>
             <td><form:input path="coefficient"/></td>
             <td><font color="red"><form:errors path="coefficient"/></font></td>
