@@ -11,7 +11,7 @@
 <jsp:include page="../adminPages/eventManagement.jsp"></jsp:include>
 
 
-<form name="eventTable" action="${contextPath}/admin/allEvents" method="post">
+<form name="eventTable" action="${contextPath}/admin/activeEvents" method="post">
     <table border="2">
         <tr>
             <td>Event ID</td>
@@ -35,7 +35,7 @@
                 <td> ${event.betSide} </td>
 
                 <td>
-                    <select name="winnerStatus${event.eventId}">
+                    <select name="winnerStatus${event.eventId}" ${event.winnerStatus=="NOT_SET" ? "":"disabled"}>
                         <option>${event.winnerStatus}</option>
                         <option>WIN</option>
                         <option>LOSE</option>

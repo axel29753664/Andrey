@@ -14,6 +14,7 @@
                 <td>Description</td>
                 <td>Winning condition description</td>
                 <td>Coefficient</td>
+                <td>Bet sum</td>
 
             </tr>
             <tr>
@@ -21,6 +22,7 @@
                 <td> ${event.eventDescription}</td>
                 <td> ${event.winDescription}</td>
                 <td> ${event.coefficient}</td>
+                <td> ${bet.betSum}</td>
 
             </tr>
         </table>

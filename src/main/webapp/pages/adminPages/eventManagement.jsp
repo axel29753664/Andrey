@@ -7,7 +7,8 @@
 </head>
 <body>
 <jsp:include page="../adminPages/adminPage.jsp"></jsp:include>
-
-<input type="button" value="Show All Events" onClick='location.href="${contextPath}/admin/allEvents"'>
-
+<form>
+    <input type="button" value="Show Active Events" onClick='location.href="${contextPath}/admin/activeEvents"'>
+    <input type="button" value="Show All Events" onClick='location.href="${contextPath}/admin/allEvents"'>
+</form>
 </body>

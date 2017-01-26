@@ -47,6 +47,7 @@ public class CreateEventFormController {
                 eventServices.createEvent(user.getUserId(), eventDTO, eventErrors, betDTO, betErrors);
                 model.setViewName("createEventConfirmation");
                 model.addObject("event", eventDTO);
+                model.addObject("bet", betDTO);
             } catch (EventCreationException e) {
                 /*error*/
             }
