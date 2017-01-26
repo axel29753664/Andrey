@@ -29,7 +29,7 @@ public class EventsController {
 
     @RequestMapping(value = "events", method = RequestMethod.GET)
     public ModelAndView processRequestGet(HttpServletRequest request) {
-        List<Event> events = eventServices.getAllEvents();
+        List<Event> events = eventServices.getEventsWhereWinnerStatusNotSet();
         return new ModelAndView("events", "eventList", events);
     }
 
