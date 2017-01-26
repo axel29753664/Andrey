@@ -31,11 +31,23 @@
             <td><form:input path="coefficient"/></td>
             <td><font color="red"><form:errors path="coefficient"/></font></td>
         </tr>
-        <tr> Bet sum</tr>
-        <td><input type="number" step="0.01" name="betSum"/></td>
-
+        <tr>
+            <form:form modelAttribute="betDTO">
+                <td height="${height}">Bet Sum:</td>
+                <td><form:input path="betSum"/></td>
+                <td>
+                    <font color="red"><form:errors path="userId"/></font>
+                    <font color="red"><form:errors path="eventId"/></font>
+                    <font color="red"><form:errors path="betSum"/></font>
+                    <font color="red"><form:errors path="uncoveredSum"/></font>
+                    <font color="red"><form:errors path="betCondition"/></font>
+                </td>
+            </form:form>
+        </tr>
     </table>
+    <form><font color="red"> ${errorMessage}</font></form>
     <input type="submit" value="Send"/>
 </form:form>
+
 </body>
 </html>

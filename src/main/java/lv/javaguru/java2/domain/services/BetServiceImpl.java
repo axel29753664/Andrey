@@ -3,9 +3,12 @@ package lv.javaguru.java2.domain.services;
 import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.BetConditionState;
+import lv.javaguru.java2.domain.services.factories.CreationFactory;
+import lv.javaguru.java2.servlet.dto.BetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,8 +20,11 @@ public class BetServiceImpl implements BetService {
     @Autowired
     private BetDAO betDAO;
 
+    @Autowired
+    private CreationFactory<BetDTO> betCreationFactory;
+
     @Override
-    public void saveToDB(Bet bet){
+    public void saveToDB(Bet bet) {
         betDAO.create(bet);
     }
 
@@ -58,6 +64,11 @@ public class BetServiceImpl implements BetService {
         Set<Bet> betSet = new HashSet<>();
         betSet.addAll(betList);
         return betSet;
+    }
+
+    @Override
+    public void createBet(BetDTO betDTO, BindingResult errors) {
+        betCreationFactory.create(betDTO, errors);
     }
 
 }

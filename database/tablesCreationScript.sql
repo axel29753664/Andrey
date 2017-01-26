@@ -39,7 +39,8 @@ CREATE TABLE `events` (
   `Winner`                      ENUM ('WIN', 'LOSE', 'NOT_SET') NOT NULL                 DEFAULT 'NOT_SET',
   `Coefficient`                 DOUBLE                          NOT NULL                 DEFAULT '1',
   `TotalBank`                   DECIMAL(19, 4)                  NOT NULL                 DEFAULT '0.0000',
-  PRIMARY KEY (`EventID`)
+  PRIMARY KEY (`EventID`),
+  UNIQUE KEY `EventName_UNIQUE` (`EventName`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 1;
