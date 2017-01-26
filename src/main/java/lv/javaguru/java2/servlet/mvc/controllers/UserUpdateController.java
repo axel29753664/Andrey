@@ -29,21 +29,20 @@ public class UserUpdateController {
                                     @Valid @ModelAttribute("user") UserDTO userDTO, BindingResult result) {
         ModelAndView model = new ModelAndView();
         if (!result.hasErrors()) {
-            // validate to same login
+            validator.validate(userDTO, result);
             if (!result.hasErrors()) {
                 userDTO.setRoles(userRolesModel.getUserRoles());
                 User user = userService.convertUserDTO(userDTO);
                 userService.updateUser(user);
+                model.addObject("url", "userManagement");
+                model.setViewName("redirect");
+                return model;
             }
 
-            model.addObject("url", "userManagement");
-            model.setViewName("redirect");
-
-        } else {
-            model.addObject("user", userDTO);
-            model.addObject("userRoles", userRolesModel);
-            model.setViewName("adminPages/updateUser");
         }
+        model.addObject("user", userDTO);
+        model.addObject("userRoles", userRolesModel);
+        model.setViewName("adminPages/updateUser");
         return model;
     }
 }

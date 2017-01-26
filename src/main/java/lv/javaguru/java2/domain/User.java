@@ -63,7 +63,7 @@ public class User implements UserDetails {
     }
 
     private Set<Role> createDefaultUserRoles() {
-        Set<Role> roleSet = new HashSet<>();                                            //saveToDB default access ROLE_USER
+        Set<Role> roleSet = new HashSet<>();                                            //set default access ROLE_USER
         roleSet.add(RolesSet.USER);
         return roleSet;
     }

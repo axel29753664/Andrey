@@ -1,6 +1,6 @@
 package lv.javaguru.java2.database.jdbc;
 
-import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.domain.exception.DBException;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.database.IDatabaseConnection;

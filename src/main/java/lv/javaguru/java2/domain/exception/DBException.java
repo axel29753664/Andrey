@@ -1,4 +1,4 @@
-package lv.javaguru.java2.database;
+package lv.javaguru.java2.domain.exception;
 
 public class DBException extends RuntimeException {
 

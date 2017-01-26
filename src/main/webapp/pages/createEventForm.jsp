@@ -45,7 +45,6 @@
             </form:form>
         </tr>
     </table>
-    <form><font color="red"> ${errorMessage}</font></form>
     <input type="submit" value="Send"/>
 </form:form>
 

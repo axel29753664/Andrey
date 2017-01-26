@@ -48,16 +48,4 @@ public class EventsController {
 
     }
 
-    /*@RequestMapping(value = "events", method = RequestMethod.POST)
-    public ModelAndView processRequestPost(HttpServletRequest request) {
-        String betEventId = request.getParameter("betEventId");
-        Long eventId = null;
-        if ((betEventId != null) && (!betEventId.equals(""))) {
-            eventId = Long.parseLong(betEventId);
-        }
-        Event event = eventServices.getEventById(eventId);
-
-        return new ModelAndView("createBetForm", "event", event);
-    }*/
-
 }

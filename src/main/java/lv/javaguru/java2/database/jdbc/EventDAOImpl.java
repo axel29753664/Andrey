@@ -15,7 +15,7 @@ import java.util.List;
 public class EventDAOImpl extends GenericHibernateDAOImpl<Event> implements EventDAO {
 
     private final String TABLE_NAME = "events";
-    private final String EVENT_ID = "EventID";
+
 
 
     @Override
@@ -39,48 +39,5 @@ public class EventDAOImpl extends GenericHibernateDAOImpl<Event> implements Even
         criteria.add(Restrictions.like("winnerStatus", BetConditionState.NOT_SET));
         return criteria.list();
     }
-
-//    public Event getById(Long eventId) throws DBException {
-//        String searchQuery = "select * from " +  TABLE_NAME + " where " + EVENT_ID + " = " + eventId;
-//        List<Event> events = getByCondition(searchQuery);
-//        Event event = getOneUniqueEvent(events);
-//        return event;
-//    }
-//
-//    private List<Event> getByCondition(String searchCondition) {
-//        List<Event> events = new ArrayList();
-//        Connection connection = null;
-//        try {
-//            connection = getConnection();
-//            PreparedStatement preparedStatement = connection.prepareStatement(searchCondition);
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            while (resultSet.next()) {
-//                Event event = getDataFromSearchResult(resultSet);
-//                events.add(event);
-//            }
-//        } catch (Throwable e) {
-//            System.out.println("Exception while execute EventDAOImpl.getByCondition()");
-//            e.printStackTrace();
-//            throw new DBException(e);
-//        } finally {
-//            closeConnection(connection);
-//        }
-//        return events;
-//    }
-//
-//    private Event getDataFromSearchResult(ResultSet resultSet) throws SQLException {
-//        Event event = new Event();
-//        event.setEventId(resultSet.getLong("EventID"));
-//        event.setEventName(resultSet.getString("EventName"));
-//        return event;
-//    }
-//
-//    private Event getOneUniqueEvent(List<Event> events) {
-//        Event event = null;
-//        if (events.size() > 0) {
-//            event = events.get(0);
-//        }
-//        return event;
-//    }
 
 }
