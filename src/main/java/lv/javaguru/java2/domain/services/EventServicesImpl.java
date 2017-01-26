@@ -84,7 +84,7 @@ public class EventServicesImpl implements EventServices {
             throw new EventCreationException("Error create event: " + eventDTO.getEventName());
         }
         initEventFirstBet(betDTO, eventDTO, userId);
-        betService.createBet(betDTO, betErrors);
+        betService.createFirstBet(betDTO, betErrors);
         if (betErrors.hasErrors()) {
             throw new EventCreationException("Error create event: " + eventDTO.getEventName() + ". Bet creation Error");
         }

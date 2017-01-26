@@ -28,8 +28,12 @@ public class TransferService {
 
     @Autowired
     private UserService userService;
+
     @Autowired
     private BetService betService;
+
+    @Autowired
+    private EventServices eventService;
 
     public void transferMoneyToWinners(Event event) {
         this.event = event;
@@ -43,6 +47,19 @@ public class TransferService {
             transferUncoveredBet(uncoveredBet);
         }
         transferWinningBets();
+    }
+
+    public void transferFromUserBalanceToEventBank(Bet bet) {
+        User user = userService.getById(bet.getUserId());
+        Event event = eventService.getEventById(bet.getEventId());
+        eventBank = event.getTotalBank();
+        eventBank = eventBank.add(bet.getBetSum());
+        userBalance = user.getBalance();
+        userBalance = userBalance.subtract(bet.getBetSum());
+        event.setTotalBank(eventBank);
+        user.setBalance(userBalance);
+        userService.updateUser(user);
+        eventService.updateEvent(event);
     }
 
     private void transferWinningBets() {
@@ -115,4 +132,5 @@ public class TransferService {
         event.setTotalBank(eventBank);
         user.setBalance(userBalance);
     }
+
 }

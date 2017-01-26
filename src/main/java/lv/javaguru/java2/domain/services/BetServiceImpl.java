@@ -67,7 +67,7 @@ public class BetServiceImpl implements BetService {
     }
 
     @Override
-    public void createBet(BetDTO betDTO, BindingResult errors) {
+    public void createFirstBet(BetDTO betDTO, BindingResult errors) {
         betCreationFactory.create(betDTO, errors);
     }
 

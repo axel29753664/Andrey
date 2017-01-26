@@ -26,7 +26,7 @@ public class BetSumBetRule implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         BetDTO betDTO = (BetDTO) obj;
-        if (betDTO.getBetSum() == null || betDTO.getEventId() <= 0){
+        if (betDTO.getBetSum() == null){
             errors.rejectValue("betSum", "message.emptyField", "Field with Your bet is empty.");
             return;
         }

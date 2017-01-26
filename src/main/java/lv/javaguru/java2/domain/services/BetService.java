@@ -26,6 +26,6 @@ public interface BetService {
 
     Set<Bet> getEventWinnersBets(Long eventId, BetConditionState state);
 
-    void createBet(BetDTO betDTO, BindingResult errors);
+    void createFirstBet(BetDTO betDTO, BindingResult errors);
 
 }

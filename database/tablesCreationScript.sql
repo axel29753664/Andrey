@@ -34,7 +34,7 @@ CREATE TABLE `events` (
   `EventID`                     BIGINT(20)                      NOT NULL                 AUTO_INCREMENT,
   `EventName`                   VARCHAR(45)                     NOT NULL,
   `EventDescription`            VARCHAR(255)                                             DEFAULT NULL,
-  `WinningConditionDescription` VARCHAR(255)                    NOT NULL                 DEFAULT NULL,
+  `WinningConditionDescription` VARCHAR(255)                    NOT NULL,
   `BetSide`                     ENUM ('WIN', 'LOSE', 'NOT_SET') NOT NULL                 DEFAULT 'LOSE',
   `Winner`                      ENUM ('WIN', 'LOSE', 'NOT_SET') NOT NULL                 DEFAULT 'NOT_SET',
   `Coefficient`                 DOUBLE                          NOT NULL                 DEFAULT '1',

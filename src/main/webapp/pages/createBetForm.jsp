@@ -27,7 +27,7 @@
         <tr>
             <td height="${height}">Bet Condition:</td>
             <td><form:select path="betCondition">
-                    <form:option value="NOT_APPLIED" label="--- Select ---"/>
+                    <form:option value="NOT_SET" label="--- Select ---"/>
                     <form:option value="WIN"/>
                     <form:option value="LOSE"/>
                 </form:select>
