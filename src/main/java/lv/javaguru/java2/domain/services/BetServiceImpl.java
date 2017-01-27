@@ -87,7 +87,7 @@ public class BetServiceImpl implements BetService {
         if (event.getBetSide() == BetConditionState.LOSE) {
             betSearchingState = BetConditionState.WIN;
         }
-        List<Bet> betList = betDAO.getByEventIdAndBetCondition(event.getEventId(), betSearchingState);
+        List<Bet> betList = betDAO.getByEventIdAndBetCondition(event.getEventId(), betSearchingState);    // ? getByEventIdWhereUncoveredSum >0
         for (Bet searchingBet: betList) {
             if (searchingBet.getUncoveredSum().compareTo(BigDecimal.ZERO) > 0) {
                 oppositeBet = searchingBet;
