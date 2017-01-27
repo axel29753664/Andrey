@@ -25,7 +25,7 @@ public class CreateBetFormController {
     }
 
     @RequestMapping(value = "createBetForm", method = {RequestMethod.POST})
-    public ModelAndView processRequestPost(@Valid @ModelAttribute("betDTOForm") BetDTO betDTO,
+    public ModelAndView processRequestPost(@Valid @ModelAttribute("betDTO") BetDTO betDTO,
                                            BindingResult result, ModelAndView model) {
 
         if (!result.hasErrors()) {

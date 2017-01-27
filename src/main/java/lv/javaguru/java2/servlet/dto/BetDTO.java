@@ -24,7 +24,6 @@ public class BetDTO {
 
 
     public BetDTO() {
-        this.uncoveredSum = new BigDecimal(0);
     }
 
     public BetDTO(Long betId) {
@@ -35,7 +34,6 @@ public class BetDTO {
                   Long eventId,
                   BigDecimal betSum,
                   BetConditionState betCondition) {
-        this();
         this.userId = userId;
         this.eventId = eventId;
         this.betSum = betSum;
