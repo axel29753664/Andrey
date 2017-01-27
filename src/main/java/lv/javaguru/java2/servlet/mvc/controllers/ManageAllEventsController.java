@@ -19,18 +19,22 @@ public class ManageAllEventsController {
     private ButtonProcessMenu buttonProcessMenu;
     @Autowired
     private EventServices eventServices;
+    private boolean eventListSwitch;
 
-    @RequestMapping(value = "allEvents", method = RequestMethod.GET)
-    public ModelAndView eventManagementProcessGet() {
 
-        List<Event> eventList = eventServices.getEventsWhereWinnerStatusNotSet();
+    @RequestMapping(value = {"activeEvents", "allEvents"}, method = RequestMethod.GET)
+    public ModelAndView eventManagementProcessGet(HttpServletRequest request) {
+        String path = request.getServletPath();
+        initSwitcher(path);
+
+        List<Event> eventList = getEventList();
         ModelAndView model = new ModelAndView();
         model.addObject("eventList", eventList);
         model.setViewName("adminPages/allEvents");
         return model;
     }
 
-    @RequestMapping(value = "allEvents", method = RequestMethod.POST)
+    @RequestMapping(value = "activeEvents", method = RequestMethod.POST)
     public ModelAndView processRequestPost(HttpServletRequest request, ModelAndView model) {
         String buttonPressed = request.getParameter("buttonPressed");
         String listSizeFromRequest = request.getParameter("eventListSize");
@@ -38,11 +42,24 @@ public class ManageAllEventsController {
         int eventListSize = Integer.parseInt(listSizeFromRequest);
         buttonProcessMenu.getButtonProcess(buttonPressed).doAction(request, eventListSize, eventServices);
 
-        List<Event> eventList = eventServices.getEventsWhereWinnerStatusNotSet();
+        List<Event> eventList = getEventList();
         model.addObject("eventList", eventList);
 
         model.setViewName("adminPages/allEvents");
         return model;
+    }
+
+
+    private void initSwitcher(String path) {
+        eventListSwitch = path.equals("/admin/allEvents");
+    }
+
+    private List<Event> getEventList() {
+        if (eventListSwitch) {
+            return eventServices.getAllEvents();
+        } else {
+            return eventServices.getEventsWhereWinnerStatusNotSet();
+        }
     }
 
 }

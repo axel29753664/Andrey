@@ -17,8 +17,13 @@ public class UpdateButtonProcess implements Process {
         List<Long> idList = ParserStringIdsFromRequestToLong.getIdList(request, eventListSize);
         for (Long id : idList) {
             String winnerStatusFromRequest = request.getParameter("winnerStatus" + id);
+            if (winnerStatusFromRequest == null) {
+                return;
+            }
             BetConditionState winnerStatus = BetConditionState.valueOf(winnerStatusFromRequest);
-            eventServices.closeEvent(winnerStatus, id);
+            if (winnerStatus.equals(BetConditionState.WIN) || winnerStatus.equals(BetConditionState.LOSE)) {
+                eventServices.closeEvent(winnerStatus, id);
+            }
         }
     }
 }
