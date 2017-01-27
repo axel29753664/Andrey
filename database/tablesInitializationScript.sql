@@ -18,22 +18,16 @@ INSERT INTO user_roles VALUES (3, 2);
 INSERT INTO user_roles VALUES (4, 2);
 
 INSERT INTO events (EventName, EventDescription, WinningConditionDescription, BetSide, Winner, Coefficient, TotalBank)
-VALUES ('Arsenal - MU', 'Arsenal play vs MU', 'Arsenal wins', 'LOSE', 'WIN', 1.5, 235.4);
+VALUES ('Arsenal - MU', 'Arsenal play vs MU', 'Arsenal wins', 'WIN', 'NOT_SET', 1.5, 235.4);
 INSERT INTO events (EventName, EventDescription, WinningConditionDescription, BetSide, Winner, Coefficient, TotalBank)
-VALUES ('CSKA - MU', 'CSKA play vs MU', 'CSKA wins', 'WIN', 'NOT_SET', 0.5, 35.4);
+VALUES ('CSKA - MU', 'CSKA play vs MU', 'CSKA wins', 'LOSE', 'NOT_SET', 0.5, 35.4);
 INSERT INTO events (EventName, EventDescription, WinningConditionDescription, BetSide, Winner, Coefficient, TotalBank)
-VALUES ('Spartak - Liverpool', 'Spartak play vs Liverpool', 'Spartak wins', 'WIN', 'NOT_SET', 1.2, 135.4);
+VALUES ('Spartak - Liverpool', 'Spartak play vs Liverpool', 'Spartak wins', 'NOT_SET', 'NOT_SET', 1.2, 135.4);
 INSERT INTO events (EventName, EventDescription, WinningConditionDescription, BetSide, Winner, Coefficient, TotalBank)
-VALUES ('Arsenal - CSKA', 'Arsenal play vs CSKA', 'Arsenal wins', 'LOSE', 'LOSE', 0.5, 35.4);
+VALUES ('Arsenal - CSKA', 'Arsenal play vs CSKA', 'Arsenal wins', 'WIN', 'NOT_SET', 0.5, 35.4);
 
 
-INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (1, 1, 10, 10, 'WIN');
-INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (2, 1, 20, 10, 'WIN');
-INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (3, 1, 30, 10, 'LOSE');
-INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (1, 2, 40, 10, 'WIN');
-INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (1, 3, 50, 10, 'WIN');
-INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (2, 3, 60, 10, 'LOSE');
-INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (3, 4, 70, 10, 'WIN');
-INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (3, 4, 80, 10, 'LOSE');
-INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (4, 1, 90, 10, 'WIN');
-INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (4, 3, 100, 10, 'LOSE');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (1, 1, 10, 10, 'LOSE');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (2, 2, 20, 10, 'WIN');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (3, 3, 30, 10, 'WIN');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (4, 4, 40, 20, 'LOSE');

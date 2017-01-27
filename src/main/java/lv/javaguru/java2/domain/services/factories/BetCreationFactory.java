@@ -42,15 +42,19 @@ public class BetCreationFactory implements CreationFactory<BetDTO> {
             Bet bet = converterDTO.convertFromRequest(betDTO);
             try {
                 applyBetToDB(bet);
-            } catch (JDBCException e) {
-                validResult.rejectValue("betId", "message.saveToDBError", "Error save to DB [" + e.getCause().getMessage() + "]");
+            } catch (JDBCException e1) {
+                validResult.rejectValue("betId", "message.saveToDBError", "Error save to DB [" + e1.getCause().getMessage() + "]");
+            } catch (IllegalArgumentException e2) {
+                validResult.rejectValue("betId", "message.saveToDBError", e2.getCause().getMessage());
             }
         }
     }
 
     @Transactional
     private void applyBetToDB(Bet bet) {
+        Bet oppositeBet = betService.getOppositeBet(bet);
         transferService.transferFromUserBalanceToEventBank(bet);
+        betService.changeBetsUncoveredSumAndEventBetSide(bet, oppositeBet);
         betService.saveToDB(bet);
     }
 

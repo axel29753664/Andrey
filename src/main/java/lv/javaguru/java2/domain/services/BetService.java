@@ -20,11 +20,17 @@ public interface BetService {
 
     List<Bet> getAllBets();
 
+    void updateBet(Bet bet);
+
     void deleteBetById(Long id);
 
     void deleteByEventId(Long id);
 
     Set<Bet> getEventWinnersBets(Long eventId, BetConditionState state);
+
+    Bet getOppositeBet (Bet bet);
+
+    void changeBetsUncoveredSumAndEventBetSide (Bet bet, Bet oppositeBet);
 
     void createFirstBet(BetDTO betDTO, BindingResult errors);
 
