@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -74,6 +75,8 @@ public class EventServicesImpl implements EventServices {
         updateEvent(event);
         transferService.transferMoneyToWinners(event);
 
+//        transferService.transferToTotalizatorBank(event.getTotalBank());
+//        event.setTotalBank(new BigDecimal(0));
     }
 
     @Override
@@ -88,6 +91,9 @@ public class EventServicesImpl implements EventServices {
         if (betErrors.hasErrors()) {
             throw new EventCreationException("Error create event: " + eventDTO.getEventName() + ". Bet creation Error");
         }
+        Event event = getEventById(betDTO.getEventId());
+        event.setBetSide(BetConditionState.LOSE);
+        updateEvent(event);
     }
 
     private void initEventFirstBet(BetDTO betDTO, EventDTO eventDTO, Long userId) {

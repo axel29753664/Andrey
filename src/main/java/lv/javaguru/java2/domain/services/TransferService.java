@@ -1,10 +1,7 @@
 package lv.javaguru.java2.domain.services;
 
 
-import lv.javaguru.java2.domain.Bet;
-import lv.javaguru.java2.domain.BetConditionState;
-import lv.javaguru.java2.domain.Event;
-import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +11,6 @@ import java.util.Set;
 @Service
 public class TransferService {
 
-    private final static double PERCENTS = 0.9;
 
     @Autowired
     private UserService userService;
@@ -24,6 +20,13 @@ public class TransferService {
 
     @Autowired
     private EventServices eventService;
+
+    @Autowired
+    private TotalizatorBankServices bankServices;
+
+    public void transferToTotalizatorBank(BigDecimal balance){
+        bankServices.updateBalance(balance);
+    }
 
     public void transferMoneyToWinners(Event event) {
         BetConditionState winnerStatus = event.getWinnerStatus();
@@ -55,13 +58,9 @@ public class TransferService {
 
     private void transferWinningBets(Set<Bet> winningBetSet, BigDecimal coefficient) {
         for (Bet bet : winningBetSet) {
-            User user = userService.getById(bet.getUserId());
-            Event event = eventService.getEventById(bet.getEventId());
             BigDecimal betSum = bet.getBetSum();
             BigDecimal totalWinSum = getTotalWinSum(betSum, coefficient);
-            transferFromEventBankToUserBalance(user, event, totalWinSum);
-            userService.updateUser(user);
-            eventService.updateEvent(event);
+            transferFromEventBankToUserBalance(bet, totalWinSum);
         }
     }
 
@@ -80,21 +79,17 @@ public class TransferService {
     }
 
     private double coefficientSetPercent(double coefficient) {
-        return coefficient * PERCENTS;                                              // -10% to Totalizator
+        return coefficient * TotalizatorBank.PERCENTS;                                              // -10% to Totalizator
     }
 
     private void transferUncoveredBet(Bet bet, boolean isWinBet, BigDecimal coefficient) {
-        User uncoveredBetUser = userService.getById(bet.getUserId());
-        Event event = eventService.getEventById(bet.getEventId());
         if (isWinBet) {
             BigDecimal coveredBetSum = getCoveredBetSum(bet);
             BigDecimal winSum = getTotalWinSum(coveredBetSum, coefficient);
-            transferFromEventBankToUserBalance(uncoveredBetUser, event, winSum);
+            transferFromEventBankToUserBalance(bet, winSum);
         }
         BigDecimal uncoveredBetSum = bet.getUncoveredSum();
-        transferFromEventBankToUserBalance(uncoveredBetUser, event, uncoveredBetSum);
-        userService.updateUser(uncoveredBetUser);
-        eventService.updateEvent(event);
+        transferFromEventBankToUserBalance(bet, uncoveredBetSum);
     }
 
     private boolean checkUncoveredBetIsWinningBet(Set<Bet> winningBetSet, Bet bet) {
@@ -112,13 +107,17 @@ public class TransferService {
         return winSum.add(betSum);
     }
 
-    private void transferFromEventBankToUserBalance(User user, Event event, BigDecimal sum) {
+    private void transferFromEventBankToUserBalance(Bet bet, BigDecimal sum) {
+        User user = userService.getById(bet.getUserId());
+        Event event = eventService.getEventById(bet.getEventId());
         BigDecimal userBalance = user.getBalance();
         userBalance = userBalance.add(sum);
         BigDecimal eventBank = event.getTotalBank();
         eventBank = eventBank.subtract(sum);
         event.setTotalBank(eventBank);
         user.setBalance(userBalance);
+        userService.updateUser(user);
+        eventService.updateEvent(event);
     }
 
 }

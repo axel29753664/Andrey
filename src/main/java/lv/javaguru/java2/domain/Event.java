@@ -37,7 +37,7 @@ public class Event {
 
     public Event() {
         this.totalBank = new BigDecimal(0);
-        this.betSide = BetConditionState.LOSE;
+        this.betSide = BetConditionState.NOT_SET;
         this.winnerStatus = BetConditionState.NOT_SET;
     }
 

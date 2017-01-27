@@ -24,7 +24,7 @@ public class EventDTO {
     private BigDecimal totalBank;
 
     public EventDTO() {
-        this.betSide = BetConditionState.LOSE;
+        this.betSide = BetConditionState.NOT_SET;
         this.totalBank = new BigDecimal(0);
         this.winnerStatus = BetConditionState.NOT_SET;
     }

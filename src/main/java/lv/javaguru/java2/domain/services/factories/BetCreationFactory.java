@@ -33,7 +33,7 @@ public class BetCreationFactory implements CreationFactory<BetDTO> {
 
         try {
             betValidator.validate(betDTO, validResult);
-            betDTO.setUncoveredSum(betDTO.getBetSum());
+            betDTO.setUncoveredSum(betDTO.getBetSum());                         // ???
         } catch (JDBCException e) {
             validResult.rejectValue("betId", "message.validate", "Error validating bet [" + e.getCause().getMessage() + "]");
         }
@@ -53,8 +53,8 @@ public class BetCreationFactory implements CreationFactory<BetDTO> {
     @Transactional
     private void applyBetToDB(Bet bet) {
         Bet oppositeBet = betService.getOppositeBet(bet);
-        transferService.transferFromUserBalanceToEventBank(bet);
-        betService.changeBetsUncoveredSumAndEventBetSide(bet, oppositeBet);
+        transferService.transferFromUserBalanceToEventBank(bet);                                        // Ставка не переводит деньки
+        if (!(oppositeBet==null)) betService.changeBetsUncoveredSumAndEventBetSide(bet, oppositeBet);
         betService.saveToDB(bet);
     }
 

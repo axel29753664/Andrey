@@ -77,29 +77,80 @@ public class BetServiceImpl implements BetService {
     }
 
     @Override
-    public Bet getOppositeBet (Bet bet) {
-        Event event = eventService.getEventById(bet.getEventId());
-        BetConditionState betSearchingState = null;
-        Bet oppositeBet = null;
+    public Bet getOppositeBet(Bet bet) {
+        Event event = eventService.getEventById(bet.getEventId());      // мы знаем что ставим на всегда против тоесть можно
+        BetConditionState betSearchingState = null;                     // getBetState() если  WIN то ищем по LOSE, и наоборот
+        Bet oppositeBet = null;                                         // ЭВЕНТ тут вообще НЕ нужен, мы ищем противоположную ставку
         if (event.getBetSide() == BetConditionState.WIN) {
             betSearchingState = BetConditionState.LOSE;
         }
         if (event.getBetSide() == BetConditionState.LOSE) {
             betSearchingState = BetConditionState.WIN;
         }
-        List<Bet> betList = betDAO.getByEventIdAndBetCondition(event.getEventId(), betSearchingState);    // ? getByEventIdWhereUncoveredSum >0
-        for (Bet searchingBet: betList) {
-            if (searchingBet.getUncoveredSum().compareTo(BigDecimal.ZERO) > 0) {
-                oppositeBet = searchingBet;
-            }
-        }
-        if (oppositeBet.getBetCondition() == bet.getBetCondition()) {
-            throw new IllegalArgumentException("Incorrect data about bets condition in DB, please contact administrator.");
-        }
+
+        List<Bet> betList = betDAO.getByEventIdAndBetCondition(event.getEventId(), betSearchingState);
+        for (Bet searchingBet : betList) {
+            if (searchingBet.getUncoveredSum().compareTo(BigDecimal.ZERO) > 0) {     //Получаем противоположную ставку
+                oppositeBet = searchingBet;                                         // запрос в таблицу ставок по условию:
+            }                                                                       //WIN/LOSE, EventId, UncoveredSum > 0 (3 условия)
+        }                                                                           // нужно в ДАО сделать метод для этого
+                                                                                    //getUncoveredEventBetByEventId() <- как этот +WIN/LOSE
+//        if (oppositeBet.getBetCondition() == bet.getBetCondition()) {
+//            throw new IllegalArgumentException("Incorrect data about bets condition in DB, please contact administrator.");
+//        }
         return oppositeBet;
     }
+    /*
+    теперь у нас есть Bet и OppositeBet(если нету ставки уровнялись)
+    у OppositeBet есть uncoveredSum = oppositebet.getUncoveredSum() (нужно проверить на нулл, для равных ставок)
 
-    public void changeBetsUncoveredSumAndEventBetSide (Bet bet, Bet oppositeBet) {
+     Result =  uncoveredSum - (Bet.getSum * coefficient)     вычитаем из противоположной ставки нашу ставку в соотношении коэффицентов
+          теперь получаем 3 варианта:
+
+          1 выриант :
+          if (result >0){
+
+          oppositeBetUncoveredSum(result)
+          betUncoveredSum(0);
+          } Ставка готова ! ( можно сохранять CreationFactory или через сервис)
+
+          2 вариант (наша ставка больше чем противоположная(нужно менять БетСайд))
+          if (result <0){
+          result *(-1) ну или поискать в Яве должен быть какойто метод.
+
+          betUncoveredSum( result / coefficient);  ставим нашей ставке UncoveredSum (тут надо проверить как соотношение коэффицента вернуть)
+          opositeBetUncoveredSum(0)
+
+          eventService.getById().changeBetSide(WIN/LOSE)
+          } Ставка готова ! ( можно сохранять CreationFactory или через сервис)
+
+          3 вариант (уровнялись)
+          else{
+
+          oppositeBetUncoveredSum(0)
+          betUncoveredSum(0)
+
+          eventService.getById().changeBetSide(NOT_SET)
+
+             (В JSP добавить возможность выбирать сторону если betSide.NOT_SET)
+          }
+
+          вынести в отделный метод к примеру
+          setUncoveredSums(oppositeUncoverSum, betUncoverSum){
+          if (oppositeBet !=null){oppositeBet.SetUncoveredSum(oppositeUncoverSum)}    ->   если ставки равны, противоположной ставки нет
+          bet.setUncoveredSum(betUncoverSum)
+          }
+
+         - ставка создана можно переводить с баланса юзера на баланс Эвента деньги TransferService ( bet.getSum )
+
+         --- Transaction end
+
+         P.S. чтобы не выбирать делить на коэффицент или умножать в зависимости от выигрышной стороны
+         в TransferService есть метод getWinnerCoefficient()
+
+    */
+
+    public void changeBetsUncoveredSumAndEventBetSide(Bet bet, Bet oppositeBet) {
         BigDecimal betSum = bet.getBetSum();
         BigDecimal betUncoveredSum = bet.getUncoveredSum();
         BigDecimal oppositeBetUncoveredSum = oppositeBet.getUncoveredSum();
