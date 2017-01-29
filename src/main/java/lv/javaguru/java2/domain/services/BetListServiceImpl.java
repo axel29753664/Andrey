@@ -5,7 +5,6 @@ import lv.javaguru.java2.domain.Event;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.services.dtoConverters.ConverterDtoList;
 import lv.javaguru.java2.domain.services.dtoConverters.ConverterEventDTO;
-import lv.javaguru.java2.domain.services.parsers.ParserStringToLong;
 import lv.javaguru.java2.servlet.dto.BetDTO;
 import lv.javaguru.java2.servlet.dto.EventDTO;
 import lv.javaguru.java2.servlet.dto.UserDTO;
