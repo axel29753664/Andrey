@@ -45,7 +45,6 @@ public class UserProfileController {
             user.setRoles(roles);
             userService.updateUser(user);
         }
-
         return model;
     }
 }
