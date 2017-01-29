@@ -45,22 +45,24 @@ public class EventsController {
         Long eventId = ParserStringToLong.parse(eventIdFromRequest);
         Event event = eventServices.getEventById(eventId);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         BetDTO betDTO = new BetDTO();
         betDTO.setEventId(eventId);
         betDTO.setUserId(user.getUserId());
         EventDTO eventDTO = converterEventDTO.convertToResponse(event);
+
         ModelAndView model = new ModelAndView();
-        //model.addObject("eventDTO", eventDTO);
         if (event.getBetSide() == BetConditionState.WIN) {
             betDTO.setBetCondition(BetConditionState.WIN);
         }
         if (event.getBetSide() == BetConditionState.LOSE) {
             betDTO.setBetCondition(BetConditionState.LOSE);
         }
-        //if (event.getBetSide() == BetConditionState.NOT_SET) {
-        //    betDTO.setBetCondition(BetConditionState.NOT_SET);
-        //}
+        if (event.getBetSide() == BetConditionState.NOT_SET) {
+            betDTO.setBetCondition(BetConditionState.NOT_SET);
+        }
         model.addObject("betDTO", betDTO);
+        model.addObject("eventDTO", eventDTO);
         model.setViewName("createBetForm");
         return model;
     }

@@ -67,6 +67,16 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
     }
 
     @Override
+    @Transactional
+    public void deleteByEventId(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        SQLQuery query = session.createSQLQuery("delete from " + TABLE_NAME + " where EventID = :ID");
+        query.setParameter("ID", id);
+        query.executeUpdate();
+    }
+
+
+    @Override
     public Bet getUncoveredEventBetByEventId(Long id) throws BetDBException {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Bet.class);
         criteria.add(Restrictions.like("eventId", id));
@@ -79,16 +89,24 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
             bet = (Bet) criteria.list().get(0);
         }
         return bet;
-
     }
 
     @Override
-    @Transactional
-    public void deleteByEventId(Long id) {
-        Session session = sessionFactory.getCurrentSession();
-        SQLQuery query = session.createSQLQuery("delete from " + TABLE_NAME + " where EventID = :ID");
-        query.setParameter("ID", id);
-        query.executeUpdate();
+    public Bet getUncoveredBetByEventIdAndUncoveredSumAndState(Long id, BetConditionState betCondition) throws BetDBException {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Bet.class);
+        criteria.add(Restrictions.like("eventId", id));
+        criteria.add(Restrictions.like("betCondition", betCondition));
+        criteria.add(Restrictions.gt("uncoveredSum", new BigDecimal(0)));
+        if (criteria.list().size() > 1) {
+            throw new BetDBException("More than one bet is uncovered");
+        }
+        Bet bet = null;
+        if (criteria.list().size() > 0) {
+            bet = (Bet) criteria.list().get(0);
+        }
+        return bet;
     }
+
+
 
 }

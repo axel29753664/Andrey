@@ -1,5 +1,6 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
+import lv.javaguru.java2.domain.services.ApplyBetService;
 import lv.javaguru.java2.domain.services.factories.CreationFactory;
 import lv.javaguru.java2.servlet.dto.BetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import javax.validation.Valid;
 public class CreateBetFormController {
 
     @Autowired
-    private CreationFactory<BetDTO> betCreationFactory;
+    private ApplyBetService applyBetService;
 
     @RequestMapping(value = "createBetForm", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
@@ -26,11 +27,11 @@ public class CreateBetFormController {
 
     @RequestMapping(value = "createBetForm", method = {RequestMethod.POST})
     public ModelAndView processRequestPost(@Valid @ModelAttribute("betDTO") BetDTO betDTO,
-                                           BindingResult result, ModelAndView model) {
+                                           BindingResult validResult, ModelAndView model) {
 
-        if (!result.hasErrors()) {
-            betCreationFactory.create(betDTO, result);
-            if (!result.hasErrors()) {
+        if (!validResult.hasErrors()) {
+            applyBetService.apply(betDTO, validResult);
+            if (!validResult.hasErrors()) {
                 model.setViewName("createBetConfirmation");
                 model.addObject("bet", betDTO);
             }

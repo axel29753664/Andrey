@@ -24,6 +24,10 @@ public class EventServicesImpl implements EventServices {
 
     @Autowired
     private BetService betService;
+
+    @Autowired
+    private ApplyBetService applyBetService;
+
     @Autowired
     private CreationFactory<EventDTO> eventCreationFactory;
 
@@ -63,6 +67,16 @@ public class EventServicesImpl implements EventServices {
     }
 
     @Override
+    public double getCoefficientDependingOnBetSide(Long eventId) {
+        Event event = getEventById(eventId);
+        double coefficient = event.getCoefficient();
+        if (event.getBetSide().equals(BetConditionState.LOSE)) {
+            coefficient = 1 / coefficient;
+        }
+        return coefficient;
+    }
+
+    @Override
     public List<Event> getEventsWhereWinnerStatusNotSet() {
         return eventDAO.getEventsWhereWinnerStatusIsNull();
     }
@@ -87,7 +101,7 @@ public class EventServicesImpl implements EventServices {
             throw new EventCreationException("Error create event: " + eventDTO.getEventName());
         }
         initEventFirstBet(betDTO, eventDTO, userId);
-        betService.createFirstBet(betDTO, betErrors);
+        applyBetService.apply(betDTO, betErrors);
         if (betErrors.hasErrors()) {
             throw new EventCreationException("Error create event: " + eventDTO.getEventName() + ". Bet creation Error");
         }
@@ -100,7 +114,7 @@ public class EventServicesImpl implements EventServices {
         Event event = getByEventName(eventDTO.getEventName());
         betDTO.setUserId(userId);
         betDTO.setEventId(event.getEventId());
-        betDTO.setUncoveredSum(betDTO.getBetSum());
+        //betDTO.setUncoveredSum(betDTO.getBetSum());
         betDTO.setBetCondition(BetConditionState.WIN);
     }
 

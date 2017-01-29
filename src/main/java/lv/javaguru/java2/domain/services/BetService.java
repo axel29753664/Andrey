@@ -4,6 +4,7 @@ import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.BetConditionState;
 import lv.javaguru.java2.servlet.dto.BetDTO;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 
 import java.util.List;
 import java.util.Set;
@@ -30,8 +31,8 @@ public interface BetService {
 
     Bet getOppositeBet (Bet bet);
 
-    void changeBetsUncoveredSumAndEventBetSide (Bet bet, Bet oppositeBet);
+    void changeBetsUncoveredSumAndEventBetSide (Bet bet, Bet oppositeBet, Double coefficient);
 
-    void createFirstBet(BetDTO betDTO, BindingResult errors);
+    //void createFirstBet(BetDTO betDTO, BindingResult errors);
 
 }

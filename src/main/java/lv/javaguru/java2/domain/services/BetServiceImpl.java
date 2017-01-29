@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -23,10 +24,8 @@ public class BetServiceImpl implements BetService {
     private BetDAO betDAO;
 
     @Autowired
-    private CreationFactory<BetDTO> betCreationFactory;
-
-    @Autowired
     private EventServices eventService;
+
 
     @Override
     public void saveToDB(Bet bet) {
@@ -78,120 +77,51 @@ public class BetServiceImpl implements BetService {
 
     @Override
     public Bet getOppositeBet(Bet bet) {
-        Event event = eventService.getEventById(bet.getEventId());      // мы знаем что ставим на всегда против тоесть можно
-        BetConditionState betSearchingState = null;                     // getBetState() если  WIN то ищем по LOSE, и наоборот
-        Bet oppositeBet = null;                                         // ЭВЕНТ тут вообще НЕ нужен, мы ищем противоположную ставку
-        if (event.getBetSide() == BetConditionState.WIN) {
+        BetConditionState betSearchingState = null;
+        if (bet.getBetCondition() == BetConditionState.WIN) {
             betSearchingState = BetConditionState.LOSE;
         }
-        if (event.getBetSide() == BetConditionState.LOSE) {
+        if (bet.getBetCondition() == BetConditionState.LOSE) {
             betSearchingState = BetConditionState.WIN;
         }
-
-        List<Bet> betList = betDAO.getByEventIdAndBetCondition(event.getEventId(), betSearchingState);
-        for (Bet searchingBet : betList) {
-            if (searchingBet.getUncoveredSum().compareTo(BigDecimal.ZERO) > 0) {     //Получаем противоположную ставку
-                oppositeBet = searchingBet;                                         // запрос в таблицу ставок по условию:
-            }                                                                       //WIN/LOSE, EventId, UncoveredSum > 0 (3 условия)
-        }                                                                           // нужно в ДАО сделать метод для этого
-                                                                                    //getUncoveredEventBetByEventId() <- как этот +WIN/LOSE
-//        if (oppositeBet.getBetCondition() == bet.getBetCondition()) {
-//            throw new IllegalArgumentException("Incorrect data about bets condition in DB, please contact administrator.");
-//        }
+        Bet oppositeBet = betDAO.getUncoveredBetByEventIdAndUncoveredSumAndState(bet.getEventId(), betSearchingState);
         return oppositeBet;
     }
-    /*
-    теперь у нас есть Bet и OppositeBet(если нету ставки уровнялись)
-    у OppositeBet есть uncoveredSum = oppositebet.getUncoveredSum() (нужно проверить на нулл, для равных ставок)
 
-     Result =  uncoveredSum - (Bet.getSum * coefficient)     вычитаем из противоположной ставки нашу ставку в соотношении коэффицентов
-          теперь получаем 3 варианта:
-
-          1 выриант :
-          if (result >0){
-
-          oppositeBetUncoveredSum(result)
-          betUncoveredSum(0);
-          } Ставка готова ! ( можно сохранять CreationFactory или через сервис)
-
-          2 вариант (наша ставка больше чем противоположная(нужно менять БетСайд))
-          if (result <0){
-          result *(-1) ну или поискать в Яве должен быть какойто метод.
-
-          betUncoveredSum( result / coefficient);  ставим нашей ставке UncoveredSum (тут надо проверить как соотношение коэффицента вернуть)
-          opositeBetUncoveredSum(0)
-
-          eventService.getById().changeBetSide(WIN/LOSE)
-          } Ставка готова ! ( можно сохранять CreationFactory или через сервис)
-
-          3 вариант (уровнялись)
-          else{
-
-          oppositeBetUncoveredSum(0)
-          betUncoveredSum(0)
-
-          eventService.getById().changeBetSide(NOT_SET)
-
-             (В JSP добавить возможность выбирать сторону если betSide.NOT_SET)
-          }
-
-          вынести в отделный метод к примеру
-          setUncoveredSums(oppositeUncoverSum, betUncoverSum){
-          if (oppositeBet !=null){oppositeBet.SetUncoveredSum(oppositeUncoverSum)}    ->   если ставки равны, противоположной ставки нет
-          bet.setUncoveredSum(betUncoverSum)
-          }
-
-         - ставка создана можно переводить с баланса юзера на баланс Эвента деньги TransferService ( bet.getSum )
-
-         --- Transaction end
-
-         P.S. чтобы не выбирать делить на коэффицент или умножать в зависимости от выигрышной стороны
-         в TransferService есть метод getWinnerCoefficient()
-
-    */
-
-    public void changeBetsUncoveredSumAndEventBetSide(Bet bet, Bet oppositeBet) {
+    public void changeBetsUncoveredSumAndEventBetSide(Bet bet, Bet oppositeBet, Double coefficient) {
         BigDecimal betSum = bet.getBetSum();
-        BigDecimal betUncoveredSum = bet.getUncoveredSum();
+        BigDecimal betUncoveredSum = betSum;
         BigDecimal oppositeBetUncoveredSum = oppositeBet.getUncoveredSum();
-        Event event = eventService.getEventById(bet.getEventId());
-        BigDecimal betCoefficient = new BigDecimal(event.getCoefficient());
-        BetConditionState newBetSide = event.getBetSide();
+        BigDecimal betCoefficient = new BigDecimal(coefficient);
+
+        BigDecimal sumToCover = oppositeBetUncoveredSum.subtract(betSum.multiply(betCoefficient));
+
         BigDecimal newOppositeBetUncoveredSum = oppositeBetUncoveredSum;
         BigDecimal newBetUncoveredSum = betUncoveredSum;
 
-        if (event.getBetSide() == BetConditionState.WIN) {
-            if (oppositeBetUncoveredSum.compareTo(betSum.multiply(betCoefficient)) > 0) {
-                newOppositeBetUncoveredSum = oppositeBetUncoveredSum.subtract(betSum.multiply(betCoefficient));
-                newBetUncoveredSum = betUncoveredSum.subtract(betSum);
-            }
-            if (oppositeBetUncoveredSum.compareTo(betSum.multiply(betCoefficient)) == 0) {
-                newOppositeBetUncoveredSum = oppositeBetUncoveredSum.subtract(betSum.multiply(betCoefficient));
-                newBetUncoveredSum = betUncoveredSum.subtract(betSum);
-                newBetSide = BetConditionState.NOT_SET;
-            }
-            if (oppositeBetUncoveredSum.compareTo(betSum.multiply(betCoefficient)) < 0) {
-                newOppositeBetUncoveredSum = oppositeBetUncoveredSum.subtract(oppositeBetUncoveredSum);
-                newBetUncoveredSum = betUncoveredSum.subtract(oppositeBetUncoveredSum.divide(betCoefficient, 2));
+        Event event = eventService.getEventById(bet.getEventId());
+        BetConditionState betSide = event.getBetSide();
+        BetConditionState newBetSide = betSide;
+
+        if (sumToCover.compareTo(BigDecimal.ZERO) > 0) {
+            newOppositeBetUncoveredSum = sumToCover;
+            newBetUncoveredSum = BigDecimal.ZERO;
+        }
+
+        if (sumToCover.compareTo(BigDecimal.ZERO) < 0) {
+            newOppositeBetUncoveredSum = BigDecimal.ZERO;
+            newBetUncoveredSum = betSum.subtract(oppositeBetUncoveredSum.divide(betCoefficient));
+            if (betSide == BetConditionState.WIN) {
                 newBetSide = BetConditionState.LOSE;
+            } else {
+                newBetSide = BetConditionState.WIN;
             }
-        } else {
-            if (event.getBetSide() == BetConditionState.LOSE) {
-                if (oppositeBetUncoveredSum.compareTo(betSum.divide(betCoefficient, 2)) > 0) {
-                    newOppositeBetUncoveredSum = oppositeBetUncoveredSum.subtract(betSum.divide(betCoefficient, 2));
-                    newBetUncoveredSum = betUncoveredSum.subtract(betSum);
-                }
-                if (oppositeBetUncoveredSum.compareTo(betSum.divide(betCoefficient, 2)) == 0) {
-                    newOppositeBetUncoveredSum = oppositeBetUncoveredSum.subtract(betSum.divide(betCoefficient, 2));
-                    newBetUncoveredSum = betUncoveredSum.subtract(betSum);
-                    newBetSide = BetConditionState.NOT_SET;
-                }
-                if (oppositeBetUncoveredSum.compareTo(betSum.divide(betCoefficient, 2)) < 0) {
-                    newOppositeBetUncoveredSum = oppositeBetUncoveredSum.subtract(oppositeBetUncoveredSum);
-                    newBetUncoveredSum = betUncoveredSum.subtract(oppositeBetUncoveredSum.multiply(betCoefficient));
-                    newBetSide = BetConditionState.WIN;
-                }
-            }
+        }
+
+        if (sumToCover.compareTo(BigDecimal.ZERO) == 0) {
+            newOppositeBetUncoveredSum = BigDecimal.ZERO;
+            newBetUncoveredSum = BigDecimal.ZERO;
+            newBetSide = BetConditionState.NOT_SET;
         }
 
         bet.setUncoveredSum(newBetUncoveredSum);
@@ -199,11 +129,6 @@ public class BetServiceImpl implements BetService {
         event.setBetSide(newBetSide);
         updateBet(oppositeBet);
         eventService.updateEvent(event);
-    }
-
-    @Override
-    public void createFirstBet(BetDTO betDTO, BindingResult errors) {
-        betCreationFactory.create(betDTO, errors);
     }
 
 }

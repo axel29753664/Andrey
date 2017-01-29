@@ -22,6 +22,8 @@ public interface EventServices {
 
     void updateEvent(Event event);
 
+    double getCoefficientDependingOnBetSide(Long eventId);
+
     List<Event> getEventsWhereWinnerStatusNotSet();
 
     void closeEvent(BetConditionState winnerStatus, Long id);

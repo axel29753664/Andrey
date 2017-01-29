@@ -2,8 +2,8 @@ package lv.javaguru.java2.domain.services.factories;
 
 import org.springframework.validation.Errors;
 
-public interface CreationFactory<DTO> {
+public interface CreationEntityFactory <DTO, Entity> {
 
-    void create(DTO dto, Errors errors);
+    Entity create(DTO dto, Errors errors);
 
 }
