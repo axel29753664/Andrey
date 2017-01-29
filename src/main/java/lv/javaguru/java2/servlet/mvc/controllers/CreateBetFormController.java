@@ -1,7 +1,15 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
+import lv.javaguru.java2.domain.Event;
+import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.services.ApplyBetService;
+import lv.javaguru.java2.domain.services.EventServices;
+import lv.javaguru.java2.domain.services.UserService;
+import lv.javaguru.java2.domain.services.dtoConverters.ConverterEventDTO;
+import lv.javaguru.java2.domain.services.dtoConverters.ConverterUserDTO;
 import lv.javaguru.java2.servlet.dto.BetDTO;
+import lv.javaguru.java2.servlet.dto.EventDTO;
+import lv.javaguru.java2.servlet.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +27,19 @@ public class CreateBetFormController {
     @Autowired
     private ApplyBetService applyBetService;
 
+    @Autowired
+    private EventServices eventServices;
+
+    @Autowired
+    private UserService userServices;
+
+    @Autowired
+    private ConverterEventDTO converterEventDTO;
+
+    @Autowired
+    private ConverterUserDTO converterUserDTO;
+
+
     @RequestMapping(value = "createBetForm", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
         return new ModelAndView("error", "data", "Incorrect request");
@@ -31,12 +52,19 @@ public class CreateBetFormController {
         if (!validResult.hasErrors()) {
             applyBetService.apply(betDTO, validResult);
             if (!validResult.hasErrors()) {
+                Event event = eventServices.getEventById(betDTO.getEventId());
+                User user = userServices.getById(betDTO.getUserId());
+                UserDTO userDTO = converterUserDTO.convertToResponse(user);
+                EventDTO eventDTO = converterEventDTO.convertToResponse(event);
+                model.addObject("betDTO", betDTO);
+                model.addObject("userDTO", userDTO);
+                model.addObject("eventDTO", eventDTO);
                 model.setViewName("createBetConfirmation");
-                model.addObject("bet", betDTO);
             }
         }
 
         return model;
+
     }
 
 }

@@ -2,8 +2,8 @@ package lv.javaguru.java2.domain.services;
 
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.domain.services.dtoConverters.ConverterDTO;
 import lv.javaguru.java2.domain.services.dtoConverters.ConverterDtoList;
+import lv.javaguru.java2.domain.services.parsers.ParserStringToLong;
 import lv.javaguru.java2.servlet.dto.BetDTO;
 import lv.javaguru.java2.servlet.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,6 @@ import java.util.List;
 
 @Service
 public class BetManagementServiceImpl implements BetManagementService{
-
-    @Autowired
-    private ConverterDTO<User, UserDTO> converterUserDto;
 
     @Autowired
     @Qualifier("ConverterBetDtoList")
@@ -36,14 +33,14 @@ public class BetManagementServiceImpl implements BetManagementService{
     @Override
     public List<UserDTO> prepareUserList() {
         List<User> users = userService.getAllUsers();
-        List<UserDTO> usersDto = converterUserDtoList.convertListToResponse(users);
-        return usersDto;
+        List<UserDTO> usersDTO = converterUserDtoList.convertListToResponse(users);
+        return usersDTO;
     }
 
     @Override
-    public List<BetDTO> managementProcess(UserDTO userDTO){
-        User user = converterUserDto.convertFromRequest(userDTO);
-        List<Bet> bets = betService.getBetsByUserId(user.getUserId());
+    public List<BetDTO> managementProcess(String userIdFromRequest){
+        Long userId = ParserStringToLong.parse(userIdFromRequest);
+        List<Bet> bets = betService.getBetsByUserId(userId);
         List<BetDTO> betsDto = converterBetDtoList.convertListToResponse(bets);
         return betsDto;
     }

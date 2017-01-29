@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface BetManagementService {
 
-    List<UserDTO> prepareUserList ();
+    List<UserDTO> prepareUserList();
 
-    List<BetDTO> managementProcess(UserDTO userDTO);
+    List<BetDTO> managementProcess(String userIdFromRequest);
 
 }

@@ -10,20 +10,28 @@
 <form name="betsTable" action="betList">
     <table border="2">
         <tr>
-            <td>UserID</td>
-            <td>EventID</td>
-            <td>BetSum</td>
-            <td>BetCondition</td>
+            <td>Event</td>
+            <td>Event Description</td>
+            <td>Bet sum</td>
+            <td>Bet condition</td>
         </tr>
-        <c:forEach items="${data}" var="bet">
-            <tr>
-                <td> ${bet.userId}</td>
-                <td> ${bet.eventId}</td>
-                <td> ${bet.betSum}</td>
-                <td> ${bet.betCondition}</td>
-            </tr>
+        <c:forEach items="${betsDTO}" var="betDTO">
+        <tr>
+            <c:set var="conditionVariable" value ="true"/>
+            <c:forEach items="${eventsDTO}" var="eventDTO">
+                <c:if test="${conditionVariable eq 'true'}">
+                    <c:if test="${betDTO.eventId==eventDTO.eventId}">
+                        <td> ${eventDTO.eventName}</td>
+                        <td> ${eventDTO.eventDescription}</td>
+                        <c:set var="conditionVariable" value="false"/>
+                    </c:if>
+                </c:if>
+            </c:forEach>
+            <td> ${betDTO.betSum}</td>
+            <td> ${betDTO.betCondition}</td>
         </c:forEach>
-    </table>
+        </tr>
+</table>
 </form>
 <input type="button" onclick="history.back();" value="Back"/>
 </body>

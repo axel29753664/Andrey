@@ -1,8 +1,10 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.domain.services.BetDeletingService;
+import lv.javaguru.java2.domain.services.BetListService;
 import lv.javaguru.java2.domain.services.parsers.ParserStringToLong;
 import lv.javaguru.java2.servlet.dto.BetDTO;
+import lv.javaguru.java2.servlet.dto.EventDTO;
 import lv.javaguru.java2.servlet.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,7 @@ import java.util.List;
 public class BetDeletingController {
 
     @Autowired
-    private BetDeletingService betDeletingService;
+    private BetListService betListService;
 
     @RequestMapping(value = "betDeleting", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
@@ -30,12 +32,13 @@ public class BetDeletingController {
     public ModelAndView processRequestPost(HttpServletRequest request) {
         String betIdFromRequest = request.getParameter("betIdForDeleting");
         Long betId = ParserStringToLong.parse(betIdFromRequest);
-        BetDTO betDto = new BetDTO();
-        betDto.setBetId(betId);
-        HttpSession session = request.getSession();
-        UserDTO userForBetDeleting = (UserDTO) session.getAttribute("userForBetDeleting");
-        List<BetDTO> betsDto = betDeletingService.deletingProcess(betDto, userForBetDeleting);
-        return new ModelAndView("adminPages/betDeleting", "data", betsDto);
+        List<BetDTO> betsDTO = betListService.deletingProcess(betId);
+        List<EventDTO> eventsDTO = betListService.prepareEventList(betsDTO);
+        ModelAndView model = new ModelAndView();
+        model.addObject("betsDTO", betsDTO);
+        model.addObject("eventsDTO", eventsDTO);
+        model.setViewName("adminPages/betDeleting");
+        return model;
     }
 
 }

@@ -18,12 +18,12 @@ public class ConverterBetDtoListImpl implements ConverterDtoList<Bet, BetDTO>{
 
     @Override
     public List<BetDTO> convertListToResponse (List<Bet> bets) {
-        List<BetDTO> betsDto = new ArrayList<>();
+        List<BetDTO> betsDTO = new ArrayList<>();
         for (Bet bet: bets) {
             BetDTO betDto = converterBetDto.convertToResponse(bet);
-            betsDto.add(betDto);
+            betsDTO.add(betDto);
         }
-        return betsDto;
+        return betsDTO;
     }
 
 }

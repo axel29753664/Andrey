@@ -13,6 +13,8 @@ public interface BetService {
 
     void saveToDB(Bet bet);
 
+    Bet getById(Long id);
+
     List<Bet> getBetsByUserId(Long userId);
 
     List<Bet> getEventBets(Long eventId);

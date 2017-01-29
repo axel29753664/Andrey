@@ -33,6 +33,11 @@ public class BetServiceImpl implements BetService {
     }
 
     @Override
+    public Bet getById(Long id) {
+        return betDAO.getById(id);
+    }
+
+    @Override
     public List<Bet> getBetsByUserId(Long userId) {
         return betDAO.getByUserId(userId);
     }
