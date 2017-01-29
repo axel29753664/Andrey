@@ -65,18 +65,11 @@ public class TransferService {
     }
 
     private BigDecimal initCoefficient(Event event) {
-        double coefficient = getWinnerCoefficient(event);
+        double coefficient = eventService.getCoefficientDependingOnBetSide(event.getEventId());
         coefficient = coefficientSetPercent(coefficient);
         return new BigDecimal(coefficient);
     }
 
-    private double getWinnerCoefficient(Event event) {
-        double coefficient = event.getCoefficient();
-        if (event.getWinnerStatus().equals(BetConditionState.WIN)) {
-            coefficient = 1 / coefficient;
-        }
-        return coefficient;
-    }
 
     private double coefficientSetPercent(double coefficient) {
         return coefficient * TotalizatorBank.PERCENTS;                                              // -10% to Totalizator

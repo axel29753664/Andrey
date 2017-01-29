@@ -110,7 +110,7 @@ public class BetServiceImpl implements BetService {
 
         if (sumToCover.compareTo(BigDecimal.ZERO) < 0) {
             newOppositeBetUncoveredSum = BigDecimal.ZERO;
-            newBetUncoveredSum = betSum.subtract(oppositeBetUncoveredSum.divide(betCoefficient));
+            newBetUncoveredSum = betSum.subtract(oppositeBetUncoveredSum.divide(betCoefficient,2));
             if (betSide == BetConditionState.WIN) {
                 newBetSide = BetConditionState.LOSE;
             } else {

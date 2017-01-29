@@ -49,7 +49,7 @@ public class EventsController {
         BetDTO betDTO = new BetDTO();
         betDTO.setEventId(eventId);
         betDTO.setUserId(user.getUserId());
-        EventDTO eventDTO = converterEventDTO.convertToResponse(event);
+
 
         ModelAndView model = new ModelAndView();
         if (event.getBetSide() == BetConditionState.WIN) {
@@ -62,10 +62,9 @@ public class EventsController {
         }
         if (event.getBetSide() == BetConditionState.NOT_SET) {
             betDTO.setBetCondition(BetConditionState.NOT_SET);
-            model.setViewName("createBetFormByChoosingCondition");
+            model.setViewName("createBetForm");
         }
         model.addObject("betDTO", betDTO);
-        model.addObject("eventDTO", eventDTO);
         return model;
     }
 

@@ -26,7 +26,7 @@ public class CreateBetFormController {
 
     @RequestMapping(value = "createBetForm", method = {RequestMethod.POST})
     public ModelAndView processRequestPost(@Valid @ModelAttribute("betDTO") BetDTO betDTO,
-                                           BindingResult validResult, ModelAndView model) {
+                                           BindingResult validResult, ModelAndView model, HttpServletRequest request) {
 
         if (!validResult.hasErrors()) {
             applyBetService.apply(betDTO, validResult);
@@ -35,6 +35,7 @@ public class CreateBetFormController {
                 model.addObject("bet", betDTO);
             }
         }
+
         return model;
     }
 
