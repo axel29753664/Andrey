@@ -7,7 +7,7 @@
     <title>Bet creation form by choosing condition</title>
 </head>
 <body>
-<jsp:include page="menu.jsp"></jsp:include>
+<jsp:include page="userPage.jsp"></jsp:include>
 <form:form method="post" action="createBetForm" modelAttribute="betDTO">
     <table>
         <c:set var="height" value="50"/>

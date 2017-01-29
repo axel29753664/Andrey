@@ -116,4 +116,16 @@ public class UserDTO {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                ", balance=" + balance +
+                '}';
+    }
 }

@@ -9,7 +9,7 @@
     <title>Confirmation</title>
 </head>
 <body>
-<jsp:include page="menu.jsp"></jsp:include>
+<jsp:include page="userPage.jsp"></jsp:include>
 <center>
     <form>
         <h1>You made a bid!</h1>

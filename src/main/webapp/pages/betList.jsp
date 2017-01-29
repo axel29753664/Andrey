@@ -5,7 +5,7 @@
     <title>Bets</title>
 </head>
 <body>
-<jsp:include page="menu.jsp"></jsp:include>
+<jsp:include page="userPage.jsp"></jsp:include>
 
 <form name="betsTable" action="betList">
     <table border="2">

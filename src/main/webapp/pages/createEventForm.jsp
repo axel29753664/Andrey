@@ -6,7 +6,7 @@
     <title>Event creation form</title>
 </head>
 <body>
-<jsp:include page="menu.jsp"></jsp:include>
+<jsp:include page="userPage.jsp"></jsp:include>
 <form:form method="post" action="createEventForm" modelAttribute="eventDTO">
     <table>
         <c:set var="height" value="50"/>

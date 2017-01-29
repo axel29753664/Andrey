@@ -41,13 +41,13 @@ public class CreateBetFormController {
 
 
     @RequestMapping(value = "createBetForm", method = {RequestMethod.GET})
-    public ModelAndView processRequestGet(HttpServletRequest request) {
+    public ModelAndView processRequestGet() {
         return new ModelAndView("error", "data", "Incorrect request");
     }
 
     @RequestMapping(value = "createBetForm", method = {RequestMethod.POST})
     public ModelAndView processRequestPost(@Valid @ModelAttribute("betDTO") BetDTO betDTO,
-                                           BindingResult validResult, ModelAndView model, HttpServletRequest request) {
+                                           BindingResult validResult, ModelAndView model) {
 
         if (!validResult.hasErrors()) {
             applyBetService.apply(betDTO, validResult);

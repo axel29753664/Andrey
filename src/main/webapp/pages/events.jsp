@@ -5,7 +5,7 @@
     <title>Events</title>
 </head>
 <body>
-<jsp:include page="menu.jsp"></jsp:include>
+<jsp:include page="userPage.jsp"></jsp:include>
 
 
 <form name="eventTable" action="events" method="post">
