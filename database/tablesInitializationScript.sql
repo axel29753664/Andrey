@@ -27,7 +27,7 @@ VALUES ('Arsenal - CSKA', 'Arsenal play vs CSKA', 'Arsenal wins', 'WIN', 'NOT_SE
 
 INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (1, 1, 10, 10, 'LOSE');
 INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (2, 2, 20, 10, 'WIN');
-INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (1, 3, 50, 5, 'WIN');
+INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (1, 3, 50, 0, 'WIN');
 INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (2, 3, 10, 0, 'LOSE');
 INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (3, 3, 20, 0, 'LOSE');
 INSERT INTO bets (UserID, EventID, BetSum, UncoveredSum, BetCondition) VALUES (1, 4, 50, 20, 'WIN');

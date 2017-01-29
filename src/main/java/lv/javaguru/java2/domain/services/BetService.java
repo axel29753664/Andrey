@@ -33,6 +33,6 @@ public interface BetService {
 
     void changeBetsUncoveredSumAndEventBetSide (Bet bet, Bet oppositeBet, Double coefficient);
 
-    //void createFirstBet(BetDTO betDTO, BindingResult errors);
+    void changeEventBetSide(Bet bet);
 
 }

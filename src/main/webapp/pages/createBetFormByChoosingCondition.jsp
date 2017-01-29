@@ -8,7 +8,7 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
-<form:form method="post" action="createBetForm" modelAttribute="betDTO">
+<form:form method="post" action="createBetFormByChoosingCondition" modelAttribute="betDTO">
     <table>
         <c:set var="height" value="50"/>
         <tr>

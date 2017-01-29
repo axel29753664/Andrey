@@ -14,17 +14,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-public class CreateBetFormController {
+public class CreateBetFormByChoosingConditionController {
 
     @Autowired
     private ApplyBetService applyBetService;
 
-    @RequestMapping(value = "createBetForm", method = {RequestMethod.GET})
+    @RequestMapping(value = "createBetFormByChoosingCondition", method = {RequestMethod.GET})
     public ModelAndView processRequestGet(HttpServletRequest request) {
         return new ModelAndView("error", "data", "Incorrect request");
     }
 
-    @RequestMapping(value = "createBetForm", method = {RequestMethod.POST})
+    @RequestMapping(value = "createBetFormByChoosingCondition", method = {RequestMethod.POST})
     public ModelAndView processRequestPost(@Valid @ModelAttribute("betDTO") BetDTO betDTO,
                                            BindingResult validResult, ModelAndView model) {
 

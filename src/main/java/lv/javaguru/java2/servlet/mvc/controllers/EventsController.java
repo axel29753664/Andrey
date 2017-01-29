@@ -54,16 +54,18 @@ public class EventsController {
         ModelAndView model = new ModelAndView();
         if (event.getBetSide() == BetConditionState.WIN) {
             betDTO.setBetCondition(BetConditionState.WIN);
+            model.setViewName("createBetForm");
         }
         if (event.getBetSide() == BetConditionState.LOSE) {
             betDTO.setBetCondition(BetConditionState.LOSE);
+            model.setViewName("createBetForm");
         }
         if (event.getBetSide() == BetConditionState.NOT_SET) {
             betDTO.setBetCondition(BetConditionState.NOT_SET);
+            model.setViewName("createBetFormByChoosingCondition");
         }
         model.addObject("betDTO", betDTO);
         model.addObject("eventDTO", eventDTO);
-        model.setViewName("createBetForm");
         return model;
     }
 

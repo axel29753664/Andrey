@@ -45,6 +45,8 @@ public class ApplyBetServiceImpl implements ApplyBetService{
         if (oppositeBet != null){
             Double coefficient = eventService.getCoefficientDependingOnBetSide(bet.getEventId());
             betService.changeBetsUncoveredSumAndEventBetSide(bet, oppositeBet, coefficient);
+        } else {
+            betService.changeEventBetSide(bet);
         }
         try {
             betService.saveToDB(bet);

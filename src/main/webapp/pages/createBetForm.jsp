@@ -8,6 +8,7 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
+
 <form:form method="post" action="createBetForm" modelAttribute="betDTO">
     <table>
         <c:set var="height" value="50"/>
@@ -28,8 +29,9 @@
             <td><form:input path="betSum"/></td>
             <td><font color="red"><form:errors path="betSum"/></font></td>
         </tr>
- </table>
- <input type="submit" value="Send"/>
+    </table>
+    <table>
+    <input type="submit" value="Send"/>
 </form:form>
 </body>
 </html>

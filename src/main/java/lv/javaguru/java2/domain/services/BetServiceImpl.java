@@ -131,4 +131,15 @@ public class BetServiceImpl implements BetService {
         eventService.updateEvent(event);
     }
 
+    public void changeEventBetSide(Bet bet) {
+        Event event = eventService.getEventById(bet.getEventId());
+
+        if (bet.getBetCondition() == BetConditionState.WIN) {
+            event.setBetSide(BetConditionState.LOSE);
+        } else {
+            event.setBetSide(BetConditionState.WIN);
+        }
+        eventService.updateEvent(event);
+    }
+
 }
