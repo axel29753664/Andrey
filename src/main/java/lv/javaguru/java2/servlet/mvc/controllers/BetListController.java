@@ -1,7 +1,6 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.domain.Bet;
-import lv.javaguru.java2.domain.Event;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.services.BetService;
 
@@ -14,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
+import java.util.List;
+
 
 @Controller
 public class BetListController {
@@ -22,15 +22,14 @@ public class BetListController {
     @Autowired
     BetService betService;
 
-
     @RequestMapping(value = {"allBets", "activeBets"}, method = RequestMethod.GET)
     public ModelAndView processRequestGet(HttpServletRequest request) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String path = request.getServletPath();
 
         ModelAndView model = new ModelAndView();
-        Map<Bet, Event> betEventMap = getBetEventMap(path, user.getUserId());
-        model.addObject("betEventMap", betEventMap);
+        List<Bet> bets = getUserBets(path, user.getUserId());
+        model.addObject("bets", bets);
 
         model.setViewName("betList");
         return model;
@@ -41,11 +40,11 @@ public class BetListController {
         return new ModelAndView("bets");
     }
 
-    private Map<Bet, Event> getBetEventMap(String path, Long userId) {
+    private List<Bet> getUserBets(String path, Long userId) {
         if (path.equals("/activeBets")) {
-            return betService.getActiveUserBetWithItsEventMap(userId);
+            return betService.getUserActiveBets(userId);
         }
-        return betService.getAllUserBetsWithItsEvents(userId);
+        return betService.getBetsByUserId(userId);
     }
 
 }

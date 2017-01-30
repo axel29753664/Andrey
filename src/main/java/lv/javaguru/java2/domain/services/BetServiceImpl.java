@@ -37,24 +37,6 @@ public class BetServiceImpl implements BetService {
     }
 
 
-    @Override
-    public Map<Bet, Event> getAllUserBetsWithItsEvents(Long userId) {
-        return geUserBetEventMap(getBetsByUserId(userId));
-    }
-
-    @Override
-    public Map<Bet, Event> getActiveUserBetWithItsEventMap(Long userId) {
-        return geUserBetEventMap(getUserActiveBets(userId));
-    }
-
-    private Map<Bet, Event> geUserBetEventMap(List<Bet> bets) {
-        Map<Bet, Event> betEventMap = new HashMap<>();
-        for (Bet bet : bets) {
-            Event event = eventService.getEventById(bet.getEventId());
-            betEventMap.put(bet, event);
-        }
-        return betEventMap;
-    }
 
     @Override
     public List<Bet> getUserActiveBets(Long userId) {

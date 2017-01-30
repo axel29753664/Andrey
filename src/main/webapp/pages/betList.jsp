@@ -17,13 +17,13 @@
             <td>Bet sum</td>
 
         </tr>
-        <c:forEach items="${betEventMap}" var="betEvent">
+        <c:forEach items="${bets}" var="bet">
             <tr>
-                <td> ${betEvent.value.eventName}</td>
-                <td> ${betEvent.value.eventDescription}</td>
-                <td> ${betEvent.value.winnerStatus}</td>
-                <td> ${betEvent.key.betCondition}</td>
-                <td> ${betEvent.key.betSum}</td>
+                <td> ${bet.event.eventName}</td>
+                <td> ${bet.event.eventDescription}</td>
+                <td> ${bet.event.winnerStatus}</td>
+                <td> ${bet.betCondition}</td>
+                <td> ${bet.betSum}</td>
             </tr>
         </c:forEach>
 

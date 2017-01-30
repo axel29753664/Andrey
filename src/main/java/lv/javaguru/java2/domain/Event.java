@@ -2,6 +2,7 @@ package lv.javaguru.java2.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "Events")
@@ -35,6 +36,9 @@ public class Event {
     @Column(name = "TotalBank", nullable = false)
     private BigDecimal totalBank;
 
+    @OneToMany(mappedBy = "event")
+    private Set<Bet> bets;
+
     public Event() {
         this.totalBank = new BigDecimal(0);
         this.betSide = BetConditionState.NOT_SET;
@@ -58,6 +62,14 @@ public class Event {
         this.winnerStatus = winnerStatus;
         this.coefficient = coefficient;
         this.totalBank = totalBank;
+    }
+
+    public Set<Bet> getBets() {
+        return bets;
+    }
+
+    public void setBets(Set<Bet> bets) {
+        this.bets = bets;
     }
 
     public String getWinDescription() {

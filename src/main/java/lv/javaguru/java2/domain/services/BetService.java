@@ -21,10 +21,6 @@ public interface BetService {
 
     List<Bet> getUserActiveBets(Long userId);
 
-    Map<Bet, Event> getActiveUserBetWithItsEventMap(Long userId);
-
-    Map<Bet, Event> getAllUserBetsWithItsEvents(Long userId);
-
     List<Bet> getEventBets(Long eventId);
 
     Bet getEventUncoveredBet(Long id);
