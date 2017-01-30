@@ -3,6 +3,7 @@ package lv.javaguru.java2.servlet.dto;
 import lv.javaguru.java2.domain.BetConditionState;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 
@@ -19,7 +20,8 @@ public class EventDTO {
     private BetConditionState betSide;
     private BetConditionState winnerStatus;
 
-    @DecimalMin("0.01")
+    @DecimalMin("0.1")
+    @DecimalMax("10")
     private double coefficient;
     private BigDecimal totalBank;
 
