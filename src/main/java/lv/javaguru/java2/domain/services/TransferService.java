@@ -33,7 +33,7 @@ public class TransferService {
         Long eventId = event.getEventId();
         Set<Bet> winningBetSet = betService.getEventWinnersBets(eventId, winnerStatus);
         Bet uncoveredBet = betService.getEventUncoveredBet(eventId);
-        BigDecimal coefficientWithPercent = initCoefficient(event);
+        BigDecimal coefficientWithPercent = initCoefficient(winnerStatus,event);
 
         if (uncoveredBet != null) {
             boolean isWinBet = checkUncoveredBetIsWinningBet(winningBetSet, uncoveredBet);
@@ -64,8 +64,8 @@ public class TransferService {
         }
     }
 
-    private BigDecimal initCoefficient(Event event) {
-        double coefficient = eventService.getCoefficientDependingOnBetSide(event.getEventId());
+    private BigDecimal initCoefficient(BetConditionState state,Event event) {
+        double coefficient = eventService.getCoefficientDependingOnBetState(state,event.getEventId());
         coefficient = coefficientSetPercent(coefficient);
         return new BigDecimal(coefficient);
     }

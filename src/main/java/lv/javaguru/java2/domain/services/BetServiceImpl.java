@@ -119,7 +119,7 @@ public class BetServiceImpl implements BetService {
         BigDecimal betCoefficient = new BigDecimal(coefficient);
 
         BigDecimal sumToCover = oppositeBetUncoveredSum.subtract(betSum.multiply(betCoefficient));
-
+        sumToCover = sumToCover.setScale(5, BigDecimal.ROUND_UP);
         BigDecimal newOppositeBetUncoveredSum = oppositeBetUncoveredSum;
         BigDecimal newBetUncoveredSum = betUncoveredSum;
 
@@ -134,7 +134,7 @@ public class BetServiceImpl implements BetService {
 
         if (sumToCover.compareTo(BigDecimal.ZERO) < 0) {
             newOppositeBetUncoveredSum = BigDecimal.ZERO;
-            newBetUncoveredSum = betSum.subtract(oppositeBetUncoveredSum.divide(betCoefficient, 2));
+            newBetUncoveredSum = betSum.subtract(oppositeBetUncoveredSum.divide(betCoefficient, 5, BigDecimal.ROUND_HALF_UP));
             if (betSide == BetConditionState.WIN) {
                 newBetSide = BetConditionState.LOSE;
             } else {

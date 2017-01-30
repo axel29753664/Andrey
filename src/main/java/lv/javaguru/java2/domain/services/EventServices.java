@@ -22,7 +22,7 @@ public interface EventServices {
 
     void updateEvent(Event event);
 
-    double getCoefficientDependingOnBetSide(Long eventId);
+    double getCoefficientDependingOnBetState(BetConditionState state, Long eventId);
 
     List<Event> getEventsWhereWinnerStatusNotSet();
 

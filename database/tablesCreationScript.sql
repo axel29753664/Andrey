@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `bets` (
   `UserID`       BIGINT(20)               NOT NULL,
   `EventID`      BIGINT(20)               NOT NULL,
   `BetSum`       DECIMAL(19, 2)           NOT NULL DEFAULT '0.00',
-  `UncoveredSum` DECIMAL(19, 2)           NOT NULL DEFAULT '0.00',
+  `UncoveredSum` DECIMAL(19, 5)           NOT NULL DEFAULT '0.00',
   `BetCondition` ENUM ('WIN', 'LOSE')     NOT NULL,
   PRIMARY KEY (`BetID`),
   FOREIGN KEY (`UserID`) REFERENCES users (`UserID`),

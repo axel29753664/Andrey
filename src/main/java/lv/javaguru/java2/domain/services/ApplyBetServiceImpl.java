@@ -11,8 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 
 @Service
-public class ApplyBetServiceImpl implements ApplyBetService{
-
+public class ApplyBetServiceImpl implements ApplyBetService {
 
 
     @Autowired
@@ -31,7 +30,7 @@ public class ApplyBetServiceImpl implements ApplyBetService{
     private BetCreationEntityFactory betCreationFactory;
 
     @Transactional
-    public void apply (BetDTO betDTO, Errors validResult){
+    public void apply(BetDTO betDTO, Errors validResult) {
 
         Bet bet = betCreationFactory.create(betDTO, validResult);
         if (!validResult.hasErrors()) {
@@ -42,8 +41,8 @@ public class ApplyBetServiceImpl implements ApplyBetService{
 
 
     private void betCreationProcess(Bet bet, Bet oppositeBet, Errors validResult) {
-        if (oppositeBet != null){
-            Double coefficient = eventService.getCoefficientDependingOnBetSide(bet.getEventId());
+        if (oppositeBet != null) {
+            Double coefficient = eventService.getCoefficientDependingOnBetState(bet.getBetCondition(), bet.getEventId());
             betService.changeBetsUncoveredSumAndEventBetSide(bet, oppositeBet, coefficient);
         } else {
             betService.changeEventBetSide(bet);

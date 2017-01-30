@@ -67,10 +67,10 @@ public class EventServicesImpl implements EventServices {
     }
 
     @Override
-    public double getCoefficientDependingOnBetSide(Long eventId) {
+    public double getCoefficientDependingOnBetState(BetConditionState state, Long eventId) {
         Event event = getEventById(eventId);
         double coefficient = event.getCoefficient();
-        if (event.getBetSide().equals(BetConditionState.LOSE)) {
+        if (state.equals(BetConditionState.WIN)) {
             coefficient = 1 / coefficient;
         }
         return coefficient;
