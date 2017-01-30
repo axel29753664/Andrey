@@ -6,6 +6,7 @@ import lv.javaguru.java2.domain.BetConditionState;
 import java.util.List;
 
 public interface BetDAO extends GenericDAO<Bet> {
+    List<Bet> getUserBetsByEventStatus(Long userId, BetConditionState state);
 
     List getByUserId(Long userId);
 

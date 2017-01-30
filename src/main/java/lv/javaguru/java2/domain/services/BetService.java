@@ -2,11 +2,13 @@ package lv.javaguru.java2.domain.services;
 
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.BetConditionState;
+import lv.javaguru.java2.domain.Event;
 import lv.javaguru.java2.servlet.dto.BetDTO;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public interface BetService {
@@ -16,6 +18,12 @@ public interface BetService {
     Bet getById(Long id);
 
     List<Bet> getBetsByUserId(Long userId);
+
+    List<Bet> getUserActiveBets(Long userId);
+
+    Map<Bet, Event> getActiveUserBetWithItsEventMap(Long userId);
+
+    Map<Bet, Event> getAllUserBetsWithItsEvents(Long userId);
 
     List<Bet> getEventBets(Long eventId);
 
@@ -31,9 +39,9 @@ public interface BetService {
 
     Set<Bet> getEventWinnersBets(Long eventId, BetConditionState state);
 
-    Bet getOppositeBet (Bet bet);
+    Bet getOppositeBet(Bet bet);
 
-    void changeBetsUncoveredSumAndEventBetSide (Bet bet, Bet oppositeBet, Double coefficient);
+    void changeBetsUncoveredSumAndEventBetSide(Bet bet, Bet oppositeBet, Double coefficient);
 
     void changeEventBetSide(Bet bet);
 

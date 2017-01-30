@@ -114,7 +114,6 @@ public class EventServicesImpl implements EventServices {
         Event event = getByEventName(eventDTO.getEventName());
         betDTO.setUserId(userId);
         betDTO.setEventId(event.getEventId());
-        //betDTO.setUncoveredSum(betDTO.getBetSum());
         betDTO.setBetCondition(BetConditionState.WIN);
     }
 

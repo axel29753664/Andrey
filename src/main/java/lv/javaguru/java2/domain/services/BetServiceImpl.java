@@ -4,18 +4,11 @@ import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.BetConditionState;
 import lv.javaguru.java2.domain.Event;
-import lv.javaguru.java2.domain.services.factories.CreationFactory;
-import lv.javaguru.java2.servlet.dto.BetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class BetServiceImpl implements BetService {
@@ -37,9 +30,35 @@ public class BetServiceImpl implements BetService {
         return betDAO.getById(id);
     }
 
+
     @Override
     public List<Bet> getBetsByUserId(Long userId) {
         return betDAO.getByUserId(userId);
+    }
+
+
+    @Override
+    public Map<Bet, Event> getAllUserBetsWithItsEvents(Long userId) {
+        return geUserBetEventMap(getBetsByUserId(userId));
+    }
+
+    @Override
+    public Map<Bet, Event> getActiveUserBetWithItsEventMap(Long userId) {
+        return geUserBetEventMap(getUserActiveBets(userId));
+    }
+
+    private Map<Bet, Event> geUserBetEventMap(List<Bet> bets) {
+        Map<Bet, Event> betEventMap = new HashMap<>();
+        for (Bet bet : bets) {
+            Event event = eventService.getEventById(bet.getEventId());
+            betEventMap.put(bet, event);
+        }
+        return betEventMap;
+    }
+
+    @Override
+    public List<Bet> getUserActiveBets(Long userId) {
+        return betDAO.getUserBetsByEventStatus(userId, BetConditionState.NOT_SET);
     }
 
     @Override
@@ -115,7 +134,7 @@ public class BetServiceImpl implements BetService {
 
         if (sumToCover.compareTo(BigDecimal.ZERO) < 0) {
             newOppositeBetUncoveredSum = BigDecimal.ZERO;
-            newBetUncoveredSum = betSum.subtract(oppositeBetUncoveredSum.divide(betCoefficient,2));
+            newBetUncoveredSum = betSum.subtract(oppositeBetUncoveredSum.divide(betCoefficient, 2));
             if (betSide == BetConditionState.WIN) {
                 newBetSide = BetConditionState.LOSE;
             } else {

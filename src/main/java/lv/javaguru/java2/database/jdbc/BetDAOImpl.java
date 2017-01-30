@@ -4,6 +4,7 @@ import lv.javaguru.java2.database.BetDAO;
 import lv.javaguru.java2.database.GenericHibernateDAOImpl;
 import lv.javaguru.java2.domain.Bet;
 import lv.javaguru.java2.domain.BetConditionState;
+import lv.javaguru.java2.domain.Event;
 import lv.javaguru.java2.domain.exception.BetDBException;
 import org.hibernate.Criteria;
 import org.hibernate.JDBCException;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -47,12 +49,24 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
         return criteria.list();
     }
 
+    @Transactional
+    @Override
+    public List<Bet> getUserBetsByEventStatus(Long userId, BetConditionState state) {
+        Session session = sessionFactory.getCurrentSession();
+        SQLQuery query = session.createSQLQuery("SELECT *" +
+                "FROM bets , events WHERE bets.EventID = events.EventID AND Winner=:status AND bets.UserID= :userId");
+        query.addEntity(Bet.class);
+        query.setLong("userId", userId);
+        query.setString("status", state.name());
+
+        return query.list();
+    }
 
     @Override
     @Transactional
     public void delete(Long id) throws JDBCException {
         Session session = sessionFactory.getCurrentSession();
-        SQLQuery query = session.createSQLQuery("delete from " + TABLE_NAME + " where BetID = :ID");
+        SQLQuery query = session.createSQLQuery("DELETE FROM " + TABLE_NAME + " WHERE BetID = :ID");
         query.setParameter("ID", id);
         query.executeUpdate();
     }
@@ -60,7 +74,7 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
     @Override
     @Transactional
     public void deleteByUserId(Long userID) throws JDBCException {
-        String deleteQuery = "delete from " + TABLE_NAME + " where UserID= :userID";
+        String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE UserID= :userID";
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(deleteQuery);
         query.setLong("userID", userID);
         query.executeUpdate();
@@ -70,7 +84,7 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
     @Transactional
     public void deleteByEventId(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        SQLQuery query = session.createSQLQuery("delete from " + TABLE_NAME + " where EventID = :ID");
+        SQLQuery query = session.createSQLQuery("DELETE FROM " + TABLE_NAME + " WHERE EventID = :ID");
         query.setParameter("ID", id);
         query.executeUpdate();
     }
@@ -106,7 +120,6 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
         }
         return bet;
     }
-
 
 
 }

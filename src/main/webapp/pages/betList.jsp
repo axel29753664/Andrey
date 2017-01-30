@@ -5,34 +5,29 @@
     <title>Bets</title>
 </head>
 <body>
-<jsp:include page="userPage.jsp"></jsp:include>
+<jsp:include page="bets.jsp"></jsp:include>
 
-<form name="betsTable" action="betList">
+<form name="betsTable">
     <table border="2">
         <tr>
-            <td>Event</td>
+            <td>Event name</td>
             <td>Event Description</td>
-            <td>Bet sum</td>
+            <td>Event winner side</td>
             <td>Bet condition</td>
+            <td>Bet sum</td>
+
         </tr>
-        <c:forEach items="${betsDTO}" var="betDTO">
-        <tr>
-            <c:set var="conditionVariable" value ="true"/>
-            <c:forEach items="${eventsDTO}" var="eventDTO">
-                <c:if test="${conditionVariable eq 'true'}">
-                    <c:if test="${betDTO.eventId==eventDTO.eventId}">
-                        <td> ${eventDTO.eventName}</td>
-                        <td> ${eventDTO.eventDescription}</td>
-                        <c:set var="conditionVariable" value="false"/>
-                    </c:if>
-                </c:if>
-            </c:forEach>
-            <td> ${betDTO.betSum}</td>
-            <td> ${betDTO.betCondition}</td>
+        <c:forEach items="${betEventMap}" var="betEvent">
+            <tr>
+                <td> ${betEvent.value.eventName}</td>
+                <td> ${betEvent.value.eventDescription}</td>
+                <td> ${betEvent.value.winnerStatus}</td>
+                <td> ${betEvent.key.betCondition}</td>
+                <td> ${betEvent.key.betSum}</td>
+            </tr>
         </c:forEach>
-        </tr>
-</table>
+
+    </table>
 </form>
-<input type="button" onclick="history.back();" value="Back"/>
 </body>
 </html>
