@@ -15,7 +15,7 @@ public class Bet {
     @Column(name = "UserID", nullable = false)
     private Long userId;
 
-    @Column(name = "EventID", nullable = false)
+    @Column(name = "Event_ID", nullable = false)
     private Long eventId;
 
     @Column(name = "BetSum", nullable = false)
@@ -28,7 +28,7 @@ public class Bet {
     @Column(name = "BetCondition", columnDefinition = "enum('WIN', 'LOSE')", nullable = false)
     private BetConditionState betCondition;
     @ManyToOne
-    @JoinColumn(name = "EventId")
+    @JoinColumn(name = "Event_ID",referencedColumnName = "EventID", insertable = false, updatable = false)
     private Event event;
 
     public Bet() {

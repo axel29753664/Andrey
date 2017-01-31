@@ -46,16 +46,18 @@ CREATE TABLE `events` (
   AUTO_INCREMENT = 1;
 
 
-CREATE TABLE IF NOT EXISTS `bets` (
-  `BetID`        BIGINT(20)               AUTO_INCREMENT,
-  `UserID`       BIGINT(20)               NOT NULL,
-  `EventID`      BIGINT(20)               NOT NULL,
-  `BetSum`       DECIMAL(19, 2)           NOT NULL DEFAULT '0.00',
-  `UncoveredSum` DECIMAL(19, 5)           NOT NULL DEFAULT '0.00',
-  `BetCondition` ENUM ('WIN', 'LOSE')     NOT NULL,
+CREATE TABLE `bets` (
+  `BetID`        BIGINT(20)           NOT NULL AUTO_INCREMENT,
+  `UserID`       BIGINT(20)           NOT NULL,
+  `Event_ID`     BIGINT(20)           NOT NULL,
+  `BetSum`       DECIMAL(19, 2)       NOT NULL DEFAULT '0.00',
+  `UncoveredSum` DECIMAL(19, 5)       NOT NULL DEFAULT '0.00000',
+  `BetCondition` ENUM ('WIN', 'LOSE') NOT NULL,
   PRIMARY KEY (`BetID`),
-  FOREIGN KEY (`UserID`) REFERENCES users (`UserID`),
-  FOREIGN KEY (`EventID`) REFERENCES events (`EventID`)
+  KEY `UserID` (`UserID`),
+  KEY `bets_ibfk_2` (`Event_ID`),
+  CONSTRAINT `bets_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
+  CONSTRAINT `bets_ibfk_2` FOREIGN KEY (`Event_ID`) REFERENCES `events` (`EventID`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 1;

@@ -54,7 +54,7 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
     public List<Bet> getUserBetsByEventStatus(Long userId, BetConditionState state) {
         Session session = sessionFactory.getCurrentSession();
         SQLQuery query = session.createSQLQuery("SELECT *" +
-                "FROM bets , events WHERE bets.EventID = events.EventID AND Winner=:status AND bets.UserID= :userId");
+                "FROM bets , events WHERE bets.Event_ID = events.EventID AND Winner=:status AND bets.UserID= :userId");
         query.addEntity(Bet.class);
         query.setLong("userId", userId);
         query.setString("status", state.name());
@@ -84,7 +84,7 @@ public class BetDAOImpl extends GenericHibernateDAOImpl<Bet> implements BetDAO {
     @Transactional
     public void deleteByEventId(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        SQLQuery query = session.createSQLQuery("DELETE FROM " + TABLE_NAME + " WHERE EventID = :ID");
+        SQLQuery query = session.createSQLQuery("DELETE FROM " + TABLE_NAME + " WHERE Event_ID = :ID");
         query.setParameter("ID", id);
         query.executeUpdate();
     }
